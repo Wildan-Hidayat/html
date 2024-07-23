@@ -1,1 +1,246 @@
-?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #ffecd2, #fcb69f);
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: 100% 100%;
+            background-image: url('background.jpg');
+        }
+
+        .overlay {
+            opacity: 0.9.5;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay:before, .overlay:after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+            background: url('galery2.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .overlay:before {
+            top: -20px;
+            left: -20px;
+            transform: rotate(-30deg);
+            opacity: 0.5;
+        }
+
+        .overlay:after {
+            bottom: -20px;
+            right: -20px;
+            transform: rotate(30deg);
+            opacity: 0.5;
+        }
+
+        header {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .couple-photo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .couple-photo img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-size: 3em;
+            color: #333;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header h2 {
+            margin: 10px 0 0;
+            font-size: 1.5em;
+            color: #666;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            color: #999;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .details, .gallery, .rsvp {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            animation: fadeInUp 1s ease-in-out;
+            position: relative;
+        }
+
+        .details h3, .gallery h3, .rsvp h3 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            color: #333;
+        }
+
+        .gallery .photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .whatsapp-button {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #1DA851;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header h2 {
+                font-size: 1.3em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .whatsapp-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header h2 {
+                font-size: 1.2em;
+            }
+
+            header p {
+                font-size: 0.9em;
+            }
+
+            .whatsapp-button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay">
+            <header>
+                <div class="couple-photo">
+                    <img src="alucard.jpg" alt="Pengantin Pria">
+                    <img src="miya.jpg" alt="Pengantin Wanita">
+                </div>
+                <h1>Undangan Pernikahan</h1>
+                <h2>Alucard & Miya</h2>
+                <p>Sabtu, 30 Desember 2024</p>
+            </header>
+            
+            <section class="details">
+                <h3>Detail Acara</h3>
+                <p><b>Lokasi:</b> Mobile Legends, Land Of Dawn, Ranked</p>
+                <p><b>Waktu:</b> 10:00 - 14:00 WIB</p>
+            </section>
+            
+            <section class="gallery">
+                <h3>Galeri</h3>
+                <div class="photos">
+                    <img src="galery1.jpg" alt="Foto1">
+                    <img src="galery2.jpg" alt="Foto2">
+                    <img src="galery3.jpg" alt="Foto3">
+                    <img src="galery4.jpg" alt="Foto3">
+                </div>
+            </section>
+            
+            <section class="rsvp">
+                <h3>RSVP</h3>
+                <a href="https://wa.me/6280000000000?text=Halo,%20saya%20akan%20menghadiri%20acara%20pernikahan%20Anda%20pada%20tanggal%2030%20Desember%202024." class="whatsapp-button">Konfirmasi via WhatsApp</a>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
