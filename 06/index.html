@@ -1,1 +1,196 @@
-?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enkripsi dan Dekripsi Sederhana</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 290px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            font-weight: normal;
+        }
+        label {
+            font-size: 12px;
+            color: #555;
+        }
+        textarea, input[type="number"], input[type="range"] {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        input[type="range"] {
+            padding: 0;
+            margin-top: 5px;
+            -webkit-appearance: none;
+            background: #ddd;
+            height: 4px;
+            border-radius: 4px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background: #007bff;
+            border-radius: 50%;
+            height: 18px;
+            width: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+        input[type="range"]::-moz-range-thumb {
+            background: #007bff;
+            border-radius: 50%;
+            height: 18px;
+            width: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+        .button-group, .copy-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        button:active {
+            background-color: #004080;
+            transform: translateY(0);
+        }
+        .copy-group button {
+            background-color: #28a745;
+        }
+        .copy-group button:hover {
+            background-color: #218838;
+        }
+        .result-container {
+            margin-top: 5px;
+        }
+        .result-container textarea {
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enkripsi & Dekripsi</h1>
+        
+        <label for="textInput">Teks:</label>
+        <textarea id="textInput" placeholder="Masukkan teks..."></textarea>
+        
+        <label for="shiftInput1">Tanggal:</label>
+        <input type="range" id="shiftInput1" min="1" max="31" value="1" oninput="updateShiftValue(1)">
+        <input type="number" id="shiftValue1" value="1" min="1" max="31" oninput="updateRangeValue(1)" readonly>
+        
+        <label for="shiftInput2">Bulan:</label>
+        <input type="range" id="shiftInput2" min="1" max="12" value="1" oninput="updateShiftValue(2)">
+        <input type="number" id="shiftValue2" value="1" min="1" max="12" oninput="updateRangeValue(2)" readonly>
+        
+        <label for="shiftInput3">Tahun:</label>
+        <input type="range" id="shiftInput3" min="1752" max="2100" value="1752" oninput="updateShiftValue(3)">
+        <input type="number" id="shiftValue3" value="1752" min="1752" max="2100" oninput="updateRangeValue(3)" readonly>
+        
+        <div class="button-group">
+            <button onclick="encryptText()">Enkripsi</button>
+            <button onclick="decryptText()">Dekripsi</button>
+        </div>
+
+        <div class="copy-group">
+            <button onclick="copyText('textInput')">Salin Pesan</button>
+            <button onclick="copyText('result')">Salin Hasil</button>
+        </div>
+        
+        <div class="result-container">
+            <label for="result">Hasil:</label>
+            <textarea id="result" readonly></textarea>
+        </div>
+    </div>
+    
+    <script>
+        function encryptText() {
+            const text = document.getElementById('textInput').value;
+            const shift1 = parseInt(document.getElementById('shiftValue1').value);
+            const shift2 = parseInt(document.getElementById('shiftValue2').value);
+            const shift3 = parseInt(document.getElementById('shiftValue3').value);
+            document.getElementById('result').value = caesarCipher(text, shift1, shift2, shift3);
+        }
+        
+        function decryptText() {
+            const text = document.getElementById('textInput').value;
+            const shift1 = parseInt(document.getElementById('shiftValue1').value);
+            const shift2 = parseInt(document.getElementById('shiftValue2').value);
+            const shift3 = parseInt(document.getElementById('shiftValue3').value);
+            document.getElementById('result').value = caesarCipher(text, -shift1, -shift2, -shift3);
+        }
+        
+        function caesarCipher(str, shift1, shift2, shift3) {
+            return str.split('').map((char, index) => {
+                let shift = [shift1, shift2, shift3][index % 3]; // Apply different shifts in a cyclic manner
+                if (char >= 'a' && char <= 'z') {
+                    return String.fromCharCode(((char.charCodeAt(0) - 97 + shift) % 26 + 26) % 26 + 97);
+                }
+                if (char >= 'A' && char <= 'Z') {
+                    return String.fromCharCode(((char.charCodeAt(0) - 65 + shift) % 26 + 26) % 26 + 65);
+                }
+                return char;
+            }).join('');
+        }
+
+        function copyText(elementId) {
+            const textArea = document.getElementById(elementId);
+            textArea.select();
+            document.execCommand('copy');
+            alert('Teks berhasil disalin!');
+        }
+
+        function updateShiftValue(sliderNumber) {
+            const range = document.getElementById(`shiftInput${sliderNumber}`);
+            const number = document.getElementById(`shiftValue${sliderNumber}`);
+            number.value = range.value;
+        }
+
+        function updateRangeValue(sliderNumber) {
+            const range = document.getElementById(`shiftInput${sliderNumber}`);
+            const number = document.getElementById(`shiftValue${sliderNumber}`);
+            range.value = number.value;
+        }
+    </script>
+</body>
+</html>
