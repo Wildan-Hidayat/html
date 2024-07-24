@@ -1,1 +1,279 @@
-?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Zodiak</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eaeaea;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 20px;
+            margin: 0 0 15px;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 90%;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            text-align: center;
+        }
+        .zodiac-info {
+            margin-top: 15px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+        .zodiac-info h2 {
+            color: #333;
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .zodiac-info p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+        }
+        span {
+          width: 100%;
+          font-size: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+        <h1>Periksa Zodiak Anda</h1>
+        <div class="input-container">
+            <label for="day">Tanggal:</label>
+            <input type="number" id="day" min="1" max="31" placeholder="Tanggal">
+            <label for="month">Bulan:</label>
+            <input type="number" id="month" min="1" max="12" placeholder="Bulan">
+            <button onclick="showZodiac()">Cek Zodiak</button>
+        </div>
+        <div id="result" class="zodiac-info"></div>
+        <div id="error" class="error"></div>
+        <span>semua informasi zodiak di ambil dari chatGPT. jangan percaya 100%</span>
+    </div>
+    <script>
+        function getZodiacSign(day, month) {
+            if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return "Aquarius";
+            if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) return "Pisces";
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return "Aries";
+            if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return "Taurus";
+            if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return "Gemini";
+            if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return "Cancer";
+            if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return "Leo";
+            if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return "Virgo";
+            if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return "Libra";
+            if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return "Scorpio";
+            if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return "Sagittarius";
+            if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return "Capricorn";
+            return "Unknown";
+        }
+
+        function getZodiacInfo(sign) {
+            const zodiacInfo = {
+                "Aquarius": {
+                    "Symbol": "Water Bearer",
+                    "Element": "Air",
+                    "Dates": "20 Januari - 18 Februari",
+                    "Traits": "Kreatif, idealis, dan cenderung independen.",
+                    "Strengths": "Inovatif, berpikiran terbuka, dan penuh perhatian.",
+                    "Weaknesses": "Terlalu idealis, cenderung dingin, dan sulit berkompromi.",
+                    "Compatibility": "Terbaik dengan Gemini, Libra, dan Sagittarius.",
+                    "Career": "Cocok di bidang teknologi, sosial, dan humaniter."
+                },
+                "Pisces": {
+                    "Symbol": "Fish",
+                    "Element": "Water",
+                    "Dates": "19 Februari - 20 Maret",
+                    "Traits": "Sensitif, intuitif, dan empatik.",
+                    "Strengths": "Kreatif, intuitif, dan berbelas kasih.",
+                    "Weaknesses": "Terlalu emosional, mudah terpengaruh, dan cenderung melarikan diri dari kenyataan.",
+                    "Compatibility": "Terbaik dengan Cancer, Scorpio, dan Capricorn.",
+                    "Career": "Cocok di bidang seni, kesehatan, dan pelayanan sosial."
+                },
+                "Aries": {
+                    "Symbol": "Ram",
+                    "Element": "Fire",
+                    "Dates": "21 Maret - 19 April",
+                    "Traits": "Berani, penuh semangat, dan energik.",
+                    "Strengths": "Kepemimpinan, penuh energi, dan optimis.",
+                    "Weaknesses": "Impulsif, mudah marah, dan kurang sabar.",
+                    "Compatibility": "Terbaik dengan Leo, Sagittarius, dan Aquarius.",
+                    "Career": "Cocok di bidang kepemimpinan, olahraga, dan pemasaran."
+                },
+                "Taurus": {
+                    "Symbol": "Bull",
+                    "Element": "Earth",
+                    "Dates": "20 April - 20 Mei",
+                    "Traits": "Stabil, praktis, dan penyayang.",
+                    "Strengths": "Berfokus, tahan banting, dan dapat diandalkan.",
+                    "Weaknesses": "Keras kepala, lambat beradaptasi, dan materialistis.",
+                    "Compatibility": "Terbaik dengan Virgo, Capricorn, dan Cancer.",
+                    "Career": "Cocok di bidang keuangan, seni, dan real estate."
+                },
+                "Gemini": {
+                    "Symbol": "Twins",
+                    "Element": "Air",
+                    "Dates": "21 Mei - 20 Juni",
+                    "Traits": "Cerdas, komunikatif, dan serbaguna.",
+                    "Strengths": "Adaptif, komunikatif, dan penuh rasa ingin tahu.",
+                    "Weaknesses": "Tidak konsisten, mudah bosan, dan kurang fokus.",
+                    "Compatibility": "Terbaik dengan Libra, Aquarius, dan Aries.",
+                    "Career": "Cocok di bidang komunikasi, penulisan, dan teknologi."
+                },
+                "Cancer": {
+                    "Symbol": "Crab",
+                    "Element": "Water",
+                    "Dates": "21 Juni - 22 Juli",
+                    "Traits": "Emosional, intuitif, dan pengasih.",
+                    "Strengths": "Perhatian, berempati, dan setia.",
+                    "Weaknesses": "Terlalu sensitif, mudah tersinggung, dan cenderung mengasingkan diri.",
+                    "Compatibility": "Terbaik dengan Scorpio, Pisces, dan Taurus.",
+                    "Career": "Cocok di bidang kesehatan, pendidikan, dan pelayanan."
+                },
+                "Leo": {
+                    "Symbol": "Lion",
+                    "Element": "Fire",
+                    "Dates": "23 Juli - 22 Agustus",
+                    "Traits": "Percaya diri, kreatif, dan berani.",
+                    "Strengths": "Kepemimpinan, bersemangat, dan karismatik.",
+                    "Weaknesses": "Cenderung egois, sombong, dan sulit menerima kritik.",
+                    "Compatibility": "Terbaik dengan Aries, Sagittarius, dan Libra.",
+                    "Career": "Cocok di bidang seni, hiburan, dan manajemen."
+                },
+                "Virgo": {
+                    "Symbol": "Virgin",
+                    "Element": "Earth",
+                    "Dates": "23 Agustus - 22 September",
+                    "Traits": "Analitis, detail-oriented, dan praktis.",
+                    "Strengths": "Teliti, analitis, dan pekerja keras.",
+                    "Weaknesses": "Terlalu kritis, perfeksionis, dan cenderung cemas.",
+                    "Compatibility": "Terbaik dengan Taurus, Capricorn, dan Cancer.",
+                    "Career": "Cocok di bidang kesehatan, penelitian, dan administrasi."
+                },
+                "Libra": {
+                    "Symbol": "Scales",
+                    "Element": "Air",
+                    "Dates": "23 September - 22 Oktober",
+                    "Traits": "Diplomatis, berkeadilan, dan berorientasi pada hubungan.",
+                    "Strengths": "Adil, ramah, dan artistik.",
+                    "Weaknesses": "Kebingungan, cenderung menunda, dan terlalu bergantung pada orang lain.",
+                    "Compatibility": "Terbaik dengan Gemini, Aquarius, dan Sagittarius.",
+                    "Career": "Cocok di bidang hukum, seni, dan konsultasi."
+                },
+                "Scorpio": {
+                    "Symbol": "Scorpion",
+                    "Element": "Water",
+                    "Dates": "23 Oktober - 21 November",
+                    "Traits": "Intens, misterius, dan penuh gairah.",
+                    "Strengths": "Kuat, bersemangat, dan sangat berkomitmen.",
+                    "Weaknesses": "Cemburu, posesif, dan kadang terlalu rahasia.",
+                    "Compatibility": "Terbaik dengan Pisces, Cancer, dan Virgo.",
+                    "Career": "Cocok di bidang investigasi, psikologi, dan seni."
+                },
+                "Sagittarius": {
+                    "Symbol": "Archer",
+                    "Element": "Fire",
+                    "Dates": "22 November - 21 Desember",
+                    "Traits": "Optimis, petualang, dan jujur.",
+                    "Strengths": "Petualang, jujur, dan penuh semangat.",
+                    "Weaknesses": "Terlalu blak-blakan, tidak sabar, dan cenderung menghindari tanggung jawab.",
+                    "Compatibility": "Terbaik dengan Aries, Leo, dan Aquarius.",
+                    "Career": "Cocok di bidang perjalanan, pendidikan, dan media."
+                },
+                "Capricorn": {
+                    "Symbol": "Goat",
+                    "Element": "Earth",
+                    "Dates": "22 Desember - 19 Januari",
+                    "Traits": "Disiplin, ambisius, dan bertanggung jawab.",
+                    "Strengths": "Terorganisir, pekerja keras, dan bertanggung jawab.",
+                    "Weaknesses": "Terlalu serius, sulit beradaptasi, dan cenderung pesimis.",
+                    "Compatibility": "Terbaik dengan Taurus, Virgo, dan Scorpio.",
+                    "Career": "Cocok di bidang bisnis, manajemen, dan hukum."
+                }
+            };
+            return zodiacInfo[sign] || {
+                "Symbol": "Unknown",
+                "Element": "Unknown",
+                "Dates": "Unknown",
+                "Traits": "Informasi tidak tersedia.",
+                "Strengths": "Informasi tidak tersedia.",
+                "Weaknesses": "Informasi tidak tersedia.",
+                "Compatibility": "Informasi tidak tersedia.",
+                "Career": "Informasi tidak tersedia."
+            };
+        }
+
+        function showZodiac() {
+            const day = parseInt(document.getElementById('day').value, 10);
+            const month = parseInt(document.getElementById('month').value, 10);
+            const zodiacSign = getZodiacSign(day, month);
+            const info = getZodiacInfo(zodiacSign);
+
+            const result = document.getElementById('result');
+            result.innerHTML = `
+                <h2>${zodiacSign}</h2>
+                <p><strong>Symbol:</strong> ${info.Symbol}</p>
+                <p><strong>Element:</strong> ${info.Element}</p>
+                <p><strong>Dates:</strong> ${info.Dates}</p>
+                <p><strong>Traits:</strong> ${info.Traits}</p>
+                <p><strong>Strengths:</strong> ${info.Strengths}</p>
+                <p><strong>Weaknesses:</strong> ${info.Weaknesses}</p>
+                <p><strong>Compatibility:</strong> ${info.Compatibility}</p>
+                <p><strong>Career:</strong> ${info.Career}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
