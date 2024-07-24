@@ -1,1 +1,257 @@
-?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaf Sayang</title>
+    <style>
+        @keyframes rainbow {
+            0% { border-color: #ff6b6b; }
+            14% { border-color: #ff6bff; }
+            28% { border-color: #6b6bff; }
+            42% { border-color: #6bff6b; }
+            56% { border-color: #ffff6b; }
+            70% { border-color: #ff6b6b; }
+            84% { border-color: #ff6bff; }
+            100% { border-color: #6b6bff; }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes backgroundFade {
+            0% { background-color: #121212; }
+            50% { background-color: #1e1e1e; }
+            100% { background-color: #121212; }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e, #121212);
+            animation: backgroundFade 5s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: #e0e0e0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 15px;
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            border: 4px solid;
+            animation: rainbow 4s linear infinite, spin 8s linear infinite;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            background-color: #333;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+            object-fit: cover;
+        }
+
+        .slide h2 {
+            color: #ff6b6b;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px #ff6b6b;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0.15em solid white;
+            animation: typing 4s steps(30, end), blink 0.75s step-end infinite;
+            width: 100%;
+        }
+
+        .slide p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px #ccc;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 0.15em solid white;
+            animation: typing 6s steps(40, end), blink 0.75s step-end infinite;
+            animation-delay: 4s;
+            width: 100%;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            font-size: 24px;
+            text-shadow: 0 0 8px #ff6b6b;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 15px;
+            font-size: 14px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+        }
+
+        .btn:hover {
+            background-color: #e55b5b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+        }
+
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .nav-buttons button {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            color: black;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-buttons button:disabled {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 10px;
+            }
+
+            .slide img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .slide h2 {
+                font-size: 18px;
+            }
+
+            .slide p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slides">
+            <div class="slide">
+                <img src="tkthao219-bubududu.gif" alt="Cute Picture 1">
+                <h2>Maaf Ya, Sayang!</h2>
+                <p>
+                    Aku tahu aku salah, dan aku sangat menyesal. <br>
+                    Kamu adalah kebahagiaanku, dan aku tidak mau kehilangan senyummu. <br>
+                    Maafkan aku ya, sayang. <span class="heart">❤️</span>
+                </p>
+                <a href="balas.html" class="btn">Balas</a>
+            </div>
+            <div class="slide">
+                <img src="tkthao219-bubududu (47).gif" alt="Cute Picture 2">
+                <h2>Sayang, Jangan Marah Lagi!</h2>
+                <p>
+                    Aku berjanji tidak akan mengulanginya lagi. <br>
+                    Aku sangat sayang sama kamu, lebih dari apapun. <br>
+                    Tolong berikan aku kesempatan lagi. <span class="heart">❤️</span>
+                </p>
+                <a href="balas.html" class="btn">Balas</a>
+            </div>
+            <!-- Tambahkan slide lain sesuai kebutuhan -->
+        </div>
+        <div class="nav-buttons">
+            <button id="prev" disabled>&lt;</button>
+            <button id="next">&gt;</button>
+        </div>
+    </div>
+    
+    <script>
+        const slides = document.querySelector('.slides');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentIndex = 0;
+
+        function updateButtons() {
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === slides.children.length - 1;
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateButtons();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < slides.children.length - 1) {
+                currentIndex++;
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateButtons();
+            }
+        });
+
+        // Auto-slide functionality
+        setInterval(() => {
+            if (currentIndex < slides.children.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            updateButtons();
+        }, 3000); // Adjust the interval as needed
+
+        updateButtons();
+    </script>
+</body>
+</html>
