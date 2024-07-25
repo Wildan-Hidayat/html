@@ -1,1 +1,205 @@
-?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-time Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    #login-container, #chat-container {
+      width: 400px;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #login-form, #message-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #login-form input, #message-form input {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    #login-form button, #message-form button {
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    #login-form button:hover, #message-form button:hover {
+      background: #0056b3;
+    }
+
+    #messages {
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <button id="sign-up">Sign Up</button>
+    </form>
+  </div>
+  <div id="chat-container" style="display: none;">
+    <div id="messages"></div>
+    <form id="message-form">
+      <input type="text" id="message-input" placeholder="Type a message" required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+  <script>
+    // Konfigurasi Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCxYndc1H5O4mfAlnaHtYSabgUgk8A7WxM",
+      authDomain: "chatfirebasemaxs.firebaseapp.com",
+      databaseURL: "https://chatfirebasemaxs-default-rtdb.firebaseio.com",
+      projectId: "chatfirebasemaxs",
+      storageBucket: "chatfirebasemaxs.appspot.com",
+      messagingSenderId: "1039211175918",
+      appId: "1:1039211175918:web:4315601948bf886b72f8ff"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+    // Elemen DOM
+    const loginContainer = document.getElementById('login-container');
+    const chatContainer = document.getElementById('chat-container');
+    const loginForm = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const signUpButton = document.getElementById('sign-up');
+    const messagesDiv = document.getElementById('messages');
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.getElementById('message-input');
+    const nameInput = document.getElementById('name');
+
+    // Daftar kata kasar
+    const badWords = ["kontol","k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
+
+    function filterBadWords(text) {
+      let filteredText = text;
+      badWords.forEach(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        filteredText = filteredText.replace(regex, '(^_^)');
+      });
+      return filteredText;
+    }
+
+    // Fungsi untuk menampilkan pesan
+    function displayMessage(text, name) {
+      const messageElement = document.createElement('div');
+      const filteredText = filterBadWords(text); // Terapkan filter pada pesan
+      messageElement.textContent = `${name}: ${filteredText}`;
+      messagesDiv.appendChild(messageElement);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll ke bawah
+    }
+
+    // Event listener untuk form pesan
+    messageForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const text = messageInput.value.trim();
+      if (text === '') {
+        alert('Silakan Masukkan Pesan.');
+        return;
+      }
+      const name = localStorage.getItem('userName');
+      const filteredText = filterBadWords(text); // Terapkan filter pada pesan
+      db.ref('messages').push({ text: filteredText, name });
+      messageInput.value = '';
+    });
+
+    // Fungsi untuk memuat pesan
+    function loadMessages() {
+      db.ref('messages').on('child_added', function(snapshot) {
+        const message = snapshot.val();
+        displayMessage(message.text, message.name);
+      });
+    }
+
+    // Event listener untuk form login dan sign up
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      const name = nameInput.value.trim();
+      if (name === '') {
+        alert('Silakan Masukkan Nama.');
+        return;
+      }
+      auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        localStorage.setItem('userName', name);
+        loginContainer.style.display = 'none';
+        chatContainer.style.display = 'block';
+        loadMessages();
+      })
+      .catch(error => {
+        console.error('Kesalahan Masuk:', error);
+        alert('Gagal Masuk. Silakan Periksa Email Dan Kata Sandi Anda.');
+      });
+    });
+
+    signUpButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      const name = nameInput.value.trim();
+      if (name === '') {
+        alert('Silahkan Masukan Nama Anda.');
+        return;
+      }
+      auth.createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        alert('Pengguna Berhasil Dibuat. Silahkan Masuk.');
+      })
+      .catch(error => {
+        console.error('Kesalahan Pendaftaran:', error);
+        alert('Pendaftaran Gagal. Silakan Coba Lagi.');
+      });
+    });
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        loginContainer.style.display = 'none';
+        chatContainer.style.display = 'block';
+        loadMessages();
+      } else {
+        loginContainer.style.display = 'block';
+        chatContainer.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
