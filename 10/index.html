@@ -88,11 +88,10 @@
       messagingSenderId: "1039211175918",
       appId: "1:1039211175918:web:4315601948bf886b72f8ff"
     };
-    
+
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.database();
-
     // Elemen DOM
     const loginContainer = document.getElementById('login-container');
     const chatContainer = document.getElementById('chat-container');
@@ -106,7 +105,7 @@
     const nameInput = document.getElementById('name');
 
     // Daftar kata kasar
-    const badWords = ["kontol","k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
+    const badWords = ["kontol", "k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
 
     function filterBadWords(text) {
       let filteredText = text;
@@ -120,10 +119,10 @@
     // Fungsi untuk menampilkan pesan
     function displayMessage(text, name) {
       const messageElement = document.createElement('div');
-      const filteredText = filterBadWords(text); // Terapkan filter pada pesan
+      const filteredText = filterBadWords(text);
       messageElement.textContent = `${name}: ${filteredText}`;
       messagesDiv.appendChild(messageElement);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll ke bawah
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
 
     // Event listener untuk form pesan
@@ -135,17 +134,19 @@
         return;
       }
       const name = localStorage.getItem('userName');
-      const filteredText = filterBadWords(text); // Terapkan filter pada pesan
-      db.ref('messages').push({ text: filteredText, name });
+      db.ref('messages').push({
+        text: text, name
+      });
       messageInput.value = '';
     });
 
     // Fungsi untuk memuat pesan
     function loadMessages() {
-      db.ref('messages').on('child_added', function(snapshot) {
-        const message = snapshot.val();
-        displayMessage(message.text, message.name);
-      });
+      db.ref('messages').on('child_added',
+        function(snapshot) {
+          const message = snapshot.val();
+          displayMessage(message.text, message.name);
+        });
     }
 
     // Event listener untuk form login dan sign up
@@ -160,7 +161,7 @@
       }
       auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        localStorage.setItem('userName', name);
+        localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
         loginContainer.style.display = 'none';
         chatContainer.style.display = 'block';
         loadMessages();
@@ -177,12 +178,13 @@
       const password = passwordInput.value;
       const name = nameInput.value.trim();
       if (name === '') {
-        alert('Silahkan Masukan Nama Anda.');
+        alert('Silahkan Masukkan Nama Anda.');
         return;
       }
       auth.createUserWithEmailAndPassword(email, password)
       .then(() => {
-        alert('Pengguna Berhasil Dibuat. Silahkan Masuk.');
+        localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
+        alert('Pengguna Berhasil Dibuat. Silakan Masuk.');
       })
       .catch(error => {
         console.error('Kesalahan Pendaftaran:', error);
@@ -200,6 +202,9 @@
         chatContainer.style.display = 'none';
       }
     });
+    window.onload = ()=> {
+      alert("Jangan Masukkan Email & Password Pribadi Masukkan Email & Password Random Aja Yang Penting Mudah Di ingat Dan Jangan Lupa Namanya Juga Harus Di Ingat Juga. Kasih Nama Yang Sopan")
+    }
   </script>
 </body>
 </html>
