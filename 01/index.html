@@ -1,151 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesan Romantis</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
-            font-family: 'Arial', sans-serif;
-            position: relative;
-        }
-        .message-container {
-            text-align: center;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 1s ease-out;
-        }
-        .message-container h1 {
-            color: #ff6f61;
-            font-size: 2.8em;
-            margin: 0;
-            animation: bounceIn 2s ease-out;
-        }
-        .message-container p {
-            color: #333;
-            font-size: 1.2em;
-            margin: 15px 0;
-            line-height: 1.5;
-            animation: fadeIn 2s ease-in;
-        }
-        .heart {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4em;
-            color: #ff6f61;
-            opacity: 0.5;
-            animation: beat 1s infinite;
-        }
-        .floating-heart {
-            position: absolute;
-            top: 70%;
-            left: 70%;
-            font-size: 2em;
-            color: #ff6f61;
-            animation: float 4s ease-in-out infinite;
-            opacity: 0.6;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        @keyframes beat {
-            0%, 20%, 50%, 80%, 100% {
-                transform: scale(1);
-            }
-            10% {
-                transform: scale(1.3);
-            }
-            30% {
-                transform: scale(1.3);
-            }
-        }
-        @keyframes slideUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-30px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-        .background-heart {
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            font-size: 6em;
-            color: #ff6f61;
-            opacity: 0.3;
-            animation: rotate 15s linear infinite;
-        }
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .in {
-          position: fixed;
-          left: 0;
-          bottom: 0;
-          color: transparent;
-          background-color: transparent;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesan Romantis</title>
+  <style>
+    body {
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      font-family: 'Arial', sans-serif;
+      position: relative;
+    }
+    .message-container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      max-width: 80%;
+      width: 500px;
+      position: relative;
+      overflow: hidden;
+      animation: slideUp 1.5s ease-out;
+      backdrop-filter: blur(10px);
+    }
+    .message-container h1 {
+      color: #ff6f61;
+      font-size: 2.5em;
+      margin: 0;
+      animation: bounceIn 2s ease-out;
+    }
+    .message-container p {
+      color: #333;
+      font-size: 1.2em;
+      margin: 15px 0;
+      line-height: 1.5;
+      animation: fadeIn 2s ease-in;
+    }
+    .heart {
+      position: absolute;
+      top: 50%;
+      left: 35%;
+      transform: translateX(-50%);
+      font-size: 5em;
+      color: #ff6f61;
+      opacity: 0.5;
+      animation: beat 1.2s infinite;
+    }
+    .floating-heart {
+      position: absolute;
+      bottom: 10%;
+      right: 10%;
+      font-size: 3em;
+      color: #ff6f61;
+      animation: float 4.5s ease-in-out infinite;
+      opacity: 0.5;
+    }
+    .particle {
+      position: fixed;
+      top: 0;
+      font-size: 1.5em;
+      color: #ff6f61;
+      opacity: 0.5;
+      pointer-events: none;
+      animation: fall 10s linear infinite;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes beat {
+      0%, 20%, 50%, 80%, 100% {
+        transform: scale(1);
+      }
+      10% {
+        transform: scale(1.3);
+      }
+      30% {
+        transform: scale(1.3);
+      }
+    }
+    @keyframes slideUp {
+      from {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-30px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+    .background-heart-left {
+      position: fixed;
+      top: 5%;
+      left: 5%;
+      font-size: 7em;
+      color: #ff6f61;
+      opacity: 0.2;
+      animation: rotate 20s linear infinite;
+    }
+    .background-heart-left-a {
+      position: fixed;
+      bottom: 5%;
+      left: 5%;
+      font-size: 7em;
+      color: #ff6f61;
+      opacity: 0.2;
+      animation: rotate 20s linear infinite;
+    }
+    .background-heart-right {
+      position: fixed;
+      top: 5%;
+      right: 5%;
+      font-size: 7em;
+      color: #ff6f61;
+      opacity: 0.2;
+      animation: rotate 20s linear infinite;
+    }
+    .background-heart-right-a {
+      position: fixed;
+      bottom: 5%;
+      right: 5%;
+      font-size: 7em;
+      color: #ff6f61;
+      opacity: 0.2;
+      animation: rotate 20s linear infinite;
+    }
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="background-heart">❤️</div>
-    <div class="message-container">
-        <div class="heart">❤️</div>
-        <h1>Untuk Cintaku</h1>
-        <p>Setiap hari bersamamu adalah hadiah terindah dalam hidupku. Aku mencintaimu lebih dari kata-kata yang bisa diungkapkan. Kamu adalah segalanya bagiku. Selamat hari ini dan selamanya, sayang.</p>
-        <div class="floating-heart">❤️</div>
+  <audio autoplay loop controls hidden>
+  <source src="URL_LAGU" type="audio/mpeg">
+  </audio>
+  <div class="background-heart-left">
+    ❤️
+  </div>
+  <div onclick="myLover()" class="background-heart-left-a">
+    ❤️
+  </div>
+  <div class="background-heart-right">
+    ❤️
+  </div>
+  <div class="background-heart-right-a">
+    ❤️
+  </div>
+  <div class="message-container">
+    <div class="heart">
+      ❤️
     </div>
-    <span class="in">TiyahSayang</span>
+    <h1 id="title">Untuk Cintaku</h1>
+    <p id="typed"></p>
+    <div class="floating-heart">
+      ❤️
+    </div>
+  </div>
+  <script>
+    let love = 0;
+    function myLover() {
+      love++;
+      if (10 <= love) {
+        document.getElementById("typed").style.display = "none";
+        document.getElementById("title").textContent = "I LOVE YOU TIAH";
+        love = 0;
+      }else {
+        document.getElementById("typed").style.display = "";
+        document.getElementById("title").textContent = "Untuk Cintaku";
+      }
+    }
+    const typedSpan = document.getElementById("typed");
+    const totype = [
+      "setiap kali aku melihat senyummu, rasanya dunia ini terasa lebih indah. kamu adalah alasan di balik kebahagiaanku yang tulus, dan setiap detik bersamamu adalah momen yang aku hargai lebih dari apa pun. dalam setiap percakapan kita, aku menemukan kebahagiaan dan ketenangan yang tidak bisa aku temukan di tempat lain. kamu lebih dari sekadar pasangan bagiku; kamu adalah sahabat terbaik yang selalu bisa aku andalkan.",
+      "ketika kita bersama, waktu seakan berhenti. aku mencintai cara kamu membuat segala sesuatu menjadi lebih ringan dan menyenangkan. bahkan dalam hari-hari yang penuh kesibukan, kamu adalah titik cahaya yang selalu mengingatkanku untuk tersenyum dan bersyukur. setiap detail tentangmu, dari caramu berbicara hingga cara kamu menatapku, membuatku merasa spesial dan dicintai.",
+      "aku sering membayangkan masa depan kita dan bagaimana kita akan menghadapi berbagai tantangan bersama. aku yakin bahwa denganmu di sisiku, kita bisa mengatasi apa pun yang datang. kamu adalah harapanku, impianku, dan cintaku, dan aku ingin terus bersama-sama membangun kisah indah kita. terima kasih telah menjadi bagian dari hidupku dan membuat setiap hari lebih berarti.",
+    ];
+
+    const delayTyping_char = 100;  // Percepat pengetikan
+    const delayErasing_text = 50;  // Percepat penghapusan
+    const delayTyping_text = 1500; // Sesuaikan jeda antar pesan
+
+    let totypeIndex = 0;
+    let charIndex = 0;
+
+    function typeText() {
+      if (charIndex < totype[totypeIndex].length) {
+        typedSpan.textContent += totype[totypeIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(typeText, delayTyping_char);
+      } else {
+        setTimeout(eraseText, delayTyping_text);
+      }
+    }
+
+    function eraseText() {
+      if (charIndex > 0) {
+        typedSpan.textContent = totype[totypeIndex].substring(0, charIndex - 1);
+        charIndex = charIndex - 1;
+        setTimeout(eraseText, delayErasing_text);
+      } else {
+        totypeIndex++;
+
+        if (totypeIndex >= totype.length)
+          totypeIndex = 0;
+        setTimeout(typeText, delayTyping_text);
+      }
+    }
+
+    function createParticles() {
+      const numberOfParticles = 50;
+      for (let i = 0; i < numberOfParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.textContent = '❤️';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = Math.random() * 2 + 3 + 's';
+        document.body.appendChild(particle);
+        
+        // Remove particle after animation
+        particle.addEventListener('animationend', () => {
+          particle.remove();
+        });
+      }
+    }
+
+    window.onload = function() {
+      if (totype[totypeIndex].length) setTimeout(typeText, delayTyping_text);
+      createParticles();
+    }
+  </script>
 </body>
 </html>
