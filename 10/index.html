@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Real-time Chat</title>
+  <title>Real-time Chat with File Upload</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -54,6 +54,21 @@
       padding: 10px;
       background: #fafafa;
     }
+
+    #progress-container {
+      display: none;
+      margin-bottom: 10px;
+    }
+
+    #progress-bar {
+      width: 0%;
+      height: 4px;
+      background: #007bff;
+    }
+    
+    #delete-messages {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -68,15 +83,22 @@
     </form>
   </div>
   <div id="chat-container" style="display: none;">
+    <h2>Grup Desa</h2>
     <div id="messages"></div>
     <form id="message-form">
-      <input type="text" id="message-input" placeholder="Type a message" required>
+      <input type="file" id="file-input" accept="image/*,video/*,audio/*,text/*" />
+      <input type="text" id="message-input" placeholder="Type a message" />
       <button type="submit">Send</button>
     </form>
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+    <button id="delete-messages">Delete All Messages</button>
   </div>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
   <script>
     // Konfigurasi Firebase
     const firebaseConfig = {
@@ -89,9 +111,13 @@
       appId: "1:1039211175918:web:4315601948bf886b72f8ff"
     };
 
+    // Inisialisasi Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.database();
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+
     // Elemen DOM
     const loginContainer = document.getElementById('login-container');
     const chatContainer = document.getElementById('chat-container');
@@ -102,7 +128,11 @@
     const messagesDiv = document.getElementById('messages');
     const messageForm = document.getElementById('message-form');
     const messageInput = document.getElementById('message-input');
+    const fileInput = document.getElementById('file-input');
     const nameInput = document.getElementById('name');
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar');
+    const deleteMessagesButton = document.getElementById('delete-messages');
 
     // Daftar kata kasar
     const badWords = ["kontol", "k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
@@ -117,94 +147,179 @@
     }
 
     // Fungsi untuk menampilkan pesan
-    function displayMessage(text, name) {
+    function displayMessage(text, name, fileUrl, fileType) {
       const messageElement = document.createElement('div');
       const filteredText = filterBadWords(text);
-      messageElement.textContent = `${name}: ${filteredText}`;
+      const messageContent = document.createElement('div');
+
+      if (fileUrl) {
+        if (fileType.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.src = fileUrl;
+          img.style.maxWidth = '100%';
+          img.style.maxHeight = '200px';
+          messageContent.appendChild(img);
+        } else if (fileType.startsWith('video/')) {
+          const video = document.createElement('video');
+          video.src = fileUrl;
+          video.controls = true;
+          video.style.maxWidth = '100%';
+          messageContent.appendChild(video);
+        } else if (fileType.startsWith('audio/')) {
+          const audio = document.createElement('audio');
+          audio.src = fileUrl;
+          audio.controls = true;
+          messageContent.appendChild(audio);
+        } else {
+          const fileLink = document.createElement('a');
+          fileLink.href = fileUrl;
+          fileLink.textContent = 'Download File';
+          fileLink.target = '_blank';
+          messageContent.appendChild(fileLink);
+        }
+      } else {
+        messageContent.textContent = filteredText;
+      }
+
+      messageElement.textContent = `${name}: `;
+      messageElement.appendChild(messageContent);
       messagesDiv.appendChild(messageElement);
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Fungsi untuk mengunggah file
+    function uploadFile(file) {
+      const fileRef = storageRef.child(`files/${file.name}`);
+      const uploadTask = fileRef.put(file);
+
+      uploadTask.on('state_changed',
+        function(snapshot) {
+          // Progres pengunggahan bisa ditangani di sini
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          progressBar.style.width = `${progress}%`;
+          progressContainer.style.display = 'block';
+        },
+        function(error) {
+          console.error('Kesalahan Pengunggahan:', error);
+        },
+        function() {
+          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            db.ref('messages').push({
+              text: messageInput.value.trim(),
+              name: localStorage.getItem('userName'),
+              fileUrl: downloadURL,
+              fileType: file.type
+            });
+            messageInput.value = '';
+            fileInput.value = ''; // Clear the file input
+            progressContainer.style.display = 'none';
+            progressBar.style.width = '0%';
+          });
+        }
+      );
     }
 
     // Event listener untuk form pesan
     messageForm.addEventListener('submit', function(event) {
       event.preventDefault();
       const text = messageInput.value.trim();
-      if (text === '') {
-        alert('Silakan Masukkan Pesan.');
-        return;
-      }
+      const file = fileInput.files[0];
       const name = localStorage.getItem('userName');
-      db.ref('messages').push({
-        text: text, name
-      });
-      messageInput.value = '';
-    });
 
-    // Fungsi untuk memuat pesan
-    function loadMessages() {
-      db.ref('messages').on('child_added',
-        function(snapshot) {
-          const message = snapshot.val();
-          displayMessage(message.text, message.name);
-        });
-    }
-
-    // Event listener untuk form login dan sign up
-    loginForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      const name = nameInput.value.trim();
-      if (name === '') {
-        alert('Silakan Masukkan Nama.');
+      if (text === '' && !file) {
+        alert('Silakan Masukkan Pesan atau Pilih File.');
         return;
       }
-      auth.signInWithEmailAndPassword(email, password)
-      .then(() => {
-        localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
-        loginContainer.style.display = 'none';
-        chatContainer.style.display = 'block';
-        loadMessages();
-      })
-      .catch(error => {
-        console.error('Kesalahan Masuk:', error);
-        alert('Gagal Masuk. Silakan Periksa Email Dan Kata Sandi Anda.');
-      });
-    });
 
-    signUpButton.addEventListener('click', function(event) {
-      event.preventDefault();
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      const name = nameInput.value.trim();
-      if (name === '') {
-        alert('Silahkan Masukkan Nama Anda.');
-        return;
-      }
-      auth.createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
-        alert('Pengguna Berhasil Dibuat. Silakan Masuk.');
-      })
-      .catch(error => {
-        console.error('Kesalahan Pendaftaran:', error);
-        alert('Pendaftaran Gagal. Silakan Coba Lagi.');
-      });
-    });
-
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        loginContainer.style.display = 'none';
-        chatContainer.style.display = 'block';
-        loadMessages();
+      if (file) {
+        uploadFile(file);
       } else {
-        loginContainer.style.display = 'block';
-        chatContainer.style.display = 'none';
+        db.ref('messages').push({
+          text: text,
+          name: name
+        });
+        messageInput.value = '';
       }
     });
-    window.onload = ()=> {
-      alert("Jangan Masukkan Email & Password Pribadi Masukkan Email & Password Random Aja Yang Penting Mudah Di ingat Dan Jangan Lupa Namanya Juga Harus Di Ingat Juga. Kasih Nama Yang Sopan")
-    }
-  </script>
+
+// Fungsi untuk memuat pesan
+        function loadMessages() {
+          db.ref('messages').on('child_added', function(snapshot) {
+            const message = snapshot.val();
+            displayMessage(message.text, message.name, message.fileUrl, message.fileType);
+          });
+        }
+
+        // Event listener untuk form login dan sign up
+        loginForm.addEventListener('submit', function(event) {
+          event.preventDefault();
+          const email = emailInput.value;
+          const password = passwordInput.value;
+          const name = nameInput.value.trim();
+          if (name === '') {
+            alert('Silakan Masukkan Nama.');
+            return;
+          }
+          auth.signInWithEmailAndPassword(email, password)
+            .then(() => {
+              localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
+              loginContainer.style.display = 'none';
+              chatContainer.style.display = 'block';
+              loadMessages();
+            })
+            .catch(error => {
+              console.error('Kesalahan Masuk:', error);
+              alert('Gagal Masuk. Silakan Periksa Email Dan Kata Sandi Anda.');
+            });
+        });
+
+        signUpButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          const email = emailInput.value;
+          const password = passwordInput.value;
+          const name = nameInput.value.trim();
+          if (name === '') {
+            alert('Silahkan Masukkan Nama Anda.');
+            return;
+          }
+          auth.createUserWithEmailAndPassword(email, password)
+            .then(() => {
+              localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
+              alert('Pengguna Berhasil Dibuat. Silakan Masuk.');
+            })
+            .catch(error => {
+              console.error('Kesalahan Pendaftaran:', error);
+              alert('Pendaftaran Gagal. Silakan Coba Lagi.');
+            });
+        });
+
+        auth.onAuthStateChanged(user => {
+          if (user) {
+            loginContainer.style.display = 'none';
+            chatContainer.style.display = 'block';
+            loadMessages();
+          } else {
+            loginContainer.style.display = 'block';
+            chatContainer.style.display = 'none';
+          }
+        });
+
+        // Fungsi untuk menghapus semua pesan
+        deleteMessagesButton.addEventListener('click', function() {
+          db.ref('messages').remove()
+            .then(() => {
+              messagesDiv.innerHTML = ''; // Clear the messages div
+              alert('Semua pesan telah dihapus.');
+            })
+            .catch(error => {
+              console.error('Kesalahan saat menghapus pesan:', error);
+              alert('Gagal menghapus pesan.');
+            });
+        });
+
+        window.onload = () => {
+          alert("Jangan Masukkan Email & Password Pribadi. Masukkan Email & Password Random Aja Yang Penting Mudah Diingat Dan Jangan Lupa Namanya Juga Harus Di Ingat Juga. Kasih Nama Yang Sopan.");
+        };
+    </script>
 </body>
 </html>
