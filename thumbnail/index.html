@@ -69,6 +69,26 @@
       border-radius: 4px;
     }
 
+    #progress-container {
+      display: none;
+      margin-bottom: 10px;
+    }
+
+    #progress-bar {
+      width: 100%;
+      height: 20px;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    #progress-bar-inner {
+      height: 100%;
+      background-color: #007bff;
+      width: 0;
+      transition: width 0.3s ease;
+    }
+
     @media (max-width: 600px) {
       body {
         padding: 10px;
@@ -97,6 +117,11 @@
     <form id="message-form">
       <input type="text" id="message-input" placeholder="Type a message" required>
       <input type="file" id="file-input">
+      <div id="progress-container">
+        <div id="progress-bar">
+          <div id="progress-bar-inner"></div>
+        </div>
+      </div>
       <button type="submit">Send</button>
     </form>
     <button id="delete-messages">Delete All Messages</button>
@@ -135,6 +160,8 @@
     const fileInput = document.getElementById('file-input');
     const nameInput = document.getElementById('name');
     const deleteMessagesButton = document.getElementById('delete-messages');
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar-inner');
 
     // Daftar kata kasar
     const badWords = ["kontol", "k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
@@ -189,22 +216,35 @@
       const name = localStorage.getItem('userName');
 
       if (file) {
+        progressContainer.style.display = 'block';
         const storageRef = storage.ref(`images/${Date.now()}_${file.name}`);
-        storageRef.put(file)
-          .then(snapshot => snapshot.ref.getDownloadURL())
-          .then(url => {
-            db.ref('messages').push({
-              text: text,
-              name: name,
-              imageUrl: url
-            });
-            messageInput.value = '';
-            fileInput.value = '';
-          })
-          .catch(error => {
+        const uploadTask = storageRef.put(file);
+
+        uploadTask.on('state_changed',
+          function(snapshot) {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            progressBar.style.width = progress + '%';
+          },
+          function(error) {
             console.error('Kesalahan mengunggah file:', error);
             alert('Gagal mengunggah file. Silakan coba lagi.');
-          });
+            progressContainer.style.display = 'none';
+          },
+          function() {
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+              db.ref('messages').push({
+                text: text,
+                name: name,
+                imageUrl: downloadURL
+              });
+              messageInput.value = '';
+              fileInput.value = '';
+              progressContainer.style.display = 'none';
+              progressContainer.style.display = 'none';
+              progressBar.style.width = '0%';
+            });
+          }
+        );
       } else {
         db.ref('messages').push({
           text: text,
