@@ -1,1 +1,466 @@
-?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>islam koleksi v1.0</title>
+<meta name="description" content="semoga bermanfaat & berkah" />
+<meta property="og:title" content="islam koleksi v1.0" />
+<meta property="og:description" content="semoga bermanfaat & berkah" />
+<meta property="og:image" content="https://raw.githubusercontent.com/F-HTML/f-html/main/thumbnail/09.jpg" />
+<meta property="og:url" content="https://github.com/F-HTML" />
+<meta property="og:type" content="website" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<style>
+/* Reset default browser styles */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+@font-face {
+font-family: 'AmiriQuran';
+src: url('AmiriQuran.ttf');
+}
+body {
+font-family: Arial,Sans-Serif,'AmiriQuran';
+background-color: #f0f4f8;
+/* Warna latar belakang lembut */
+color: #333;
+/* Warna teks yang nyaman untuk dibaca */
+line-height: 1.6;
+user-select: none;
+}
+
+.container {
+max-width: 900px;
+margin: 20px auto;
+padding: 20px;
+background: #ffffff;
+/* Latar belakang putih bersih */
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+h1 {
+text-align: center;
+margin-bottom: 20px;
+color: #007bff;
+font-size: 2em;
+}
+
+ul {
+list-style-type: none;
+padding: 0;
+max-height: 300px;
+/* Adjust height as needed */
+overflow-y: auto;
+}
+
+#doaList {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+#doaList li {
+padding: 15px;
+background: #f9f9f9;
+/* Warna latar belakang item doa */
+border: 1px solid #ddd;
+/* Warna border lembut */
+border-radius: 8px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+cursor: pointer;
+transition: background 0.3s, transform 0.3s;
+font-size: 16px;
+/* Ukuran font yang nyaman dibaca */
+}
+
+#doaList li:hover {
+background: #e2e6ea;
+/* Warna latar belakang hover yang lembut */
+transform: translateY(-2px);
+}
+
+#doaDetail {
+display: none;
+background: #ffffff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#closeDetail {
+display: block;
+margin-bottom: 15px;
+padding: 10px 15px;
+background: #007bff;
+color: #ffffff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+text-align: center;
+transition: background 0.3s;
+}
+
+#closeDetail:hover {
+background: #0056b3;
+}
+
+h2 {
+margin-bottom: 10px;
+color: #333;
+font-size: 1.4em;
+/* Ukuran font yang nyaman */
+text-align: center;
+}
+
+#doaArabic {
+font-size: 2em;
+/* Ukuran font yang lebih besar untuk teks Arab */
+margin: 10px 0;
+text-align: center;
+line-height: 70px;
+color: #333;
+}
+
+#doaLatin {
+font-style: italic;
+text-align: center;
+color: #555;
+/* Warna teks Latin yang lembut */
+font-size: 1.2em;
+/* Ukuran font yang nyaman */
+}
+
+#doaTranslation {
+margin-top: 10px;
+text-align: center;
+color: #333;
+/* Warna teks terjemahan yang nyaman */
+font-size: 1.1em;
+/* Ukuran font yang nyaman */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.container {
+padding: 15px;
+}
+
+#doaList li {
+font-size: 15px;
+/* Ukuran font yang lebih kecil untuk layar kecil */
+padding: 12px;
+}
+
+#closeDetail {
+font-size: 14px;
+padding: 8px;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Islam Koleksi</h1>
+<ul id="doaList">
+<!-- Daftar doa akan diisi melalui JavaScript -->
+</ul>
+<div id="doaDetail">
+<button id="closeDetail">Tutup</button>
+<h2 id="doaTitle"></h2>
+<p id="doaArabic"></p>
+<p id="doaLatin"></p>
+<p id="doaTranslation"></p>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const doaListElement = document.getElementById('doaList');
+const doaDetailElement = document.getElementById('doaDetail');
+const doaTitleElement = document.getElementById('doaTitle');
+const doaArabicElement = document.getElementById('doaArabic');
+const doaLatinElement = document.getElementById('doaLatin');
+const doaTranslationElement = document.getElementById('doaTranslation');
+const closeDetailButton = document.getElementById('closeDetail');
+let doaList = [
+  {
+    title: "Doa Masuk Rumah",
+    arabic: "اَللّٰهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلَجِ وَخَيْرَ الْمَخْرَجِ بِاسْمِ اللهِ وَلَجْنَا، وبِاسْمِ اللهِ خَرَجْنَا، وَعَلَى اللهِ رَبِّنَا تَوَكَّلْنَا",
+    latin: "Allâhumma innî as’aluka khairal maulaji wa khairal makhraji, bismillâhi walajnâ wa bismillâhi kharajnâ wa ‘ala-Llâhi rabbinâ tawakkalnâ",
+    translation: "Ya Allah, aku memohon kepada-Mu sebaik-baik tempat masuk dan sebaik-baik tempat keluar. Atas nama-Mu kami masuk dan atas nama-Mu kami keluar. Dan kepada Allah Tuhan kami, kami bertawakal."
+  },
+  {
+    title: "Doa Keluar Rumah",
+    arabic: "بِسْمِ اللهِ تَوَكَّلْتُ عَلَى اللهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ",
+    latin: "Bismillâhi tawakkaltu ‘alallâhi wa lâ ḫaula wa lâ quwwata illâ billâh(i)",
+    translation: "Dengan nama Allah, aku bertawakal kepada Allah. Tidak ada daya dan kekuatan kecuali dengan (pertolongan) Allah."
+  },
+  {
+    title: "Doa Sebelum Tidur",
+    arabic: "اَللّٰهُمَّ بِسْمِكَ أَحْيَا وَبِسْمِكَ أَمُوْتُ",
+    latin: "Allâhumma bismika aḫyâ wa bismika amût(u)",
+    translation: "Ya Allah, dengan Nama-Mu, aku hidup dan dengan nama-Mu pula aku mati."
+  },
+  {
+    title: "Doa Bangun Tidur",
+    arabic: "اَلْحَمْدُ ِللّٰهِ الَّذِيْ أَحْيَانَا بَعْدَمَا أَمَاتَنَا وَإِلَيْهِ النُّشُوْرُ",
+    latin: "Alḫamdulillâhil ladzî aḫyânâ ba‘da mâ amâtanâ wa ilaihin nusyûr(u)",
+    translation: "Segala puji bagi Allah yang menghidupkanku kembali setelah mematikanku dan hanya kepada-Nya akan bangkit."
+  },
+  {
+    title: "Doa Masuk Kamar Mandi",
+    arabic: "بِسْمِ اللهِ اَللّٰهُمَّ إِنِّيْ أَعُوْذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+    latin: "Bismillâhi allâhumma innî a‘ûdzu bika minal khubutsi wal khabâits(i)",
+    translation: "Dengan nama Allah, ya Allah, aku berlindung kepada-Mu dari godaan setan laki-laki dan setan perempuan (sesuatu yang keji dan menjijikkan)."
+  },
+  {
+    title: "Doa Keluar Kamar Mandi",
+    arabic: "غُفْرَانَكَ الْحَمْدُ لِلّٰهِ الَّذِيْ أَذْهَبَ عَنِّيْ الْأَذَى وَعَافَانِيْ",
+    latin: "Ghufrânaka alḫamdulillâhil-ladzî adzhaba ‘annil adzâ wa ‘âfânî",
+    translation: "Dengan mengharap ampunan-Mu, segala puji bagi Allah yang telah menghilangkan penyakit dari tubuhku dan menyehatkan aku."
+  },
+  {
+    title: "Doa Sebelum Makan",
+    arabic: "اَللّٰهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ",
+    latin: "Allâhumma bârik lanâ fîmâ razaqtanâ waqinâ ‘adzâban nâr(i)",
+    translation: "Ya Allah, berkahilah apa yang telah Engkau anugerahkan kepada kami dan jagalah kami dari siksa neraka."
+  },
+  {
+    title: "Doa Sesudah Makan",
+    arabic: "اَلْحَمْدُ لِلّٰهِ الَّذِيْ أَطْعَمَنَا وَسَقَــــانَا وَجَعَلَنَا مِنَ الْمُسْلِمِيْنَ",
+    latin: "Alḫamdulillâhilladzî ath‘amanâ wa saqânâ wa ja‘alanâ minal muslimîn(a)",
+    translation: "Segala puji bagi Allah yang telah memberi kami makan dan minum, serta menjadikan kami sebagai orang-orang yang berserah diri."
+  },
+  {
+    title: "Doa Masuk Masjid",
+    arabic: "اَللّٰهُمَّ اغْفِرْ لِيْ ذُنُوْبِيْ وَافْتَحْ لِيْ أَبْوَابَ رَحْمَتِكَ",
+    latin: "Allâhummaghfir lî dzunûbî waftaḫ lî abwâba raḫmatik(a)",
+    translation: "Ya Allah, ampuni segala dosaku dan bukalah bagiku segala pintu rahmat-Mu."
+  },
+  {
+    title: "Doa Keluar Masjid",
+    arabic: "اَللّٰهُمَّ اغْفِرْ لِيْ ذُنُوْبِيْ وَافْتَحْ لِيْ أَبْوَابَ فَضْلِكَ",
+    latin: "Allâhummaghfirlî dzunûbî waftaḫ lî abwâba fadl-lik(a)",
+    translation: "Ya Allah, ampuni segala dosaku. Bukakanlah bagiku segala pintu anugerahmu-Mu."
+  },
+  {
+    title: "Doa Sesudah Adzan",
+    arabic: "اَللّٰهُمَّ رَبَّ هٰذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ آتِ سَيِّدَنَـا مُحَمَّـدًا ࣙالْوَسِيْلَةَ وَالْفَضِيْلَةَ وَالدَّرَجَةَ الرَّفِيْعَةَ وَابْعَثْهُ مَقَامًا مَحْمُوْدًا ࣙالَّذِيْ وَعَدْتَهُ إِنَّكَ لَا تُخْلِفُ الْمِيْعَادَ",
+    latin: "Allâhumma Rabba hâdzihid-da‘watit-tâmmati, wash-shalâtil-qâimati, âti sayyidanâ Muḫammada nil-washilata wal fadlîlata, wad-darajatar rafî’ata wab‘atshu maqâman maḫmûdani-lladzî wa‘adtah, innaka lâ tukhliful-mî‘âd(a)",
+    translation: "Ya Allah Tuhan yang memiliki seruan yang sempurna dan shalat yang tetap didirikan, karuniailah Nabi Muhammad wasilah (tempat yang luhur) dan kelebihan serta kemuliaan dan derajat yang tinggi dan tempatkanlah dia pada kependudukan yang terpuji yang telah Kaujanjikan, sesungguhnya Engkau tiada menyalahi janji, wahai dzat yang paling Penyayang."
+  },
+  {
+    title: "Doa Bercermin",
+    arabic: "اَللّٰهُمَّ كَمَا حَسَّنْتَ خَلْقِيْ فَحَسِّنْ خُلُقِيْ",
+    latin: "Allâhumma kamâ ḫassanta khalqî faḫassin khuluqî",
+    translation: "Hai Tuhanku, sebagaimana telah Kaubaguskan kejadianku, maka baguskanlah perangaiku."
+  },
+  {
+    title: "Doa Mengenakan Pakaian Baru",
+    arabic: "اَللّٰهُمَّ لَكَ الْحَمْدُ أَنْتَ كَسَوْتَنِيْهِ أَسْأَلُكَ خَيْرَهُ وَخَيْرَ مَا صُنِعَ لَهُ وأَعُوْذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا صُنِعَ لَهُ",
+    latin: "Allâhumma lakal ḫamdu anta kasautanîhi, as-aluka khairahu wa khaira mâ shuni‘a lahû wa a‘ûdzu bika min syarrihi wa syarri mâ shuni‘a lahû",
+    translation: "Ya Allah bagi-Mu segala puji. Engkau telah memakaikannya untukku, aku memohon kepada-Mu kebaikannya dan kebaikan apa yang ia dijadikan untuknya, dan aku berlindung dari keburukannya dan keburukan apa yang ia dijadikan untuknya."
+  },
+  {
+    title: "Doa Memakai Pakaian",
+    arabic: "اَللّٰهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِهِ وَخَيْرِ مَا هُوَ لَهُ، وَأَعُوْذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا هُوَ لَهُ",
+    latin: "Allâhumma innî as’aluka min khairhi wa khaira mâ huwa lahu, wa a‘ûdzubika min syarrihi wa syarri mâ huwa lahu",
+    translation: "Ya Allah, sungguh aku memohon kepada-Mu kebaikan pakaian ini dan kebaikan sesuatu yang di dalamnya, dan aku berlindung kepada-Mu dari keburukan pakaian ini dan keburukan sesuatu yang ada di dalamnya."
+  },
+  {
+    title: "Doa Melepas Pakaian",
+    arabic: "بِسْمِ اللهِ الَّذِيْ لَا إِلٰهَ إِلَّا هُوَ",
+    latin: "Bismillâhil ladzî lâilâha illâ huwa",
+    translation: "Dengan nama Allah yang tiada tuhan selain Dia."
+  },
+  {
+    title: "Doa saat Turun Hujan",
+    arabic: "اَللّٰهُمَّ صَيِّبًا نَافِعًا",
+    latin: "Allâhummâ shayyiban nâfi'an",
+    translation: "Ya Allah, turunkanlah pada kami hujan yang bermanfaat."
+  },
+  {
+    title: "Doa setelah Hujan Reda",
+    arabic: "مُطِرْنَا بِفَضْلِ اللهِ وَرَحْمَتِهِ",
+    latin: "Muthirnâ bi fadhlillâhi wa raḫmatih.",
+    translation: "Semoga kita dihujani dengan anugerah dan rahmat Allah."
+  },
+  {
+    title: "Doa untuk Kedua Orang Tua",
+    arabic: "رَبِّ اغْفِرْ لِيْ وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِيْ صَغِيْرًا",
+    latin: "Rabbighfir lî  wa li wâlidayya warḫamhumâ kamâ rabbayânî shaghîrâ.",
+    translation: "Tuhanku, ampunilah diriku dan kedua orang tuaku, sayangilah mereka sebagaimana mereka menyayangiku di waktu aku kecil."
+  },
+  {
+    title: "Doa Masuk Pasar atau Mal",
+    arabic: "بِاسْمِ اللّٰهِ، اَللّٰهُمَّ إنِّيْ أَسْأَلُكَ خَيْرَ هٰذِهِ السُّوْقِ وَخَيْرَ مَا فِيْهَا وَأَعُوْذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيْهَا، اَللّٰهُمَّ إِنِّيْ أَعُوْذُ بِكَ أنْ أُصِيْبَ فِيْهَا يَمِيْنًا فَاجِرَةً أَوْ صَفْقَةً خَاسِرَةً",
+    latin: "Bismillâh allâhumma innî as-aluka khaira hâdzihi-s-sûqi wa khaira mâ fîhâ wa a‘ûdzubika min syarrihâ wa syarri mâ fîhâ. Allâhumma innî a‘ûdzubika an ushîba fîhâ yamînan fâjiratan au shafqatan khâsiratan",
+    translation: "Dengan nama Allah, ya Allah, aku memohon kebaikan dari pasar ini dan kebaikan dari apa yang ada di dalamnya. Aku berlindung dari keburukan pasar ini dan keburukan apa yang ada di dalamnya. Ya Allah, aku berlindung dari sumpah palsu dan transaksi yang merugikan."
+  },
+  // Kumpulan Doa Rezeki
+  {
+    title: "Doa Berangkat Kerja",
+    arabic: "بِسْمِ اللهِ عَلَى نَفْسِيْ وَمَالِي وَدِيْنِيْ، اَللّٰهُمَّ رَضِّنِيْ بِقَضَائِكَ وَبَارِكْ لِي فِيْمَا قُدِّرَ لِيْ حَتَّى لَا أُحِبَّ تَعْجِيْلَ مَا أَخَّرْتَ وَلَا تَأْخِيْرَ مَا عَجَّلْتَ",
+    latin: "Bismillâhi ‘alâ nafsî wa mâlî wa dînî. Allâhumma radl-dlinî bi qadâ-ika, wabârik lî fî mâ quddira lî hattâ lâ uḫibba ta‘jîla mâ akh-kharta wa lâ ta’khîra mâ ‘ajjalta",
+    translation: "Dengan menyebut nama Allah, atas diriku, hartaku, dan agamaku. Ya Allah, jadikanlah aku orang yang ridha (menerima) atas ketetapan-Mu serta berkahilah aku atas rezeki yang Engkau tentukan sehingga aku tak tergesa-gesa meminta sesuatu yang Engkau tunda, atau menunda-nunda sesuatu yang Engkau hendak segerakan. (HR Ibnu as-Sunni)."
+  },
+  {
+    title: "Doa Mudah Raih Rezeki(1)",
+    arabic: "اَللّٰهُ لَطِيْفٌۢ بِعِبَادِهٖ يَرْزُقُ مَنْ يَّشَاۤءُۚ وَهُوَ الْقَوِيُّ الْعَزِيْزُ",
+    latin: "Allâhu lathîfun bi ‘ibâdihi yarzuqu man yasyâ’(u), wa huwal qawiyyul ‘azîz(u)",
+    translation: "Allah Mahalembut terhadap hamba-hamba-Nya; Dia memberi rezeki kepada siapa yang Dia kehendaki dan Dia Mahakuat, Mahaperkasa."
+  },
+  {
+    title: "Doa Mudah Raih Rezeki(2)",
+    arabic: "اَللّٰهُمَّ إِنِّي أَسْأَلُكَ أَنْ تَرْزُقَنِيْ رِزْقًا حَلَالًا وَاسِعًا طَيِّبًا مِنْ غَيْرِ تَعَبٍ وَلَا مَشَقَّةٍ وَلَا ضَيْرٍ وَلَانَصَبٍ إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيْرٌ",
+    latin: "Allâhumma innî as-aluka an tarzuqanî rizqan ḫalâlan wâsi‘an thayyiban min ghairi ta’abin wa lâ masyaqqatin wa lâ dlairin wa lâ nashabin innaka ‘alâ kulli syai-in qadîr(un)",
+    translation: "Ya Allah aku mohon kepadamu limpahan rezeki yang halal, luas, dan baik, yang didapat tanpa letih, memberatkan, membahayakan, dan banting tulang. Sungguh Engkau Mahakuasa atas segala sesuatu."
+  },
+  {
+    title: "Doa Mudah Urusan",
+    arabic: "اَللّٰهُمَّ إِنَّكَ تَعْلَمُ مَا نَحْنُ فِيْهِ وَمَا نَطْلُبُـهُ وَنَرْتَجِيْـهِ مِنْ رَحْمَتِكَ فِيْ أَمْرِنَا كُلِّهِ فَيَسِّرْ لَنَا مَا نَحْنُ فِيْهِ مِنْ سَفَرِنَا وَمَا نَطْلُبُهُ مِنْ حَوَائِجِـنَا وَقَرِّبْ عَلَيْنَا الْمَسَافَاتِ وَسَلِّمْنَا مِنَ الْعِلَلِ وَاْلاٰفَاتِ وَلَا تَجْعَلِ الدُّنْيَا أَكْبَرَ هَمِّـنَا وَلَا مَبْلَغَ عِلْمِنَا وَلَا تُسَلِّطْ عَلَيْنَا مَنْ لَا يَرْحَمُنَا بِرَحْمَتِكَ يَاأَرْحَمَ الرَّاحِمِيْنَ وَصَلَّى اللهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَاٰلِهِ وَصَحْبِهِ وَسَلَّمَ",
+    latin: "Allâhumma innaka ta‘lamu mâ naḫnu fîhi wa mâ nathlubuhu wa nartajîhi min raḫmatika fî amrinâ kullihi fayassir lanâ mâ naḫnu fîhi min safarinâ wa mâ nathlubuhu min ḫawâijinâ wa qarrib ‘alainâ al-masâfâti wa sallimnâ minal ‘ilali wal âfâti wa lâ taj‘alid dunyâ akbara hamminâ wa lâ mablagha ‘ilminâ wa lâ tusallith ‘alainâ man lâ yarḫamunâ bi raḫmatika yâ arḫamar râḫimîn(a), washallallâhu ‘alâ sayyidinâ muḫammadin wa âlihi wa shaḫbihi wa sallam(a)",
+    translation: "Ya Allah, sungguh Engkau mengetahui keadaan yang sedang kami hadapi, dan mengetahui apa yang kami cari dan harapkan dari rahmat-Mu dalam semua urusan kami. Karena itu, permudahkanlah perjalanan kami dan pemenuhan keperluan-keperluan kami. Dekatkanlah jarak perjalanan kami, selamatkanlah kami dari segala penyakit dan kerusakan. Janganlah Engkau jadikan dunia ini sebagai perhatian terbesar kami dan puncak pengetahuan kami. Janganlah Engkau kuasakan atas kami orang yang tidak menyayangi kami dengan rahmat-Mu, wahai Tuhan Yang Maha Pengasih sebaik-baik yang mengasihani! Semoga Allah swt mencurahkan rahmat dan keselamatan atas junjungan kami, Nabi Muhammad saw, keluarganya, dan sahabat-sahabatnya."
+  },
+  {
+    title: "Doa agar Bisa Membayar Utang",
+    arabic: "اَللّٰهُمَّ يَا فَارِجَ الْهَمِّ، كَاشِفَ الْغَمِّ، مُجِيْبَ دَعْوَةِ الْمُضْطَرِّينَ، يَا رَحْمَانَ الدُّنْيَا وَالْاٰخِرَةِ وَرَحِيْمَهُمَا، أَنْتَ تَرْحَمُنِيْ فَارْحَمْنِيْ رَحْمَةً تُغْنِيْنِيْ بِهَا عَنْمَنْ سِوَاكَ",
+    latin: "Yâ fârijal hammi yâ kâsyifal ghammi yâ mujîba da‘watil mudldltharrîn yâ raḫmânad dun-yâ wal âkhirati wa raḫîmahumâ, anta tarḫamunî farḫamnî raḫmatan tughnînî bihâ ‘an man siwâka",
+    translation: "Ya Allah yang berkuasa menghilangkan kegalauan, menyingkap kesedihan, dan mengabulkan doa orang-orang yang dalam kesempitan, yang Maha Pengasih lagi Maha Penyayang di dunia dan akhirat. Engkaulah yang senantiasa merahmatiku, maka rahmatilah aku dengan rahmat yang mencukupi diriku dari mencari rahmat kepada selain Diri-Mu."
+  },
+  {
+    title: "Doa Terhindar dari Lilitan Utang",
+    arabic: "اَللّٰهُمَّ إِنِّيْ أَعُوْذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوْذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوْذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوْذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ",
+    latin: "Allâhumma innî a‘ûdzu bika minal hammi wal ḫazan(i). Wa a‘ûdzu bika minal ‘ajzi wal kasal(i). Wa a‘ûdzu bika minal jubni wal bukhl(i). Wa a‘ûdzu bika min ghalabatid daini wa qahrir rijâl(i)",
+    translation: "Ya Allah, aku berlindung kepada-Mu dari kebingungan dan kesedihan, aku berlindung kepada-Mu dari kelemahan dan kemalasan, aku berlindung kepada-Mu dari ketakutan dan kekikiran, aku berlindung kepada-Mu dari lilitan utang dan tekanan orang-orang."
+  },
+  {
+    title: "Doa Terhindar dari Harta Haram",
+    arabic: "اَللّٰهُمَّ اكْفِنِيْ بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِيْ بِفَضْلِكَ عَمَّنْ سِوَاكَ",
+    latin: "Allâhumma-kfinî biḫalâlika ‘an ḫarâmika wa aghninî bi fadl-lika ‘am man siwâka",
+    translation: "Ya Allah, cukupkanlah aku dengan yang halal sehingga terhindar dari yang haram. Cukupkanlah aku dengan anugerahmu sehingga terhindar dari (bergantung pada) selain-Mu."
+  },
+  {
+    title: "Doa saat Mengalami Kerugian",
+    arabic: "عَسٰى رَبُّنَآ اَنْ يُّبْدِلَنَا خَيْرًا مِّنْهَآ اِنَّآ اِلٰى رَبِّنَا رَاغِبُوْنَ",
+    latin: "‘asâ rabbunâ ay yubdilanâ khairam min-hâ innâ ilâ rabbinâ râghibûn",
+    translation: "Semoga Tuhan memberikan ganti untuk kami dengan yang lebih baik dari yang ini. Sungguh kita mengharapkan (ampunan) kepada Tuhan kita (QS al-Qalam: 32)."
+  },
+  {
+    title: "Doa Berjumpa Pedagang",
+    arabic: "اَللّٰهُمَّ بَارِكْ لَهُ فِيْ تِجَارَتِهِ",
+    latin: "Allâhumma bârik lahû fî tijâratihi",
+    translation: "Ya Allah, berilah ia keberkahan dalam usaha berdagangnya"
+  },
+  {
+    title: "Doa Rezeki Jelang Pensiun",
+    arabic: "اَللّٰهُمَّ اجْعَلْ أَوْسَعَ رِزْقِكَ عَلَيَّ عِنْدَ كِبَرِ سِنِّيْ وَانْقِطَاعِ عُمُرِيْ",
+    latin: "Allâhummaj‘al ausa‘a rizqika ‘alayya ‘inda kibari sinnî wa-nqithâ‘i ‘umurî",
+    translation: "Ya Allah, jadikan rezeki-Mu yang paling luas bagiku saat menuanya usiaku dan hampir habisnya umurku."
+  },
+  // Kumpulan Doa Tolak Bala
+  {
+    title: "Doa Keselamatan Anak Keturunan",
+    arabic: "اَللّٰهُمَّ بِحُرْمَةِ النَّبِيِّ وَالْحَسَنِ وَأَخِيْهِ وَأُمِّهِ وَأَبِيْهِ وَنَجِّنِيْ مِنَ الْغَمِّ الَّذِيْ فِيْهِ يَا حَيُّ يَا قَيُّوْمُ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ، وَأَسْأَلُكَ أَنْ تُحْيِيَ قَلْبِيْ بِنُوْرِ مَعْرِفَتِكَ أَبَدًا أَبَدًا يَا رَسُوْلَ اللهِ يَا اَللهُ، يَا اَللهُ، يَا اَللهُ، بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِيْنَ، وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ",
+    latin: "Allâhumma bi ḫurmatin nabiyyi wal Ḫasani wa akhîhi wa ummihi wa abîhi wa najjinî minal ghammil ladzî fîhi, yâ Ḫayyu yâ Qayyûmu yâ dzal jalâli wal ikrâm. Wa as’aluka an tuḫyiya qalbî bi nûri ma‘rifatika abadan abadâ. Yâ Rasûlallâh, yâ Allâh (3 kali), bi raḫmatika yâ arḫamar râḫimîn, wal ḫamdulillâhi rabbil ‘âlamîn",
+    translation: "Ya Allah, demi kehormatan Nabi Muhammad SAW, Hasan, saudaranya, ibunya, dan bapaknya, selamatkanlah aku dari kebingungan yang ada di dalamnya. Wahai Zat yang hidup, wahai Zat yang maha tegak, wahai Zat yang maha besar dan mulia, aku memohon kepada-Mu agar menghidupkan hatiku dengan cahaya makrifat-Mu selamanya.Wahai Rasulullah, ya Allah (3 kali), dengan rahmat-Mu, wahai Zat yang maha pengasih. Segala puji bagi Allah, Tuhan sekalian alam."
+  },
+  {
+    title: "Doa Perlindungan dari Berbagai Bencana",
+    arabic: "اَللّٰهُمَّ إِنِّيْ أَعُوْذُ بِكَ مِنَ الْهَدْمِ وَأَعُوْذُ بِكَ مِنَ التَّرَدِّيْ وَأَعُوْذُ بِكَ مِنَ الْغَرَقِ وَالْحَرِيْقِ وَأَعُوْذُ بِكَ أَنْ يَتَخَبَّطَنِي الشَّيْطَانُ عِنْدَ الْمَوْتِ وَأَعُوْذُ بِكَ أَنْ أَمُوْتَ فِيْ سَبِيْلِكَ مُدْبِرًا وَأَعُوْذُ بِكَ أَنْ أَمُوْتَ لَدِيْغًا",
+    latin: "Allâhumma innî a‘ûdzu bika minal hadmi, wa a‘ûdzu bika minat taraddî, wa a‘ûdzu bika minal gharqi wal ḫarîqi, wa a‘ûdzu bika an yatakhabbathanîsy syaithânu ‘indal mauti, wa a‘ûdzu bika an amûta fî sabîlika mudbiran, wa a‘ûdzu bika an amûta ladîghan",
+    translation: "Ya Allah, aku berlindung kepada-Mu dari tertimpa reruntuhan. Aku berlindung kepada-Mu dari jatuh dari tempat yang tinggi. Aku berlindung kepada-Mu dari tenggelam dan kebakaran. Aku berlindung kepada-Mu dari bujuk rayu setan ketika (menjelang) kematian (sakaratul maut). Aku berlindung kepada-Mu dari mati di jalan-Mu dalam keadaan melarikan diri. Dan aku berlindung kepada-Mu dari mati karena sengatan binatang."
+  },
+  {
+    title: "Doa saat Disergap Galau dan Susah",
+    arabic: "اَللّٰهُمَّ رَحْمَتَكَ أَرْجُوْ، فَلَا تَكِلْنِيْ إِلَى نَفْسِيْ طَرْفَةَ عَيْنٍ، أَصْلِحْ لِيْ شَأْنِيْ كُلَّهُ",
+    latin: "Allâhumma raḫmataka arjû, falâ takilnî ilâ nafsî tharfata ‘ainin, ashliḫ lî sya’nî kullahu",
+    translation: "Ya Allah, kasih sayang-Mu kuharapkan. Maka dari itu, janganlah kau serahkan aku kepada diriku sendiri walau sekejap. Perbaikilah bagiku seluruh urusanku."
+  },
+  {
+    title: "Doa Selamat Dunia Akhirat",
+    arabic: "اَللّٰهُمَّ إِنَّا نَسْئَلُكَ سَلَامَةً فِي الدِّيْنِ وَعَافِيَةً فِي الْجَسَدِ وَزِيَادَةً فِي الْعِلْمِ وَبَرَكَةً فِي الرِّزْقِ وَتَوْبَةً قَبْلَ الْمَوْتِ وَرَحْمَةً عِنْدَ الْمَوْتِ وَمَغْفِرَةً بَعْدَ الْمَوْتِ. اَللّٰهُمَّ هَوِّنْ عَلَيْنَا فِيْ سَكَرَاتِ الْمَوْتِ وَالنَّجَاةَ مِنَ النَّارِ وَالْعَفْوَ عِنْدَ الْحِسَابِ",
+    latin: "Allâhumma innâ nas aluka salâmatan fid dîn(i), wa ‘âfiyatan fil jasad(i), wa ziyadatan fil ‘ilm(i), wabarakatan fir rizq(i), wa taubatan qablal maut(i), waraḫmatan ‘indal maut(i), wa maghfiratan ba’dal maut(i). Allâhumma hawwin ‘alainâ fî sakarâtil maut(i), wan najâta minan nâr(i), wal ‘afwa indal hisâb(i)",
+    translation: "Ya Allah, sungguh kami memohon kepada-Mu keselamatan dalam beragama, kesehatan raga, tambahan ilmu, keberkahan rezeki, taubat sebelum mati, rahmat ketika mati, dan ampunan setelah mati. Ya Allah, mudahkanlah kami dalam menghadapi sakaratul maut. Berikanlah kami keselamatan dari api neraka, dan ampunan pada saat perhitungan amal."
+  },
+  {
+    title: "Doa Selamat dan Tolak Bala",
+    arabic: "اَللَّهُمَّ افْتَحْ لَنَا أَبْوَابَ الْخَيْرِ وَأَبْوَابَ الْبَرَكَةِ وَأَبْوَابَ النِّعْمَةِ وَأَبْوَابَ الرِّزْقِ وَأَبْوَابَ الْقُوَّةِ وَأَبْوَابَ الصِّحَّةِ وَأَبْوَابَ السَّلَامَةِ وَأَبْوَابَ الْعَافِيَةِ وَأَبْوَابَ الْجَنَّةِ، اَللَّهُمَّ عَافِنَا مِنْ كُلِّ بَلَاءِ الدُّنْيَا وَعَذَابِ الْاٰخِرَةِ وَاصْرِفْ عَنَّا بِحَقِّ الْقُرْاٰنِ الْعَظِيْمِ وَنَبِيِّكَ الْكَرِيْمِ شَرَّ الدُّنْيَا وَعَذَابَ الْاٰخِرَةِ،غَفَرَ اللهُ لَنَا وَلَهُمْ بِرَحْمَتِكَ يَا أَرْحَمَ الرَّاحِمِيْنَ، سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُوْنَ وَسَلَامٌ عَلَى الْمُرْسَلِيْنَ وَ الْحَمْدُ لِلّٰهِ رَبِّ الْعَـــالَمِيْنَ",
+    latin: "Allâhumma-ftaḫ lanâ abwâbal khair, wa abwâbal barakah, wa abwâban ni‘mah, wa abwâbar rizqi, wa abwâbal quwwah, wa abwâbas shiḫḫah, wa abwâbas salâmah, wa abwâbal ‘âfiyah, wa abwâbal jannah. Allâhumma ‘âfinâ min kulli balâ’id dunyâ wa ‘adzâbil âkhirah, washrif ‘annâ bi ḫaqqil Qur’ânil ‘azhîm wa nabiyyikal karîm syarrad dunyâ wa ‘adzâbal âkhirah. Ghafarallâhu lanâ wa lahum bi raḫmatika yâ arḫamar râḫimîn. Subḫâna rabbika rabbil ‘izzati ‘an mâ yashifūn, wa salâmun ‘alal mursalîn, wal ḫamdulillâhi rabbil ‘âlamîn",
+    translation: "Ya Allah, bukalah bagi kami pintu kebaikan, pintu keberkahan, pintu kenikmatan, pintu rezeki, pintu kekuatan, pintu kesehatan, pintu keselamatan, pintu afiyah, dan pintu surga. Ya Allah, jauhkan kami dari semua ujian dunia dan siksa akhirat. Palingkan kami dari keburukan dunia dan siksa akhirat dengan hak Al-Qur’an yang agung dan derajat nabi-Mu yang pemurah. Semoga Allah mengampuni kami dan mereka. Wahai Zat yang maha pengasih. Maha suci Tuhanmu, Tuhan keagungan, dari segala yang mereka sifatkan. Semoga salam tercurah kepada para rasul. Segala puji bagi Allah, Tuhan sekalian alam."
+  },
+  {
+    title: "Doa saat Tertimpa Musibah",
+    arabic: "إِنَّا لِلّٰهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ، اَللّٰهُمَّ أَجِرْنِيْ فِيْ مُصِيْبَتِيْ وَأَخْلِفْ لِيْ خَيْرًا مِنْهَا",
+    latin: "Innâ lillâhi wa innâ ilaihi râji‘un(a). Allâhumma ajirnî fî mushîbatî wa akhlif lî khairan minhâ",
+    translation: "Sungguh kami adalah milik Allah, dan sungguh hanya kepada-Nya kami akan kembali. Ya Allah, karuniakanlah padaku pahala dalam musibah yang menimpaku dan berilah aku ganti yang lebih baik daripadanya."
+  },
+  {
+    title: "Doa Terhindar dari Kezaliman",
+    arabic: "عَلَى اللّٰهِ تَوَكَّلْنَاۚ رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلْقَوْمِ الظّٰلِمِيْنَ، وَنَجِّنَا بِرَحْمَتِكَ مِنَ الْقَوْمِ الْكٰفِرِيْنَ",
+    latin: "‘alallâhi tawakkalnâ, rabbanâ lâ taj‘alnâ fitnatal lil-qaumidh-dhâlimîn, wa najjinâ biraḫmatika minal-qaumil-kâfirîn(a)",
+    translation: "Kepada Allah-lah kami bertawakal. Ya Tuhan kami, janganlah Engkau jadikan kami (sasaran) fitnah bagi kaum yang zalim, dan selamatkanlah kami dengan rahmat-Mu dari orang-orang kafir. (QS Yunus: 85-86)"
+  },
+  {
+    title: "Doa untuk Perampas Hak Publik",
+    arabic: "مَلَأَ اللهُ قُبُوْرَهُمْ وَبُيُوْتَهُمْ نَارًا كَمَا شَغَلُوْنَا عَنِ الصَّلَاةِ الْوُسْطَى",
+    latin: "Mala’allâhu qubûrahum wa buyûtahum nâran kamâ syaghalûnâ anis shalâtil wusthâ",
+    translation: "Semoga Allah penuhi kubur dan rumah mereka dengan api sebagaimana mereka menyibukkan kami dari shalat wushta (ashar)"
+  },
+  {
+    title: "Doa saat Gempa Bumi",
+    arabic: "اَللّٰهُمَّ إِنِّيْ أَسْأَلُكَ خَيْرَهَا وَخَيْرَ مَا فِيْهَا وَخَيْرَ مَا أَرْسَلْتَ بِهِ، وَأَعُوْذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا فِيْهَا وَشَرِّ مَا أَرْسَلْتَ بِهِ",
+    latin: "Allâhumma innî as-aluka khairaha wa khaira mâ fîhâ, wa khaira mâ arsalta bihi, wa a‘ûdzubika min syarrihâ, wa syarri mâ fîhâ wa syarri mâ arsalta bihi",
+    translation: "Ya Allah, sesungguhnya aku memohon kehadirat-Mu kebaikan atas apa yang terjadi, dan kebaikan apa yang di dalamnya, dan kebaikan atas apa yang Engkau kirimkan dengan kejadian ini. Dan aku memohon perlindungan kepada-Mu dari keburukan atas apa yang terjadi, dan keburukan atas apa yang terjadi didalamnya, dan aku juga memohon perlindungan kepada-Mu atas apa-apa yang Engkau kirimkan."
+  },
+  {
+    title: "Doa saat Hujan yang Dikhawatirkan Banjir",
+    arabic: "اَللّٰهُمَّ حَوَالَيْنَا وَلَا عَلَيْنَا، اَللّٰهُمَّ عَلَى الْاٰكَامِ وَالْجِبَالِ وَالظِّرَابِ وَبُطُوْنِ الْأَوْدِيَةِ وَمَنَابِتِ الشَّجَرِ",
+    latin: "Allâhumma ḫawâlainâ wa lâ ‘alainâ. Allâhumma ‘alal âkâmi wal jibâli, wadh dhirâbi, wa buthûnil awdiyati, wa manâbitisy syajar(i)",
+    translation: "Ya Allah, turunkanlah hujan di sekitar kami (memberkahi), bukan di atas kami (memudaratkan). Ya Allah, turunkanlah hujan ke dataran tinggi, gunung-gunung, bukit-bukit, perut lembah, dan tempat tumbuh pohon."
+  },
+  {
+    title: "Doa saat Kehilangan Barang",
+    arabic: "اَللّٰهُمَّ يَا جَامِعَ النَّاسِ لِيَوْمٍ لَا رَيْبَ فِيْهِ، اِجْمَعْ بَيْنِيْ وَبَيْنَ ضَالَّتِيْ فِيْ خَيْرٍ وَعَافِيَةٍ",
+    latin: "Allâhumma yâ jâmi‘an nâsi liyaumin lâ raiba fîh, ijma‘ bainî wa baina dlâllatî fî khairin wa ‘âfiyah",
+    translation: "Wahai Tuhanku, wahai Tuhan yang mengumpulkan semua manusia di hari yang tiada ragu lagi padanya. Pertemukan aku dan barangku yang hilang dengan kebaikan dan keselamatan."
+  },
+  {
+    title: "Doa saat Melihat Pertanda Buruk",
+    arabic: "اَللّٰهُمَّ لَا يَأْتِيْ بِالْحَسَنَاتِ إِلَّا أَنْتَ وَلَا يَذْهَبُ بِالسَّيِّئَاتِ إِلَّا أَنْتَ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللّٰهِ",
+    latin: "Allâhumma lâ ya’tî bil ḫasanâti illâ anta, wa lâ yadzhabu bis sayyi’âti illâ anta, wa lâ ḫaula wa lâ quwwata illâ billâh(i)",
+    translation: "Ya Allah, tidak ada yang dapat mendatangkan kebaikan kecuali Engkau, dan tidak ada yang menghilangkan keburukan kecuali Engkau. Tiada daya dan tiada kekuatan kecuali dengan (pertolongan) Allah."
+  },
+];
+doaList.forEach(doa => {
+const listItem = document.createElement('li');
+listItem.textContent = doa.title;
+listItem.addEventListener('click', () => {
+doaTitleElement.textContent = doa.title;
+doaArabicElement.textContent = doa.arabic;
+doaLatinElement.textContent = doa.latin;
+doaTranslationElement.textContent = doa.translation;
+doaDetailElement.style.display = 'block';
+});
+doaListElement.appendChild(listItem);
+});
+
+closeDetailButton.addEventListener('click', () => {
+doaDetailElement.style.display = 'none';
+});
+});
+
+window.onload = ()=> {
+  alert("sebelum membaca baca dulu. بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيْمِ")
+}
+</script>
+</body>
+</html>
