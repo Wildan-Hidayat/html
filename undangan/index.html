@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wedding invitation for John Doe and Jane Smith.">
+    <meta name="keywords" content="Wedding, Invitation, John Doe, Jane Smith">
+    <meta name="author" content="John Doe">
+    <title>Wedding Invitation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300&family=Playfair+Display:wght@700&family=Lora:wght@400;500&display=swap');
+        @keyframes klip {
+            0% { opacity: 0.0; }
+            100% { opacity: 1.0; }
+        }
+        body {
+            user-select: none;
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1.5s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .header {
+            font-size: 28px;
+            font-family: 'Great Vibes', cursive;
+            color: #d32f2f;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 1.5s 0.5s forwards;
+        }
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .bride-groom {
+            font-size: 24px;
+            margin: 15px 0;
+            font-family: 'Playfair Display', serif;
+            color: #d32f2f;
+        }
+        .date-time,
+        .venue,
+        .additional-info {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #555;
+            font-family: 'Lora', serif;
+            opacity: 0;
+            animation: fadeIn 1s 1s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        .rsvp {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #d32f2f;
+            font-family: 'Lora', serif;
+            opacity: 0;
+            animation: fadeIn 1s 1.5s forwards;
+        }
+        .footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #777;
+            font-family: 'Lora', serif;
+            opacity: 0;
+            animation: fadeIn 1s 2s forwards;
+        }
+        .heart {
+            color: #d32f2f;
+            font-size: 20px;
+        }
+        .photos {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            opacity: 0;
+            animation: fadeIn 1s 0.5s forwards;
+        }
+        .photos img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #d32f2f;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: scale(0);
+            animation: popIn 1s 0.5s forwards;
+        }
+        @keyframes popIn {
+            to {
+                transform: scale(1);
+            }
+        }
+        .flower {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: pink;
+            border-radius: 70px;
+        }
+        .flower.top-left {
+            top: -15px;
+            left: -15px;
+            background-image: url('f1.gif');
+            animation: fadeInRotate 2s 0.5s forwards;
+        }
+        .flower.top-right {
+            top: -15px;
+            right: -15px;
+            background-image: url('f2.gif');
+            animation: fadeInRotate 2s 0.5s forwards;
+        }
+        .flower.bottom-left {
+            bottom: -15px;
+            left: -15px;
+            background-image: url('f3.gif');
+            animation: fadeInRotate 2s 0.5s forwards;
+        }
+        .flower.bottom-right {
+            bottom: -15px;
+            right: -15px;
+            background-image: url('f4.gif');
+            animation: fadeInRotate 2s 0.5s forwards;
+        }
+        @keyframes fadeInRotate {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0);
+            }
+        }
+        .open-popup {
+            color: #d32f2f;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            animation: klip 2s linear infinite;
+        }
+        .open-popup:after {
+            content: " *";
+        }
+        .open-popup:before {
+            content: "* ";
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .popup.show {
+            display: flex;
+            opacity: 1;
+        }
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: scaleUp 0.5s ease-out;
+        }
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s;
+        }
+        .close-popup:hover {
+            color: #d32f2f;
+        }
+        .popup-content h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d32f2f;
+        }
+        .popup-content p {
+          font-size: 1.5em;
+        }
+        .popup-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .popup-content ul li {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+            .header {
+                font-size: 24px;
+            }
+            .bride-groom {
+                font-size: 20px;
+            }
+            .date-time,
+            .venue,
+            .additional-info {
+                font-size: 14px;
+            }
+            .rsvp {
+                font-size: 12px;
+            }
+            .footer {
+                font-size: 10px;
+            }
+            .photos img {
+                width: 100px;
+                height: 100px;
+                background-size: 100% 100%;
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-color: pink;
+            }
+            .flower {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flower top-left"></div>
+        <div class="flower top-right"></div>
+        <div class="flower bottom-left"></div>
+        <div class="flower bottom-right"></div>
+        <div class="header">Undangan</div>
+        <div class="photos">
+            <img src="icon2.gif" alt="peria">
+            <img src="icon1.gif" alt="wanita">
+        </div>
+        <div class="bride-groom">
+            <p>Aku <span class="heart">&hearts;</span> Kamu</p>
+            <p>Akan Menikah</p>
+        </div>
+        <div class="date-time">
+            <p>Hari, Bulan 1, 2030</p>
+            <p>Jam 12:00 WIB</p>
+        </div>
+        <div class="venue">
+            <p>Tempat Dilaksanakan</p>
+            <p>123 Jalan Pernikahan, Kota, Negara</p>
+        </div>
+        <div class="additional-info">
+            <p><b>Kepada Yth, Bapak/Ibu/Saudara/i:</b> ?</p>
+        </div>
+        <div class="rsvp">
+            
+        </div>
+        <div class="footer">
+            <p>Kami menantikan untuk merayakannya bersama Anda!</p>
+        </div>
+        <span class="open-popup">Keterangan lebih lanjut</span>
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup" id="close-popup">&times;</span>
+            <h2>informasi tambahan</h2>
+            <p>ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</p>
+            <p>وَالَّذِيْنَ يَقُوْلُوْنَ رَبَّنَا هَبْ لَنَا مِنْ اَزْوَاجِنَا وَذُرِّيّٰتِنَا قُرَّةَ اَعْيُنٍ وَّاجْعَلْنَا لِلْمُتَّقِيْنَ اِمَامًا (Al-Furqon Ayat 74)</p>
+            <ul>
+                <li><b>Turut mengundang:</b> ?</li>
+                <li><b>Acara:</b> ?</li>
+                <li><b>Hormat kami:</b> ?</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Ambil elemen
+        const openPopupButton = document.querySelector('.open-popup');
+        const popup = document.getElementById('popup');
+        const closePopupButton = document.getElementById('close-popup');
+
+        // Buka popup
+        openPopupButton.addEventListener('click', () => {
+            popup.classList.add('show');
+        });
+
+        // Tutup popup
+        closePopupButton.addEventListener('click', () => {
+            popup.classList.remove('show');
+        });
+
+        // Tutup popup jika klik di luar area popup
+        window.addEventListener('click', (event) => {
+            if (event.target === popup) {
+                popup.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
