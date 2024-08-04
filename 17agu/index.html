@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17 Agustus 2024 gabut</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1E1E1E; /* Background warna gelap */
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.flag {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 20px auto;
+    animation: wave 1.5s linear infinite;
+}
+
+.flag-red {
+    background-color: #ff0000;
+    height: 50%;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.flag-white {
+    background-color: #ffffff;
+    height: 50%;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.text h1 {
+    color: #FFD700; /* Warna emas */
+    font-size: 2.5em;
+    animation: textFadeIn 3s ease-in-out 1s forwards, slideIn 3s ease-in-out 1s forwards;
+    opacity: 0;
+}
+
+.text h2 {
+    color: #FFD700;
+    font-size: 1.5em;
+    animation: textFadeIn 3s ease-in-out 2s forwards, slideIn 3s ease-in-out 2s forwards;
+    opacity: 0;
+}
+
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes textFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(30px); }
+    to { transform: translateY(0); }
+}
+
+/* Background animation */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 1%, transparent 1%) center/720px;
+    animation: stars 60s infinite;
+}
+
+@keyframes stars {
+    from { background-position: 0 0; }
+    to { background-position: 10000px 10000px; }
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti div {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color);
+    opacity: 0.7;
+    animation: fall linear infinite;
+}
+
+.confetti div:nth-child(1) { --color: #FFD700; animation-duration: 10s; animation-delay: 0s; left: 10%; }
+.confetti div:nth-child(2) { --color: #FF6347; animation-duration: 8s; animation-delay: 2s; left: 20%; }
+.confetti div:nth-child(3) { --color: #ADFF2F; animation-duration: 12s; animation-delay: 4s; left: 30%; }
+.confetti div:nth-child(4) { --color: #87CEEB; animation-duration: 14s; animation-delay: 6s; left: 40%; }
+.confetti div:nth-child(5) { --color: #FF1493; animation-duration: 11s; animation-delay: 1s; left: 50%; }
+.confetti div:nth-child(6) { --color: #FFD700; animation-duration: 9s; animation-delay: 3s; left: 60%; }
+.confetti div:nth-child(7) { --color: #FF6347; animation-duration: 13s; animation-delay: 5s; left: 70%; }
+.confetti div:nth-child(8) { --color: #ADFF2F; animation-duration: 15s; animation-delay: 7s; left: 80%; }
+.confetti div:nth-child(9) { --color: #87CEEB; animation-duration: 10s; animation-delay: 2s; left: 90%; }
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flag">
+            <div class="flag-red"></div>
+            <div class="flag-white"></div>
+        </div>
+        <div class="text">
+            <h1>Dirgahayu Republik Indonesia</h1>
+            <h2>17 Agustus 2024</h2>
+        </div>
+    </div>
+    <div class="confetti"></div>
+    <script>
+      // script.js
+// Create confetti elements dynamically
+const confettiContainer = document.querySelector('.confetti');
+for (let i = 0; i < 50; i++) {
+    const confettiPiece = document.createElement('div');
+    confettiContainer.appendChild(confettiPiece);
+}
+    </script>
+</body>
+</html>
