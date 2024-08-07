@@ -66,7 +66,7 @@
       height: 4px;
       background: #007bff;
     }
-    
+
     #delete-messages {
       display: none;
     }
@@ -88,239 +88,289 @@
     <div id="messages"></div>
     <form id="message-form">
       <input type="file" id="file-input" accept="image/*,video/*,audio/*,text/*" />
-      <input type="text" id="message-input" placeholder="Type a message" />
-      <button type="submit">Send</button>
-    </form>
-    <div id="progress-container">
-      <div id="progress-bar"></div>
-    </div>
-    <button id="delete-messages">Delete All Messages</button>
-  </div>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
-  <script>
-    // Konfigurasi Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyCxYndc1H5O4mfAlnaHtYSabgUgk8A7WxM",
-      authDomain: "chatfirebasemaxs.firebaseapp.com",
-      databaseURL: "https://chatfirebasemaxs-default-rtdb.firebaseio.com",
-      projectId: "chatfirebasemaxs",
-      storageBucket: "chatfirebasemaxs.appspot.com",
-      messagingSenderId: "1039211175918",
-      appId: "1:1039211175918:web:4315601948bf886b72f8ff"
-    };
+    <input type="text" id="message-input" placeholder="Type a message" />
+  <button type="submit">Send</button>
+</form>
+<div id="progress-container">
+  <div id="progress-bar"></div>
+</div>
+<button id="delete-messages">Delete All Messages</button>
+</div>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+<script>
+// Konfigurasi Firebase
+const firebaseConfig = {
+apiKey: "AIzaSyCxYndc1H5O4mfAlnaHtYSabgUgk8A7WxM",
+authDomain: "chatfirebasemaxs.firebaseapp.com",
+databaseURL: "https://chatfirebasemaxs-default-rtdb.firebaseio.com",
+projectId: "chatfirebasemaxs",
+storageBucket: "chatfirebasemaxs.appspot.com",
+messagingSenderId: "1039211175918",
+appId: "1:1039211175918:web:4315601948bf886b72f8ff"
+};
 
-    // Inisialisasi Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.database();
-    const storage = firebase.storage();
-    const storageRef = storage.ref();
+// Inisialisasi Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+const storage = firebase.storage();
+const storageRef = storage.ref();
 
-    // Elemen DOM
-    const loginContainer = document.getElementById('login-container');
-    const chatContainer = document.getElementById('chat-container');
-    const loginForm = document.getElementById('login-form');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const signUpButton = document.getElementById('sign-up');
-    const messagesDiv = document.getElementById('messages');
-    const messageForm = document.getElementById('message-form');
-    const messageInput = document.getElementById('message-input');
-    const fileInput = document.getElementById('file-input');
-    const nameInput = document.getElementById('name');
-    const progressContainer = document.getElementById('progress-container');
-    const progressBar = document.getElementById('progress-bar');
-    const deleteMessagesButton = document.getElementById('delete-messages');
+// Elemen DOM
+const loginContainer = document.getElementById('login-container');
+const chatContainer = document.getElementById('chat-container');
+const loginForm = document.getElementById('login-form');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const signUpButton = document.getElementById('sign-up');
+const messagesDiv = document.getElementById('messages');
+const messageForm = document.getElementById('message-form');
+const messageInput = document.getElementById('message-input');
+const fileInput = document.getElementById('file-input');
+const nameInput = document.getElementById('name');
+const progressContainer = document.getElementById('progress-container');
+const progressBar = document.getElementById('progress-bar');
+const deleteMessagesButton = document.getElementById('delete-messages');
 
-    // Daftar kata kasar
-    const badWords = ["kontol", "k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
+// Daftar kata kasar
+const badWords = ["kontol", "k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
 
-    function filterBadWords(text) {
-      let filteredText = text;
-      badWords.forEach(word => {
-        const regex = new RegExp(`\\b${word}\\b`, 'gi');
-        filteredText = filteredText.replace(regex, '(^_^)');
-      });
-      return filteredText;
-    }
+function filterBadWords(text) {
+let filteredText = text;
+badWords.forEach(word => {
+const regex = new RegExp(`\\b${word}\\b`, 'gi');
+filteredText = filteredText.replace(regex, '(^_^)');
+});
+return filteredText;
+}
 
-    // Fungsi untuk menampilkan pesan
-    function displayMessage(text, name, fileUrl, fileType) {
-      const messageElement = document.createElement('div');
-      const filteredText = filterBadWords(text);
-      const messageContent = document.createElement('div');
+// Fungsi untuk menampilkan pesan
+function displayMessage(messageKey, text, name, fileUrl, fileType) {
+const messageElement = document.createElement('div');
+messageElement.id = `message-${messageKey}`; // Tambahkan ID unik
+const filteredText = filterBadWords(text);
+const messageContent = document.createElement('div');
 
-      if (fileUrl) {
-        if (fileType.startsWith('image/')) {
-          const img = document.createElement('img');
-          img.src = fileUrl;
-          img.style.maxWidth = '100%';
-          img.style.maxHeight = '200px';
-          messageContent.appendChild(img);
-        } else if (fileType.startsWith('video/')) {
-          const video = document.createElement('video');
-          video.src = fileUrl;
-          video.controls = true;
-          video.style.maxWidth = '100%';
-          messageContent.appendChild(video);
-        } else if (fileType.startsWith('audio/')) {
-          const audio = document.createElement('audio');
-          audio.src = fileUrl;
-          audio.controls = true;
-          messageContent.appendChild(audio);
-        } else {
-          const fileLink = document.createElement('a');
-          fileLink.href = fileUrl;
-          fileLink.textContent = 'Download File';
-          fileLink.target = '_blank';
-          messageContent.appendChild(fileLink);
-        }
-      } else {
-        messageContent.textContent = filteredText;
-      }
+if (fileUrl) {
+if (fileType.startsWith('image/')) {
+const img = document.createElement('img');
+img.src = fileUrl;
+img.style.maxWidth = '100%';
+img.style.maxHeight = '200px';
+messageContent.appendChild(img);
+} else if (fileType.startsWith('video/')) {
+const video = document.createElement('video');
+video.src = fileUrl;
+video.controls = true;
+video.style.maxWidth = '100%';
+messageContent.appendChild(video);
+} else if (fileType.startsWith('audio/')) {
+const audio = document.createElement('audio');
+audio.src = fileUrl;
+audio.controls = true;
+messageContent.appendChild(audio);
+} else {
+const fileLink = document.createElement('a');
+fileLink.href = fileUrl;
+fileLink.textContent = 'Download File';
+fileLink.target = '_blank';
+messageContent.appendChild(fileLink);
+}
+} else {
+messageContent.textContent = filteredText;
+}
 
-      messageElement.textContent = `${name}: `;
-      messageElement.appendChild(messageContent);
-      messagesDiv.appendChild(messageElement);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    }
+messageElement.textContent = `${name}: `;
+messageElement.appendChild(messageContent);
+messagesDiv.appendChild(messageElement);
+messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+// Fungsi untuk mengunggah file
+function uploadFile(file) {
+const fileRef = storageRef.child(`files/${file.name}`);
+const uploadTask = fileRef.put(file);
 
-    // Fungsi untuk mengunggah file
-    function uploadFile(file) {
-      const fileRef = storageRef.child(`files/${file.name}`);
-      const uploadTask = fileRef.put(file);
+uploadTask.on('state_changed',
+function(snapshot) {
+// Progres pengunggahan bisa ditangani di sini
+const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+progressBar.style.width = `${progress}%`;
+progressContainer.style.display = 'block';
+},
+function(error) {
+console.error('Kesalahan Pengunggahan:', error);
+},
+function() {
+uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+db.ref('messages').push({
+text: messageInput.value.trim(),
+name: localStorage.getItem('userName'),
+fileUrl: downloadURL,
+fileType: file.type
+});
+messageInput.value = '';
+fileInput.value = ''; // Clear the file input
+progressContainer.style.display = 'none';
+progressBar.style.width = '0%';
+});
+}
+);
+}
 
-      uploadTask.on('state_changed',
-        function(snapshot) {
-          // Progres pengunggahan bisa ditangani di sini
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          progressBar.style.width = `${progress}%`;
-          progressContainer.style.display = 'block';
-        },
-        function(error) {
-          console.error('Kesalahan Pengunggahan:', error);
-        },
-        function() {
-          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-            db.ref('messages').push({
-              text: messageInput.value.trim(),
-              name: localStorage.getItem('userName'),
-              fileUrl: downloadURL,
-              fileType: file.type
-            });
-            messageInput.value = '';
-            fileInput.value = ''; // Clear the file input
-            progressContainer.style.display = 'none';
-            progressBar.style.width = '0%';
-          });
-        }
-      );
-    }
+// Event listener untuk form pesan
+messageForm.addEventListener('submit', function(event) {
+event.preventDefault();
+const text = messageInput.value.trim();
+const file = fileInput.files[0];
+const name = localStorage.getItem('userName');
 
-    // Event listener untuk form pesan
-    messageForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const text = messageInput.value.trim();
-      const file = fileInput.files[0];
-      const name = localStorage.getItem('userName');
+if (text === '' && !file) {
+alert('Silakan Masukkan Pesan atau Pilih File.');
+return;
+}
 
-      if (text === '' && !file) {
-        alert('Silakan Masukkan Pesan atau Pilih File.');
-        return;
-      }
-
-      if (file) {
-        uploadFile(file);
-      } else {
-        db.ref('messages').push({
-          text: text,
-          name: name
-        });
-        messageInput.value = '';
-      }
-    });
+if (file) {
+uploadFile(file);
+} else {
+db.ref('messages').push({
+text: text,
+name: name
+});
+messageInput.value = '';
+}
+});
 
 // Fungsi untuk memuat pesan
-        function loadMessages() {
-          db.ref('messages').on('child_added', function(snapshot) {
-            const message = snapshot.val();
-            displayMessage(message.text, message.name, message.fileUrl, message.fileType);
-          });
-        }
+function loadMessages() {
+db.ref('messages').on('child_added',
+function(snapshot) {
+const message = snapshot.val();
+displayMessage(snapshot.key, message.text, message.name, message.fileUrl, message.fileType);
+});
 
-        // Event listener untuk form login dan sign up
-        loginForm.addEventListener('submit', function(event) {
-          event.preventDefault();
-          const email = emailInput.value;
-          const password = passwordInput.value;
-          const name = nameInput.value.trim();
-          if (name === '') {
-            alert('Silakan Masukkan Nama.');
-            return;
-          }
-          auth.signInWithEmailAndPassword(email, password)
-            .then(() => {
-              localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
-              loginContainer.style.display = 'none';
-              chatContainer.style.display = 'block';
-              loadMessages();
-            })
-            .catch(error => {
-              console.error('Kesalahan Masuk:', error);
-              alert('Gagal Masuk. Silakan Periksa Email Dan Kata Sandi Anda.');
-            });
-        });
+db.ref('messages').on('value',
+function(snapshot) {
+const messageCount = snapshot.numChildren();
+if (messageCount > 5) {
+deleteOldestMessage();
+}
+});
+}
 
-        signUpButton.addEventListener('click', function(event) {
-          event.preventDefault();
-          const email = emailInput.value;
-          const password = passwordInput.value;
-          const name = nameInput.value.trim();
-          if (name === '') {
-            alert('Silahkan Masukkan Nama Anda.');
-            return;
-          }
-          auth.createUserWithEmailAndPassword(email, password)
-            .then(() => {
-              localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
-              alert('Pengguna Berhasil Dibuat. Silakan Masuk.');
-            })
-            .catch(error => {
-              console.error('Kesalahan Pendaftaran:', error);
-              alert('Pendaftaran Gagal. Silakan Coba Lagi.');
-            });
-        });
+messageForm.addEventListener('submit', function(event) {
+event.preventDefault();
+const text = messageInput.value.trim();
+const file = fileInput.files[0];
+const name = localStorage.getItem('userName');
 
-        auth.onAuthStateChanged(user => {
-          if (user) {
-            loginContainer.style.display = 'none';
-            chatContainer.style.display = 'block';
-            loadMessages();
-          } else {
-            loginContainer.style.display = 'block';
-            chatContainer.style.display = 'none';
-          }
-        });
+if (text === '' && !file) {
+//alert('Silakan Masukkan Pesan atau Pilih File.');
+return;
+}
 
-        // Fungsi untuk menghapus semua pesan
-        deleteMessagesButton.addEventListener('click', function() {
-          db.ref('messages').remove()
-            .then(() => {
-              messagesDiv.innerHTML = ''; // Clear the messages div
-              alert('Semua pesan telah dihapus.');
-            })
-            .catch(error => {
-              console.error('Kesalahan saat menghapus pesan:', error);
-              alert('Gagal menghapus pesan.');
-            });
-        });
+if (file) {
+uploadFile(file);
+} else {
+db.ref('messages').push({
+text: text,
+name: name
+}).then(() => {
+db.ref('messages').once('value').then(function(snapshot) {
+const messageCount = snapshot.numChildren();
+if (messageCount > 5) {
+deleteOldestMessage();
+}
+});
+});
+messageInput.value = '';
+}
+});
 
-        window.onload = () => {
-          alert("Jangan Masukkan Email & Password Pribadi. Masukkan Email & Password Random Aja Yang Penting Mudah Diingat Dan Jangan Lupa Namanya Juga Harus Di Ingat Juga. Kasih Nama Yang Sopan.");
-        };
-    </script>
+function deleteOldestMessage() {
+db.ref('messages').orderByKey().limitToFirst(1).once('value', function(snapshot) {
+const messageKey = Object.keys(snapshot.val())[0];
+db.ref('messages').child(messageKey).remove().then(() => {
+const messageElement = document.getElementById(`message-${messageKey}`);
+if (messageElement) {
+messageElement.remove();
+}
+});
+});
+}
+
+// Event listener untuk form login dan sign up
+loginForm.addEventListener('submit', function(event) {
+event.preventDefault();
+const email = emailInput.value;
+const password = passwordInput.value;
+const name = nameInput.value.trim();
+if (name === '') {
+alert('Silakan Masukkan Nama.');
+return;
+}
+auth.signInWithEmailAndPassword(email, password)
+.then(() => {
+localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
+loginContainer.style.display = 'none';
+chatContainer.style.display = 'block';
+loadMessages();
+})
+.catch(error => {
+console.error('Kesalahan Masuk:', error);
+alert('Gagal Masuk. Silakan Periksa Email Dan Kata Sandi Anda.');
+});
+});
+
+signUpButton.addEventListener('click', function(event) {
+event.preventDefault();
+const email = emailInput.value;
+const password = passwordInput.value;
+const name = nameInput.value.trim();
+if (name === '') {
+alert('Silahkan Masukkan Nama Anda.');
+return;
+}
+auth.createUserWithEmailAndPassword(email, password)
+.then(() => {
+localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
+alert('Pengguna Berhasil Dibuat. Silakan Masuk.');
+})
+.catch(error => {
+console.error('Kesalahan Pendaftaran:', error);
+alert('Pendaftaran Gagal. Silakan Coba Lagi.');
+});
+});
+
+auth.onAuthStateChanged(user => {
+if (user) {
+loginContainer.style.display = 'none';
+chatContainer.style.display = 'block';
+loadMessages();
+} else {
+loginContainer.style.display = 'block';
+chatContainer.style.display = 'none';
+}
+});
+
+// Fungsi untuk menghapus semua pesan
+deleteMessagesButton.addEventListener('click', function() {
+db.ref('messages').remove()
+.then(() => {
+messagesDiv.innerHTML = ''; // Clear the messages div
+alert('Semua pesan telah dihapus.');
+})
+.catch(error => {
+console.error('Kesalahan saat menghapus pesan:', error);
+alert('Gagal menghapus pesan.');
+});
+});
+
+window.onload = () => {
+alert("Jangan Masukkan Email & Password Pribadi. Masukkan Email & Password Random Aja Yang Penting Mudah Diingat Dan Jangan Lupa Namanya Juga Harus Di Ingat Juga. Kasih Nama Yang Sopan.");
+};
+</script>
 </body>
 </html>
