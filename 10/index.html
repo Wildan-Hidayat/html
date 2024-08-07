@@ -254,7 +254,7 @@ displayMessage(snapshot.key, message.text, message.name, message.fileUrl, messag
 db.ref('messages').on('value',
 function(snapshot) {
 const messageCount = snapshot.numChildren();
-if (messageCount > 5) {
+if (messageCount > 10) {
 deleteOldestMessage();
 }
 });
@@ -280,7 +280,7 @@ name: name
 }).then(() => {
 db.ref('messages').once('value').then(function(snapshot) {
 const messageCount = snapshot.numChildren();
-if (messageCount > 5) {
+if (messageCount > 10) {
 deleteOldestMessage();
 }
 });
