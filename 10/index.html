@@ -48,7 +48,7 @@
     }
 
     #messages {
-      height: 300px;
+      height: 400px;
       overflow-y: scroll;
       border: 1px solid #ddd;
       margin-bottom: 20px;
@@ -70,9 +70,18 @@
     #delete-messages {
       display: none;
     }
+    
+    .infoUpdate {
+      position: fixed;
+      text-align: center;
+      top: 0px;
+      center: 0px;
+      background-color: transparent;
+    }
   </style>
 </head>
 <body>
+  <div class="infoUpdate" onclick="infoUpdate()">INFO-UPDATE</div>
   <div id="login-container">
     <h2>Login</h2>
     <form id="login-form">
@@ -84,7 +93,6 @@
     </form>
   </div>
   <div id="chat-container" style="display: none;">
-    <h2>Grup Desa</h2>
     <div id="messages"></div>
     <form id="message-form">
       <input type="file" id="file-input" accept="image/*,video/*,audio/*,text/*" />
@@ -101,6 +109,9 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
 <script>
+function infoUpdate() {
+  alert("[1.sekarang jumlah chat hanya 20 jika chat lebih dari 20 maka chat yang paling atas akan di hapus] [2.menambah kan lebih banyak sensor kata] [3.udah itu aja lah]")
+}
 // Konfigurasi Firebase
 const firebaseConfig = {
 apiKey: "AIzaSyCxYndc1H5O4mfAlnaHtYSabgUgk8A7WxM",
@@ -136,13 +147,67 @@ const progressBar = document.getElementById('progress-bar');
 const deleteMessagesButton = document.getElementById('delete-messages');
 
 // Daftar kata kasar
-const badWords = ["kontol", "k0nt0l", "memek", "m3m3k", "kntl", "beban", "hencet", "heuncet", "mek", "kon", "ngen", "ngentot", "beban", "bbn", "asu", "janc", "jank", "janco", "jancok", "babi", "aying", "anying", "anjing"];
+const badWords = [
+  'k[0oui]n[t]*[o0ui]l',        // kontol, k0nt0l, konttol, dll.
+  'm[e3][m3]e[k]*',         // memek, m3m3k, memeek, dll.
+  'kntl',                   // kntl
+  'b[ae3]b[a4]n',            // beban, b3b4n, dll.
+  'h[e3]n[c]*et',           // hencet, hencett, heencet, dll.
+  'm[e3]k',                 // mek, m3k
+  'n[g]*e[n]*t[o0]*t',      // ngentot, ngenntot, ngent00t, dll.
+  'a[s5][u0]*',             // asu, asssu, asuu, dll.
+  'j[a4]nc[o0]*[k]*',       // jancok, j4ncok, janc0kk, dll.
+  'b[a4]b[i1]',             // babi, b4bi, dll.
+  'a[n]*y[i1]ng',           // anjing, anying, ainying, dll.
+  't[a4]i',                 // tai, t4i, dll.
+  'p[e3][p]*[e3]k',         // pepek, p3p3k, dll.
+  'g[o0]b[l1][o0]k',        // goblok, g0bl0k, gobl0k, dll.
+  'b[a4]ngs[a4]t',          // bangsat, b4ngs4t, dll.
+  'm[a4]sturb[a4]si',       // masturbasi, m4sturb4si, dll.
+  's[e3][x]',               // sex, s3x, dll.
+  's[o0]d[o0]mi',           // sodomi, s0d0mi, dll.
+  'b[o0]d[o0][h]*',         // bodoh, b0d0h, dll.
+  'b[e3]j[a4]t',            // bejat, b3j4t, dll.
+  'm[a4]mp[o0]s',           // mampus, m4mp0s, dll.
+  'b[a4]ngke',              // bangke, b4ngke, dll.
+  's[e3]t[a4]n',            // setan, s3t4n, dll.
+  'k[a4]mp[r]*e[t]*',       // kampret, k4mpret, dll.
+  't[o0][l1][o0][l1]',      // tolol, t0l0l, dll.
+  'k[a4]mp[a4]ng',          // kampang, k4mp4ng, dll.
+  'b[a4]j[i1]ng[a4]n',      // bajingan, b4jing4n, dll.
+  'm[a4]t[i1]',             // mati, m4t1, dll.
+  's[i1][a4][l1]',          // sial, s1a4l, dll.
+  'c[o0][n]*d[o0][m]*',     // kondom, c0nd0m, dll.
+  'p[o0]rn[o0]',            // porno, p0rn0, dll.
+  'b[u]*g[i1]l',            // bugil, buugil, dll.
+  'p[e3]t[e3]t',            // petet, p3t3t, dll.
+  's[e3]ngs[a4]r[a4]',      // sengsara, s3ngs4r4, dll.
+  't[o0][p]*[e3]ng',        // topeng, t0p3ng, dll.
+  'k[a4]c[a4]u',            // kaca, k4c4u, dll.
+  's[o0]nt[o0][l1]',        // sontol, s0nt0l, dll.
+  'k[u]*n[y]*t[i1]',        // kunyit, kuunyit, dll.
+  't[u]*l[a4]ng',           // tulang, tuul4ng, dll.
+  'j[e3][m]*b[u]*t',        // jembut, j3mbut, dll.
+  'p[u]*k[i1]',             // puki, puki, dll.
+  't[i1]t[i1]t',            // titit, t1t1t, dll.
+  'b[a4]nd[o0][t]',         // bandot, b4nd0t, dll.
+  'm[a4]l[a4]m',            // malam, m4l4m, dll.
+  'b[o0]ngk[o0]s',          // bongkos, b0ngk0s, dll.
+  's[e3][p]*[e3]d[o0]',     // sepeda, s3p3d0, dll.
+  'b[u]*s[u]*k',            // busuk, buusuk, dll.
+  's[a4][l1]s[u]*',         // salsu, s4lsu, dll.
+  'c[a4][b]*u[l1]',         // cabul, c4bul, dll.
+  'c[i1]bl[a4]y',           // ciblay, c1bl4y, dll.
+  's[u]*nd[a4][l1]',        // sundal, suund4l, dll.
+  's[u]*nd[a4][l1]',        // sundal, suund4l, dll.
+  'm[o0][n]*y[e3]t'         // monyet, m0ny3t, dll.
+];
 
 function filterBadWords(text) {
 let filteredText = text;
 badWords.forEach(word => {
-const regex = new RegExp(`\\b${word}\\b`, 'gi');
-filteredText = filteredText.replace(regex, '(^_^)');
+const regex = new RegExp(word, 'gi');
+filteredText = filteredText.replace(regex, '-GakSopan-');
 });
 return filteredText;
 }
@@ -188,6 +253,7 @@ messageElement.appendChild(messageContent);
 messagesDiv.appendChild(messageElement);
 messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
 // Fungsi untuk mengunggah file
 function uploadFile(file) {
 const fileRef = storageRef.child(`files/${file.name}`);
@@ -197,180 +263,174 @@ uploadTask.on('state_changed',
 function(snapshot) {
 // Progres pengunggahan bisa ditangani di sini
 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-progressBar.style.width = `${progress}%`;
 progressContainer.style.display = 'block';
+progressBar.style.width = progress + '%';
 },
 function(error) {
-console.error('Kesalahan Pengunggahan:', error);
+// Tangani kesalahan di sini
+console.error('Upload failed:', error);
+alert('Failed to upload file');
+progressContainer.style.display = 'none';
 },
 function() {
+// Pengunggahan selesai, dapatkan URL file
 uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-db.ref('messages').push({
-text: messageInput.value.trim(),
-name: localStorage.getItem('userName'),
+const fileType = file.type;
+const message = {
+text: '',
+name: auth.currentUser.displayName,
 fileUrl: downloadURL,
-fileType: file.type
-});
-messageInput.value = '';
-fileInput.value = ''; // Clear the file input
+fileType: fileType,
+timestamp: firebase.database.ServerValue.TIMESTAMP
+};
+db.ref('messages').push(message);
 progressContainer.style.display = 'none';
-progressBar.style.width = '0%';
 });
 }
 );
 }
 
-// Event listener untuk form pesan
-messageForm.addEventListener('submit', function(event) {
-event.preventDefault();
-const text = messageInput.value.trim();
-const file = fileInput.files[0];
-const name = localStorage.getItem('userName');
-
-if (text === '' && !file) {
-alert('Silakan Masukkan Pesan atau Pilih File.');
-return;
-}
-
-if (file) {
-uploadFile(file);
-} else {
-db.ref('messages').push({
-text: text,
-name: name
-});
-messageInput.value = '';
-}
-});
-
-// Fungsi untuk memuat pesan
-function loadMessages() {
-db.ref('messages').on('child_added',
-function(snapshot) {
-const message = snapshot.val();
-displayMessage(snapshot.key, message.text, message.name, message.fileUrl, message.fileType);
-});
-
-db.ref('messages').on('value',
-function(snapshot) {
-const messageCount = snapshot.numChildren();
-if (messageCount > 10) {
-deleteOldestMessage();
-}
+// Fungsi untuk menghapus file dari Firebase Storage
+function deleteFile(fileUrl) {
+// Dapatkan referensi file dari URL
+const fileRef = storage.refFromURL(fileUrl);
+// Hapus file
+fileRef.delete().catch(function(error) {
+console.error('Error deleting file:', error);
 });
 }
 
-messageForm.addEventListener('submit', function(event) {
-event.preventDefault();
-const text = messageInput.value.trim();
-const file = fileInput.files[0];
-const name = localStorage.getItem('userName');
-
-if (text === '' && !file) {
-//alert('Silakan Masukkan Pesan atau Pilih File.');
-return;
-}
-
-if (file) {
-uploadFile(file);
-} else {
-db.ref('messages').push({
-text: text,
-name: name
-}).then(() => {
-db.ref('messages').once('value').then(function(snapshot) {
-const messageCount = snapshot.numChildren();
-if (messageCount > 10) {
-deleteOldestMessage();
-}
-});
-});
-messageInput.value = '';
-}
-});
-
+// Fungsi untuk menghapus pesan terlama jika lebih dari 10
 function deleteOldestMessage() {
-db.ref('messages').orderByKey().limitToFirst(1).once('value', function(snapshot) {
-const messageKey = Object.keys(snapshot.val())[0];
-db.ref('messages').child(messageKey).remove().then(() => {
-const messageElement = document.getElementById(`message-${messageKey}`);
-if (messageElement) {
-messageElement.remove();
+db.ref('messages').orderByChild('timestamp').limitToFirst(1).once('value', snapshot => {
+const messages = snapshot.val();
+const oldestKey = Object.keys(messages)[0];
+const oldestMessage = messages[oldestKey];
+
+// Hapus file dari Firebase Storage jika pesan memiliki fileUrl
+if (oldestMessage.fileUrl) {
+deleteFile(oldestMessage.fileUrl);
 }
-});
+
+// Hapus pesan dari Firebase Realtime Database
+db.ref('messages').child(oldestKey).remove();
 });
 }
 
-// Event listener untuk form login dan sign up
+// Event listener untuk form login
 loginForm.addEventListener('submit', function(event) {
 event.preventDefault();
 const email = emailInput.value;
 const password = passwordInput.value;
-const name = nameInput.value.trim();
-if (name === '') {
-alert('Silakan Masukkan Nama.');
-return;
-}
+
 auth.signInWithEmailAndPassword(email, password)
 .then(() => {
-localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
 loginContainer.style.display = 'none';
 chatContainer.style.display = 'block';
-loadMessages();
+displayMessages();
 })
 .catch(error => {
-console.error('Kesalahan Masuk:', error);
-alert('Gagal Masuk. Silakan Periksa Email Dan Kata Sandi Anda.');
+console.error('Login failed:', error);
+alert('Login failed: ' + error.message);
 });
 });
 
+// Event listener untuk tombol sign up
 signUpButton.addEventListener('click', function(event) {
 event.preventDefault();
 const email = emailInput.value;
 const password = passwordInput.value;
-const name = nameInput.value.trim();
-if (name === '') {
-alert('Silahkan Masukkan Nama Anda.');
-return;
-}
+
 auth.createUserWithEmailAndPassword(email, password)
+.then(userCredential => {
+const user = userCredential.user;
+return user.updateProfile({
+displayName: nameInput.value
+});
+})
 .then(() => {
-localStorage.setItem('userName', name); // Simpan nama pengguna di localStorage
-alert('Pengguna Berhasil Dibuat. Silakan Masuk.');
+loginContainer.style.display = 'none';
+chatContainer.style.display = 'block';
+displayMessages();
 })
 .catch(error => {
-console.error('Kesalahan Pendaftaran:', error);
-alert('Pendaftaran Gagal. Silakan Coba Lagi.');
+console.error('Sign up failed:', error);
+alert('Sign up failed: ' + error.message);
 });
 });
 
+// Fungsi untuk menampilkan pesan
+function displayMessages() {
+db.ref('messages').on('child_added',
+snapshot => {
+const message = snapshot.val();
+displayMessage(snapshot.key, message.text, message.name, message.fileUrl, message.fileType);
+});
+
+db.ref('messages').on('child_removed',
+snapshot => {
+const messageElement = document.getElementById(`message-${snapshot.key}`);
+if (messageElement) {
+messageElement.remove();
+}
+});
+
+db.ref('messages').on('value',
+snapshot => {
+if (snapshot.numChildren() > 20) {
+deleteOldestMessage();
+}
+});
+}
+
+// Event listener untuk form pesan
+messageForm.addEventListener('submit', function(event) {
+event.preventDefault();
+const text = messageInput.value;
+const file = fileInput.files[0];
+
+if (file) {
+uploadFile(file);
+} else if (text.trim() !== '') {
+const message = {
+text: filterBadWords(text),
+name: auth.currentUser.displayName,
+fileUrl: '',
+fileType: '',
+timestamp: firebase.database.ServerValue.TIMESTAMP
+};
+db.ref('messages').push(message);
+}
+
+messageInput.value = '';
+fileInput.value = '';
+});
+
+// Event listener untuk menghapus semua pesan
+deleteMessagesButton.addEventListener('click', function() {
+db.ref('messages').once('value', snapshot => {
+snapshot.forEach(childSnapshot => {
+const message = childSnapshot.val();
+if (message.fileUrl) {
+deleteFile(message.fileUrl);
+}
+});
+}).then(() => {
+db.ref('messages').remove();
+});
+});
+
+// Periksa status autentikasi pengguna
 auth.onAuthStateChanged(user => {
 if (user) {
 loginContainer.style.display = 'none';
 chatContainer.style.display = 'block';
-loadMessages();
+displayMessages();
 } else {
 loginContainer.style.display = 'block';
 chatContainer.style.display = 'none';
 }
 });
-
-// Fungsi untuk menghapus semua pesan
-deleteMessagesButton.addEventListener('click', function() {
-db.ref('messages').remove()
-.then(() => {
-messagesDiv.innerHTML = ''; // Clear the messages div
-alert('Semua pesan telah dihapus.');
-})
-.catch(error => {
-console.error('Kesalahan saat menghapus pesan:', error);
-alert('Gagal menghapus pesan.');
-});
-});
-
-window.onload = () => {
-alert("Jangan Masukkan Email & Password Pribadi. Masukkan Email & Password Random Aja Yang Penting Mudah Diingat Dan Jangan Lupa Namanya Juga Harus Di Ingat Juga. Kasih Nama Yang Sopan.");
-};
 </script>
 </body>
 </html>
