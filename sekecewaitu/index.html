@@ -1,1 +1,613 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+ <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+    .container {
+      width: 100%;
+      max-width: 320px;
+      overflow: hidden;
+      position: relative;
+    }
+    .slides {
+      display: flex;
+      transition: transform 1s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 15px;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 5px;
+      background: rgba(255,255,255,0.1);
+      animation: scaleUp 1.5s ease-out;
+    }
+    .slide img {
+      margin: 0;
+      padding: 0;
+      border: 2px solid #000;
+      border-radius: 5px;
+      background-color: #fff;
+      width: 100%;
+    }
+    .slide p {
+      margin: 15px 0 0;
+      padding: 0;
+      color: #eee;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .emoji {
+      font-size: 5em;
+      margin-bottom: 15px;
+    }
+    @keyframes scaleUp {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    .info {
+      font-weight: bold;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      margin-top: 50px;
+      color: #555;
+      background-color: transparent;
+      width: 100%;
+      text-align: center;
+      animation: scaleUp 1.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="slides">
+      <div class="slide">
+        <p>kisah ini berjumlah 100 halaman</br>selamat membaca</p>
+      </div>
+      <!-- Slide 1 -->
+      <div class="slide">
+        <div class="emoji">💔</div>
+        <p>Aku pernah mencintaimu dengan sepenuh hati, memberimu segalanya tanpa sedikitpun ragu.</p>
+      </div>
+      <!-- Slide 2 -->
+      <div class="slide">
+        <div class="emoji">😢</div>
+        <p>Namun, seiring waktu, semua mulai berubah. Kehangatan itu perlahan memudar, digantikan oleh dinginnya keraguan.</p>
+      </div>
+      <!-- Slide 3 -->
+      <div class="slide">
+        <div class="emoji">🌧️</div>
+        <p>Aku melihat dirimu mulai menjauh, bagaikan hujan yang turun perlahan namun pasti, meninggalkan jejak luka di hatiku.</p>
+      </div>
+      <!-- Slide 4 -->
+      <div class="slide">
+        <div class="emoji">😔</div>
+        <p>Kekecewaan mulai menyelimuti hari-hariku. Setiap janji yang kau ucapkan terasa hampa, seolah-olah tidak pernah ada artinya.</p>
+      </div>
+      <!-- Slide 5 -->
+      <div class="slide">
+        <div class="emoji">🕰️</div>
+        <p>Waktu berjalan, dan aku terus berharap bahwa segalanya akan kembali seperti dulu. Tapi kenyataannya, semua itu hanyalah harapan kosong.</p>
+      </div>
+      <!-- Slide 6 -->
+      <div class="slide">
+        <div class="emoji">💭</div>
+        <p>Aku terjebak dalam kenangan tentang kita. Setiap momen manis yang dulu kita lewati, kini hanya menyisakan rasa pahit di hati.</p>
+      </div>
+      <!-- Slide 7 -->
+      <div class="slide">
+        <div class="emoji">😞</div>
+        <p>Dan di puncak semua itu, aku menyadari bahwa aku telah mengecewakan diriku sendiri, dengan terus berharap pada cinta yang telah mati.</p>
+      </div>
+      <!-- Slide 8 -->
+      <div class="slide">
+        <div class="emoji">🚶‍♂️</div>
+        <p>Aku memutuskan untuk pergi, meninggalkan segalanya di belakang. Mencoba merangkai kembali hatiku yang hancur, meski terasa sangat sulit.</p>
+      </div>
+      <!-- Slide 9 -->
+      <div class="slide">
+        <div class="emoji">🌌</div>
+        <p>Di malam yang sunyi, aku merenung, merasakan kekosongan yang begitu dalam. Kekecewaan ini begitu nyata, begitu melukai.</p>
+      </div>
+      <!-- Slide 10 -->
+      <div class="slide">
+        <div class="emoji">🌟</div>
+        <p>Namun di balik semua kegelapan, aku tahu bahwa suatu hari aku akan bangkit kembali. Walaupun kini, sekecewa itu aku dengan apa yang pernah kita miliki.</p>
+      </div>
+      <!-- Slide 11 -->
+      <div class="slide">
+        <div class="emoji">🌑</div>
+        <p>Setiap malam terasa semakin panjang, dipenuhi dengan bayangan-bayangan masa lalu yang tak kunjung hilang dari pikiranku.</p>
+      </div>
+      <!-- Slide 12 -->
+      <div class="slide">
+        <div class="emoji">😪</div>
+        <p>Aku lelah menunggu perubahan yang tak pernah datang, terus berharap pada sesuatu yang sepertinya tidak pernah akan terjadi.</p>
+      </div>
+      <!-- Slide 13 -->
+      <div class="slide">
+        <div class="emoji">📅</div>
+        <p>Hari demi hari berlalu, dan aku semakin merasa bahwa aku telah membuang begitu banyak waktu untuk sesuatu yang tidak berarti.</p>
+      </div>
+      <!-- Slide 14 -->
+      <div class="slide">
+        <div class="emoji">💤</div>
+        <p>Setiap malam aku tidur dengan perasaan yang sama: kecewa, terluka, dan penuh dengan pertanyaan yang tak terjawab.</p>
+      </div>
+      <!-- Slide 15 -->
+      <div class="slide">
+        <div class="emoji">🎭</div>
+        <p>Di depan orang lain, aku berpura-pura kuat, tersenyum seolah-olah semuanya baik-baik saja, meskipun hatiku sebenarnya hancur.</p>
+      </div>
+      <!-- Slide 16 -->
+      <div class="slide">
+        <div class="emoji">🌅</div>
+        <p>Setiap pagi aku berharap menemukan harapan baru, tetapi kekecewaan terus membayangi setiap langkahku.</p>
+      </div>
+      <!-- Slide 17 -->
+      <div class="slide">
+        <div class="emoji">✉️</div>
+        <p>Pesan yang dulu selalu kutunggu kini hanya menjadi pengingat akan rasa sakit yang terus menggerogoti hatiku.</p>
+      </div>
+      <!-- Slide 18 -->
+      <div class="slide">
+        <div class="emoji">🔒</div>
+        <p>Aku menutup hati, berusaha melindungi diriku dari rasa sakit lebih lanjut, meskipun itu berarti aku harus kehilangan dirimu sepenuhnya.</p>
+      </div>
+      <!-- Slide 19 -->
+      <div class="slide">
+        <div class="emoji">🌙</div>
+        <p>Malam yang sepi menjadi sahabatku. Dalam kesunyian, aku menemukan kedamaian meski hanya sementara.</p>
+      </div>
+      <!-- Slide 20 -->
+      <div class="slide">
+        <div class="emoji">🛤️</div>
+        <p>Perjalanan ini masih panjang, dan meskipun hatiku lelah, aku tahu bahwa aku harus terus berjalan.</p>
+      </div>
+      <!-- Slide 21 -->
+      <div class="slide">
+        <div class="emoji">💧</div>
+        <p>Air mata yang tak terlihat mengalir setiap kali aku mengingatmu. Meskipun luka itu sudah tidak berdarah, rasa sakitnya masih terasa.</p>
+      </div>
+      <!-- Slide 22 -->
+      <div class="slide">
+        <div class="emoji">🕊️</div>
+        <p>Aku merindukan kebebasan dari perasaan ini. Ingin terbang jauh dari semua kenangan yang terus menghantuiku.</p>
+      </div>
+      <!-- Slide 23 -->
+      <div class="slide">
+        <div class="emoji">🔗</div>
+        <p>Kita pernah begitu terikat, tetapi kini aku merasa terbelenggu oleh kenangan yang tak kunjung hilang.</p>
+      </div>
+      <!-- Slide 24 -->
+      <div class="slide">
+        <div class="emoji">🌍</div>
+        <p>Dunia terus berputar, namun di dalam hatiku, waktu seakan berhenti, tersangkut di momen di mana kita pernah saling mencintai.</p>
+      </div>
+      <!-- Slide 25 -->
+      <div class="slide">
+        <div class="emoji">💬</div>
+        <p>Kata-kata yang dulu berarti segalanya bagiku kini terasa kosong, hanya menjadi bayang-bayang dari apa yang dulu kita miliki.</p>
+      </div>
+      <!-- Slide 26 -->
+      <div class="slide">
+        <div class="emoji">⚡</div>
+        <p>Keputusan untuk berpisah datang tiba-tiba, seperti kilat di tengah badai yang telah lama bergejolak dalam hatiku.</p>
+      </div>
+      <!-- Slide 27 -->
+      <div class="slide">
+        <div class="emoji">⏳</div>
+        <p>Waktu yang berlalu tak pernah bisa menghapus rasa kecewa ini, hanya membuatnya semakin mengakar dalam hati.</p>
+      </div>
+      <!-- Slide 28 -->
+      <div class="slide">
+        <div class="emoji">🕯️</div>
+        <p>Seperti lilin yang terus menyala, perasaan ini perlahan mengikis diriku, hingga aku hanya menjadi bayangan dari diri yang dulu.</p>
+      </div>
+      <!-- Slide 29 -->
+      <div class="slide">
+        <div class="emoji">🛡️</div>
+        <p>Aku mencoba melindungi diriku dari rasa sakit ini, tapi semakin aku berusaha, semakin aku terluka.</p>
+      </div>
+      <!-- Slide 30 -->
+      <div class="slide">
+        <div class="emoji">📖</div>
+        <p>Kisah kita mungkin hanya akan menjadi cerita di masa lalu, tapi bekasnya akan selalu tertulis di hatiku.</p>
+      </div>
+      <!-- Slide 31 -->
+      <div class="slide">
+        <div class="emoji">🌅</div>
+        <p>Setiap pagi adalah kesempatan baru, namun aku masih terjebak di masa lalu, berusaha memahami apa yang salah.</p>
+      </div>
+      <!-- Slide 32 -->
+      <div class="slide">
+        <div class="emoji">💥</div>
+        <p>Cintaku padamu dulu begitu besar, tapi kini hanya tersisa puing-puing harapan yang hancur berkeping-keping.</p>
+      </div>
+      <!-- Slide 33 -->
+      <div class="slide">
+        <div class="emoji">🕶️</div>
+        <p>Aku menyembunyikan perasaanku di balik senyuman dan canda, tapi di dalam hati, aku masih merasakan pedih yang tak tertahankan.</p>
+      </div>
+      <!-- Slide 34 -->
+      <div class="slide">
+        <div class="emoji">🔍</div>
+        <p>Aku terus mencari jawaban, berusaha memahami apa yang menyebabkan kita terpisah. Namun, semakin aku mencari, semakin aku tersesat.</p>
+      </div>
+      <!-- Slide 35 -->
+      <div class="slide">
+        <div class="emoji">🌾</div>
+        <p>Hidup terus berjalan, tapi hatiku masih tertambat pada saat-saat ketika kita masih bersama, sebelum semuanya berakhir dengan kekecewaan.</p>
+      </div>
+      <!-- Slide 36 -->
+      <div class="slide">
+        <div class="emoji">⛈️</div>
+        <p>Hujan turun deras di hatiku, membawa serta semua kenangan yang kini hanya menambah beban di pundakku.</p>
+      </div>
+      <!-- Slide 37 -->
+      <div class="slide">
+        <div class="emoji">🌪️</div>
+        <p>Kisah kita seperti badai, menghancurkan segalanya dalam sekejap dan menyisakan kehancuran di mana-mana.</p>
+      </div>
+      <!-- Slide 38 -->
+      <div class="slide">
+        <div class="emoji">🛤️</div>
+        <p>Meski jalan di depan masih panjang, aku merasa begitu kehilangan arah setelah perpisahan ini.</p>
+      </div>
+      <!-- Slide 39 -->
+      <div class="slide">
+        <div class="emoji">⚰️</div>
+        <p>Aku merasa seolah-olah sebagian dari diriku telah mati, hilang bersama dengan cinta yang dulu kita bagi.</p>
+      </div>
+      <!-- Slide 40 -->
+      <div class="slide">
+        <div class="emoji">🏴</div>
+        <p>Hari-hariku kini dipenuhi dengan rasa duka, meratapi cinta yang tak lagi ada, dan masa depan yang tak lagi pasti.</p>
+      </div>
+      <!-- Slide 41 -->
+      <div class="slide">
+        <div class="emoji">🎢</div>
+        <p>Perasaan ini seperti roller coaster, penuh dengan naik turun yang membuatku lelah dan tak berdaya.</p>
+      </div>
+      <!-- Slide 42 -->
+      <div class="slide">
+        <div class="emoji">🖤</div>
+        <p>Aku pernah mencintaimu dengan segenap hatiku, tapi kini hati itu hanya menyisakan luka yang mendalam.</p>
+      </div>
+      <!-- Slide 43 -->
+      <div class="slide">
+        <div class="emoji">⚓</div>
+        <p>Meski begitu, aku tahu aku harus terus bertahan, menemukan kembali kekuatanku yang dulu, meski tanpa dirimu di sisiku.</p>
+      </div>
+      <!-- Slide 44 -->
+      <div class="slide">
+        <div class="emoji">🧩</div>
+        <p>Kau pernah menjadi bagian yang melengkapi hidupku, tapi kini kau hanya menjadi kenangan yang sulit untuk dilupakan.</p>
+      </div>
+      <!-- Slide 45 -->
+      <div class="slide">
+        <div class="emoji">🛣️</div>
+        <p>Perjalanan ini masih panjang, tapi aku tahu aku harus melanjutkannya, meski tanpa dirimu di sampingku.</p>
+      </div>
+      <!-- Slide 46 -->
+      <div class="slide">
+        <div class="emoji">🌳</div>
+        <p>Meski hatiku terluka, aku masih berharap suatu hari nanti aku bisa menemukan kembali kedamaian dan kebahagiaan.</p>
+      </div>
+      <!-- Slide 47 -->
+      <div class="slide">
+        <div class="emoji">🌠</div>
+        <p>Mungkin ada bintang baru yang akan datang di hidupku, tapi sampai saat itu tiba, aku masih harus melalui kegelapan ini.</p>
+      </div>
+      <!-- Slide 48 -->
+      <div class="slide">
+        <div class="emoji">🛤️</div>
+        <p>Jalan hidup ini tidak pernah mudah, tapi aku tahu bahwa setiap langkah yang kuambil membawaku lebih dekat pada pemulihan.</p>
+      </div>
+      <!-- Slide 49 -->
+      <div class="slide">
+        <div class="emoji">🛡️</div>
+        <p>Meski hatiku terluka, aku akan tetap kuat, berusaha melindungi diri dari rasa sakit yang lebih dalam.</p>
+      </div>
+      <!-- Slide 50 -->
+      <div class="slide">
+        <div class="emoji">🚪</div>
+        <p>Pintu baru mungkin akan terbuka di hadapanku, membawa kesempatan baru, tapi aku masih harus siap untuk menerima semuanya.</p>
+      </div>
+      <!-- Slide 51 -->
+      <div class="slide">
+        <div class="emoji">📖</div>
+        <p>Kisah ini mungkin telah berakhir, tapi itu bukan berarti hidupku berhenti. Masih banyak bab yang belum kutuliskan.</p>
+      </div>
+      <!-- Slide 52 -->
+      <div class="slide">
+        <div class="emoji">🔚</div>
+        <p>Akhir dari kisah ini hanyalah awal dari perjalanan baru. Meskipun aku terluka, aku masih percaya pada hari esok yang lebih baik.</p>
+      </div>
+      <!-- Slide 53 -->
+      <div class="slide">
+        <div class="emoji">🌟</div>
+        <p>Aku akan menemukan cahaya lagi, meskipun saat ini semuanya masih tampak gelap dan suram.</p>
+      </div>
+      <!-- Slide 54 -->
+      <div class="slide">
+        <div class="emoji">🛤️</div>
+        <p>Langkah demi langkah, aku akan terus maju, mencari jalan keluar dari kegelapan yang telah menutupi hidupku.</p>
+      </div>
+      <!-- Slide 55 -->
+      <div class="slide">
+        <div class="emoji">🏞️</div>
+        <p>Mungkin suatu hari nanti, aku akan melihat kembali ke masa ini dan melihat betapa kuatnya aku bertahan.</p>
+      </div>
+      <!-- Slide 56 -->
+      <div class="slide">
+        <div class="emoji">🛠️</div>
+        <p>Setiap momen sulit ini adalah batu bata yang membangun kembali diriku, menjadi lebih kuat dari sebelumnya.</p>
+      </div>
+      <!-- Slide 57 -->
+      <div class="slide">
+        <div class="emoji">💪</div>
+        <p>Meski hatiku terluka, aku tidak akan menyerah. Aku akan bangkit, meskipun itu membutuhkan waktu.</p>
+      </div>
+      <!-- Slide 58 -->
+      <div class="slide">
+        <div class="emoji">🔄</div>
+        <p>Perasaan kecewa ini akan berubah, seiring waktu. Aku akan menemukan cara untuk melanjutkan hidup tanpa dirimu.</p>
+      </div>
+      <!-- Slide 59 -->
+      <div class="slide">
+            <div class="emoji">💔</div>
+            <p>Walaupun cinta kita telah berakhir, aku akan belajar untuk mencintai diriku sendiri lebih dari sebelumnya.</p>
+        </div>
+        <!-- Slide 60 -->
+        <div class="slide">
+            <div class="emoji">🌊</div>
+            <p>Seperti ombak yang terus bergerak, aku akan terus maju, meskipun terkadang terasa berat dan sulit.</p>
+        </div>
+        <!-- Slide 61 -->
+        <div class="slide">
+            <div class="emoji">🕰️</div>
+            <p>Waktu mungkin tidak menyembuhkan semua luka, tapi ia mengajarkan kita cara untuk hidup dengan mereka.</p>
+        </div>
+        <!-- Slide 62 -->
+        <div class="slide">
+            <div class="emoji">🚶</div>
+            <p>Perjalanan ini mungkin terasa sepi tanpa dirimu, tapi aku harus terus melangkah ke depan.</p>
+        </div>
+        <!-- Slide 63 -->
+        <div class="slide">
+            <div class="emoji">🗺️</div>
+            <p>Hidup adalah petualangan yang panjang. Aku akan menemukan jalanku lagi, meskipun tanpa peta.</p>
+        </div>
+        <!-- Slide 64 -->
+        <div class="slide">
+            <div class="emoji">🌸</div>
+            <p>Ada keindahan yang bisa ditemukan dalam luka dan kehilangan, jika aku bersedia untuk mencarinya.</p>
+        </div>
+        <!-- Slide 65 -->
+        <div class="slide">
+            <div class="emoji">🎭</div>
+            <p>Terkadang, aku harus mengenakan topeng untuk menyembunyikan rasa sakitku. Tapi di dalam, aku terus berjuang.</p>
+        </div>
+        <!-- Slide 66 -->
+        <div class="slide">
+            <div class="emoji">🧠</div>
+            <p>Aku belajar untuk menggunakan akalku, bukan hanya hatiku, dalam menghadapi realitas hidup ini.</p>
+        </div>
+        <!-- Slide 67 -->
+        <div class="slide">
+            <div class="emoji">🎨</div>
+            <p>Setiap luka adalah warna baru yang mewarnai kanvas hidupku, meski awalnya tampak gelap.</p>
+        </div>
+        <!-- Slide 68 -->
+        <div class="slide">
+            <div class="emoji">🌱</div>
+            <p>Dari rasa sakit ini, aku akan tumbuh dan berkembang, menjadi pribadi yang lebih kuat dan lebih bijaksana.</p>
+        </div>
+        <!-- Slide 69 -->
+        <div class="slide">
+            <div class="emoji">🛠️</div>
+            <p>Aku akan membangun kembali diriku, sedikit demi sedikit, dengan bahan yang lebih kuat dari sebelumnya.</p>
+        </div>
+        <!-- Slide 70 -->
+        <div class="slide">
+            <div class="emoji">🌟</div>
+            <p>Meskipun aku terluka, aku masih memiliki harapan. Aku akan menemukan kembali cahayaku.</p>
+        </div>
+        <!-- Slide 71 -->
+        <div class="slide">
+            <div class="emoji">🔗</div>
+            <p>Masa lalu kita adalah rantai yang telah putus, tapi aku akan belajar untuk melepaskannya.</p>
+        </div>
+        <!-- Slide 72 -->
+        <div class="slide">
+            <div class="emoji">📆</div>
+            <p>Hari-hari mungkin terasa panjang tanpa dirimu, tapi aku tahu waktu akan membantuku sembuh.</p>
+        </div>
+        <!-- Slide 73 -->
+        <div class="slide">
+            <div class="emoji">🏔️</div>
+            <p>Perjalanan ini adalah pendakian yang berat, tapi aku akan mencapai puncaknya suatu hari nanti.</p>
+        </div>
+        <!-- Slide 74 -->
+        <div class="slide">
+            <div class="emoji">🦋</div>
+            <p>Seperti kupu-kupu, aku akan melalui metamorfosis, dan keluar dari kepompong luka ini sebagai pribadi yang baru.</p>
+        </div>
+        <!-- Slide 75 -->
+        <div class="slide">
+            <div class="emoji">🧩</div>
+            <p>Aku mungkin kehilangan bagian penting dari diriku, tapi aku akan menemukan cara untuk menjadi utuh lagi.</p>
+        </div>
+        <!-- Slide 76 -->
+        <div class="slide">
+            <div class="emoji">🚶‍♀️</div>
+            <p>Aku akan terus berjalan, satu langkah pada satu waktu, sampai aku menemukan kembali jalan hidupku.</p>
+        </div>
+        <!-- Slide 77 -->
+        <div class="slide">
+            <div class="emoji">🏜️</div>
+            <p>Meski perjalanan ini terasa seperti gurun yang gersang, aku yakin ada oasis menungguku di depan.</p>
+        </div>
+        <!-- Slide 78 -->
+        <div class="slide">
+            <div class="emoji">🗝️</div>
+            <p>Kunci untuk kebahagiaanku ada di tanganku sendiri, bukan di tangan orang lain.</p>
+        </div>
+        <!-- Slide 79 -->
+        <div class="slide">
+            <div class="emoji">🔓</div>
+            <p>Perlahan, aku akan membuka kembali hatiku, tapi kali ini dengan lebih berhati-hati.</p>
+        </div>
+        <!-- Slide 80 -->
+        <div class="slide">
+            <div class="emoji">🎯</div>
+            <p>Aku akan menemukan tujuan baru dalam hidupku, dan mengarahkan semua energi dan perhatianku ke sana.</p>
+        </div>
+        <!-- Slide 81 -->
+        <div class="slide">
+            <div class="emoji">🎐</div>
+            <p>Angin perubahan akan membawa ke tempat baru, di mana aku bisa mulai lagi dengan lembaran baru.</p>
+        </div>
+        <!-- Slide 82 -->
+        <div class="slide">
+            <div class="emoji">🔮</div>
+            <p>Meski masa depan tampak tidak pasti, aku akan berjalan ke arahnya dengan keyakinan baru.</p>
+        </div>
+        <!-- Slide 83 -->
+        <div class="slide">
+            <div class="emoji">📈</div>
+            <p>Meski ada naik dan turun, aku tahu bahwa aku sedang dalam perjalanan menuju pemulihan.</p>
+        </div>
+        <!-- Slide 84 -->
+        <div class="slide">
+            <div class="emoji">💡</div>
+            <p>Dari rasa sakit ini, aku telah belajar banyak pelajaran berharga yang akan membimbingku ke depan.</p>
+        </div>
+        <!-- Slide 85 -->
+        <div class="slide">
+            <div class="emoji">🧭</div>
+            <p>Meski kompas hatiku sempat hilang arah, aku akan menemukan jalanku kembali, dengan panduan dari pengalaman ini.</p>
+        </div>
+        <!-- Slide 86 -->
+        <div class="slide">
+            <div class="emoji">🌄</div>
+            <p>Pagi baru akan datang, dan dengan itu, harapan baru. Aku akan bangkit lagi, lebih kuat dari sebelumnya.</p>
+        </div>
+        <!-- Slide 87 -->
+        <div class="slide">
+            <div class="emoji">🌍</div>
+            <p>Dunia ini luas, dan masih banyak keindahan yang menungguku. Aku akan menemukannya, satu langkah demi satu langkah.</p>
+        </div>
+        <!-- Slide 88 -->
+        <div class="slide">
+            <div class="emoji">🚶‍♂️</div>
+            <p>Perjalanan ini panjang, tapi aku akan terus melangkah, dan menemukan kebahagiaan di tengah-tengah rasa sakit ini.</p>
+        </div>
+        <!-- Slide 89 -->
+        <div class="slide">
+            <div class="emoji">🏁</div>
+            <p>Meskipun akhir dari kisah kita menyakitkan, itu bukanlah akhir dari hidupku. Ini adalah awal dari babak baru yang menantang.</p>
+        </div>
+        <!-- Slide 90 -->
+        <div class="slide">
+            <div class="emoji">🎇</div>
+            <p>Aku akan menemukan kembali kebahagiaan, mungkin dengan cara yang berbeda, tapi tetap nyata dan tulus.</p>
+        </div>
+        <!-- Slide 91 -->
+        <div class="slide">
+            <div class="emoji">🔍</div>
+            <p>Aku akan terus mencari, bukan hanya untuk kebahagiaan, tapi juga untuk makna yang lebih dalam dalam hidupku.</p>
+        </div>
+        <!-- Slide 92 -->
+        <div class="slide">
+            <div class="emoji">💎</div>
+            <p>Di balik setiap luka, ada pelajaran berharga. Dan dari pelajaran itu, aku akan menemukan kebijaksanaan yang abadi.</p>
+        </div>
+        <!-- Slide 93 -->
+        <div class="slide">
+            <div class="emoji">📚</div>
+            <p>Setiap bab dalam hidupku, baik atau buruk, adalah bagian dari cerita besar yang menjadikanku siapa</p>
+        </div>
+        <!-- Slide 94 -->
+            <div class="slide">
+                <div class="emoji">📚</div>
+                <p>Setiap bab dalam hidupku, baik atau buruk, adalah bagian dari cerita besar yang menjadikanku siapa aku sekarang.</p>
+            </div>
+            <!-- Slide 95 -->
+            <div class="slide">
+                <div class="emoji">🎼</div>
+                <p>Aku akan menemukan kembali melodi hidupku, meskipun nada-nada kesedihan mengiringinya.</p>
+            </div>
+            <!-- Slide 96 -->
+            <div class="slide">
+                <div class="emoji">🚪</div>
+                <p>Ketika satu pintu tertutup, yang lain akan terbuka. Aku akan menemukan pintu itu dan melangkah masuk.</p>
+            </div>
+            <!-- Slide 97 -->
+            <div class="slide">
+                <div class="emoji">🛤️</div>
+                <p>Meski rel-rel kehidupan berkelok dan sulit, aku akan terus bergerak maju ke arah yang benar.</p>
+            </div>
+            <!-- Slide 98 -->
+            <div class="slide">
+                <div class="emoji">⚓</div>
+                <p>Aku akan menemukan jangkar yang baru, yang akan memberikan kestabilan dalam hidupku yang kadang penuh badai.</p>
+            </div>
+            <!-- Slide 99 -->
+            <div class="slide">
+                <div class="emoji">🔥</div>
+                <p>Dari abu rasa sakit ini, aku akan bangkit seperti phoenix, lebih kuat dan lebih bersemangat dari sebelumnya.</p>
+            </div>
+            <!-- Slide 100 -->
+            <div class="slide">
+                <div class="emoji">🏆</div>
+                <p>Pada akhirnya, aku akan memenangkan kembali kebahagiaanku, dengan cara yang paling indah dan paling tepat untukku.</p>
+            </div>
+        </div>
+        <div class="info">
+           Klik untuk melanjutkan
+        </div>
+    </div>
+  <script>
+    let musik = new Audio();
+    musik.src = "sekecewa_itu.mp3";
+    musik.loop = true;
+    const slides = document.querySelector('.slides');
+    let currentIndex = 0;
+    window.addEventListener('click', () => {
+      if (currentIndex < slides.children.length - 1) {
+        currentIndex++;
+        musik.play();
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      } else {
+        currentIndex = 0;
+        musik.pause();
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+    });
+  </script>
+</body>
+</html>
