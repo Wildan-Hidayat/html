@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bucin Dulu Gak Sih</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        h1 {
+            font-size: 1.8em;
+            color: #ff6f61;
+            margin-bottom: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .joke {
+            font-size: 1em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            margin: 10px 0;
+        }
+        .joke.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="start">klik untuk mulai</h1>
+        <div id="joke1" class="joke">“Kamu tau gak? Kamu itu kayak kuota internet! 📶”</div>
+        <div id="joke2" class="joke">“Hah, maksudnya? 🤔”</div>
+        <div id="joke3" class="joke">“Kalo abis, bikin galau. Kalo dapet, bikin semangat nge-chat terus! 💌”</div>
+        <div id="joke4" class="joke">“Serius deh, setiap kali kita chatting, rasanya kayak lagi unboxing paket yang udah lama ditunggu. 📦 Excited parah!”</div>
+        <div id="joke5" class="joke">“Dan tau gak? Kamu itu kayak Wi-Fi di rumah. Kalo sinyalnya ilang, langsung panik, kepikiran terus, hidup berasa hampa! 😱”</div>
+        <div id="joke6" class="joke">“Jadi, please, jangan ghosting, ya? Aku gak siap kena mode pesawat tanpa peringatan, ntar hatiku bisa crash! ✈️💔”</div>
+        <div id="joke7" class="joke">“Dan oh iya, kalau kamu udah nge-typing tapi gak jadi kirim, rasanya kayak nunggu gacha tapi gak dapet SSR—patah hati gitu loh! 😭”</div>
+    </div>
+
+    <script>
+        let start = document.getElementById('start');
+        let jokes = document.querySelectorAll('.joke');
+        let currentIndex = 0;
+
+        document.body.addEventListener('click', function() {
+            if (currentIndex < jokes.length) {
+                jokes[currentIndex].classList.add('visible');
+                currentIndex++;
+                start.textContent = 'Bucin Dulu Gak Sih 😆';
+            } else {
+                jokes.forEach(joke => joke.classList.remove('visible'));
+                currentIndex = 0;
+                start.textContent = 'gak lucu ya? karena yang lucu itu kamu 😆';
+            }
+        });
+    </script>
+</body>
+</html>
