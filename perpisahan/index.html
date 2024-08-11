@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pesan perpisahan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+        }
+        .chat-header {
+            background-color: #ff4081;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            transition: opacity 0.5s ease;
+        }
+        .message {
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        .message.user {
+            text-align: right;
+        }
+        .message .bubble {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            background-color: #ff4081;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .message.bot .bubble {
+            background-color: #00796b;
+        }
+        .input-area {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #ffffff;
+        }
+        .button {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #e91e63;
+        }
+        .button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .wllcomeMessage {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            background-color: #ff4000;
+            color: white;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">Pasan Hati</div>
+    <div id="chatMessages" class="chat-messages">
+      <div class="wllcomeMessage" id="typed"></div>
+    </div>
+    <div id="inputArea" class="input-area"></div>
+</div>
+
+<script>
+    const conversationSteps = [
+        { message: "Sebenarnya aku udah lama suka sama kamu... Kamu gimana? 😍", options: [ { text: "Aku juga suka sama kamu! ❤️", nextStep: 1 }, { text: "Maaf, aku nggak bisa balas perasaan kamu 😔", nextStep: 2 } ] },
+        { message: "Beneran? Aku seneng banget! Tapi aku takut perasaan kita ini bisa berubah... 🤔", options: [ { text: "Aku yakin kita bisa hadapi ini bareng-bareng. 💪", nextStep: 3 }, { text: "Ya, perasaan bisa berubah, tapi kita coba dulu. 🌟", nextStep: 3 } ] },
+        { message: "Aku ngerti, dan aku hargai kejujuran kamu. Tapi kamu tahu, meski kita nggak bisa bareng, aku tetap peduli sama kamu... 💖", options: [ { text: "Aku juga peduli sama kamu, mungkin waktu yang bisa jawab semuanya. ⏳", nextStep: 4 }, { text: "Aku hargai perasaanmu, tapi mungkin lebih baik kita tetap jadi teman. 😔", nextStep: 4 } ] },
+        { message: "Kadang aku mikir, apakah kita bisa terus kayak gini? Menjalani perasaan yang rumit ini... 😢", options: [ { text: "Aku juga mikir gitu, tapi aku mau coba bertahan. 🌈", nextStep: 5 }, { text: "Mungkin kita perlu istirahat sejenak dari semuanya. 💤", nextStep: 5 } ] },
+        { message: "Aku tahu ini nggak mudah buat kita berdua. Tapi aku nggak mau hubungan ini berakhir begitu aja... 💔", options: [ { text: "Aku juga nggak mau, tapi kadang kita harus realistis. 🤷", nextStep: 6 }, { text: "Aku paham, tapi mungkin memang ini yang terbaik. 🌟", nextStep: 6 } ] },
+        { message: "Sejujurnya, aku takut kalau kita terus begini, kita malah saling menyakiti... 😭", options: [ { text: "Aku nggak mau kita saling menyakiti, tapi aku nggak tahu harus gimana. 😔", nextStep: 7 }, { text: "Mungkin lebih baik kita akhiri sebelum makin sakit. 😢", nextStep: 7 } ] },
+        { message: "Mungkin kamu benar... Aku harap suatu hari nanti kita bisa ketemu lagi dengan perasaan yang lebih baik. 🤞", options: [ { text: "Aku juga berharap begitu. Jaga dirimu baik-baik ya... 💕", nextStep: 8 }, { text: "Aku selalu ingat kamu, semoga kita bisa bahagia meski terpisah. 🌟", nextStep: 8 } ] },
+        { message: "Selamat tinggal... Aku akan selalu mengingatmu. 😢", options: [] },
+        { message: "Kenapa kita harus begini? Kenapa rasanya sulit sekali untuk bersama? 😔", options: [ { text: "Kadang, cinta memang bukan segalanya. 😓", nextStep: 9 }, { text: "Mungkin kita memang bukan untuk saat ini. 🤷", nextStep: 9 } ] },
+        { message: "Aku berharap suatu saat nanti, kita bisa punya kesempatan lagi. 🌠", options: [ { text: "Aku juga berharap seperti itu. 🌟", nextStep: 10 }, { text: "Mungkin itu hanya harapan, tapi kita harus terus melangkah. 🚶‍♂️", nextStep: 10 } ] },
+        { message: "Cinta ini seperti mimpi yang indah, tapi kadang harus berakhir dengan pilu. 😔", options: [ { text: "Mungkin inilah saatnya kita harus melepaskan. 🕊️", nextStep: 11 }, { text: "Aku akan selalu mengingat momen-momen indah kita. 💭", nextStep: 11 } ] },
+        { message: "Kadang, aku berharap bisa kembali ke masa lalu dan memperbaiki semuanya. ⏳", options: [ { text: "Masa lalu tidak bisa diubah, tapi kita bisa belajar darinya. 📚", nextStep: 12 }, { text: "Aku paham, tapi kita harus move on. 🌈", nextStep: 12 } ] },
+        { message: "Apa yang membuatmu memutuskan untuk pergi? 😢", options: [ { text: "Aku merasa kita perlu ruang untuk berkembang. 🌱", nextStep: 13 }, { text: "Kadang, pergi adalah cara untuk menjaga hati kita tetap utuh. 💔", nextStep: 13 } ] },
+        { message: "Aku harap kita bisa menemukan kebahagiaan masing-masing. 😊", options: [ { text: "Aku juga berharap begitu. Semoga kamu bahagia. 🌟", nextStep: 14 }, { text: "Mungkin kita akan bertemu lagi di lain waktu. 🤞", nextStep: 14 } ] },
+        { message: "Kadang, semua ini terasa seperti mimpi buruk yang tidak ingin berakhir. 😔", options: [ { text: "Tapi setiap mimpi buruk akan berlalu juga. 🌠", nextStep: 15 }, { text: "Kita harus bangkit dan terus maju. 💪", nextStep: 15 } ] },
+        { message: "Cinta kita mungkin harus berakhir, tapi kenangan akan selalu ada. 💭", options: [ { text: "Kenangan itu akan selalu berharga. 💖", nextStep: 16 }, { text: "Kita harus merelakannya dan terus maju. 🌟", nextStep: 16 } ] },
+        { message: "Aku berharap kamu menemukan seseorang yang bisa membuatmu bahagia. 🌟", options: [ { text: "Terima kasih. Aku juga berharap kamu menemukan kebahagiaan. 😊", nextStep: 17 }, { text: "Semoga kita bisa bahagia di jalan kita masing-masing. 🌈", nextStep: 17 } ] },
+        { message: "Kadang aku masih berpikir tentang kita dan apa yang mungkin terjadi jika kita bersama. 🤔", options: [ { text: "Aku juga sering memikirkan hal yang sama. 💭", nextStep: 18 }, { text: "Mungkin memang ini bukan waktunya. ⏳", nextStep: 18 } ] },
+        { message: "Setiap kali aku melihat tempat-tempat yang kita kunjungi bersama, aku merasa rindu. 😢", options: [ { text: "Kenangan-kenangan itu akan selalu indah. 🌟", nextStep: 19 }, { text: "Aku juga merindukan momen-momen itu. 💖", nextStep: 19 } ] },
+        { message: "Kita mungkin tidak bisa bersama, tapi aku berharap kita bisa menjadi lebih baik. 🌱", options: [ { text: "Aku juga berharap kita bisa menjadi lebih baik. 💪", nextStep: 20 }, { text: "Semoga kita berdua bisa menemukan kebahagiaan. 🌠", nextStep: 20 } ] },
+        { message: "Cinta ini mungkin harus berakhir, tapi hati ini akan selalu menyimpan kenangan kita. 💔", options: [ { text: "Kenangan itu adalah bagian penting dari hidup kita. 💭", nextStep: 21 }, { text: "Aku akan selalu ingat kita dengan penuh rasa syukur. 🌟", nextStep: 21 } ] },
+        { message: "Kadang aku berharap kita bisa mulai dari awal dan membuat segalanya lebih baik. 🌅", options: [ { text: "Memulai dari awal mungkin bukan solusi, tapi kita harus terus maju. 🚀", nextStep: 22 }, { text: "Aku juga berharap kita bisa memperbaiki segalanya. 🤞", nextStep: 22 } ] },
+        { message: "Cinta kita mungkin tidak berjalan seperti yang kita harapkan, tapi itu tidak mengurangi betapa berartinya kamu bagiku. ❤️", options: [ { text: "Aku juga merasa demikian. Terima kasih atas semuanya. 😊", nextStep: 23 }, { text: "Kamu selalu memiliki tempat khusus di hatiku. 💖", nextStep: 23 } ] },
+        { message: "Sekarang, aku harus pergi dan mencoba untuk melanjutkan hidup. 😔", options: [ { text: "Aku paham. Semoga kamu menemukan apa yang kamu cari. 🌟", nextStep: 24 }, { text: "Jaga diri baik-baik dan semoga kamu bahagia. 💕", nextStep: 24 } ] },
+        { message: "Setiap akhir membawa awal baru. Aku berharap kita semua bisa menemukan kebahagiaan di jalan kita masing-masing. 🌠", options: [ { text: "Aku juga berharap demikian. Terima kasih. 🌟", nextStep: 25 }, { text: "Semoga kita semua bisa menemukan kebahagiaan yang kita cari. 😊", nextStep: 25 } ] },
+        { message: "Selamat tinggal, dan semoga kita bisa bertemu lagi di masa depan dengan perasaan yang lebih baik. 🤗", options: [ { text: "Selamat tinggal. Aku akan selalu mengingatmu. 💖", nextStep: 26 }, { text: "Sampai jumpa di lain waktu. Jaga diri baik-baik. 🌈", nextStep: 26 } ] },
+        { message: "Aku akan menyimpan kenangan kita dengan penuh rasa terima kasih. 🌟", options: [ { text: "Kenangan kita adalah harta yang berharga. 💎", nextStep: 27 }, { text: "Aku juga akan mengingat kita dengan penuh kasih. 💖", nextStep: 27 } ] },
+        { message: "Meskipun kita harus berpisah, aku berharap kita bisa menemukan kedamaian di hati kita masing-masing. 🕊️", options: [ { text: "Semoga kita berdua bisa menemukan kedamaian. 🌠", nextStep: 28 }, { text: "Aku berharap kamu menemukan kedamaian yang kamu cari. 🌟", nextStep: 28 } ] },
+        { message: "Kadang, aku masih berharap kita bisa bersama lagi suatu saat nanti. 🤞", options: [ { text: "Aku juga berharap kita bisa bersama lagi jika takdir mengizinkan. 🌈", nextStep: 29 }, { text: "Semoga kita bisa bertemu lagi dengan perasaan yang lebih baik. 💖", nextStep: 29 } ] },
+        { message: "Untuk saat ini, aku harus melanjutkan hidup dan mencari kebahagiaan di tempat lain. 🌅", options: [ { text: "Aku juga harus melanjutkan hidup. Semoga kita bahagia di jalan kita masing-masing. 😊", nextStep: 30 }, { text: "Semoga kamu menemukan kebahagiaan dan kedamaian. 💕", nextStep: 30 } ] },
+        { message: "Selamat tinggal. Aku akan selalu mengingatmu dengan penuh kasih. 💖" }
+    ];
+
+    let step = 0;
+    let buttonDisabled = false;
+    let typedSpan = document.getElementById("typed");
+    let totype = "hai akhirnya yang di tunggu-tunggu pun telah datang makasih. sebelum kita mulai ada pantun nih buat kamu. Pergi ke pantai di sore hari, Menikmati senja yang memerah. Hati ini selalu berharap kembali, Saat kenangan manis bersama tak pernah salah.";
+    let charIndex = 0;
+    
+    function typeText() {
+      if (charIndex < totype.length) {
+        typedSpan.textContent += totype.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeText, 150);
+      }else {
+        setTimeout(showStep, 1000)
+      }
+    }
+    
+    function showStep() {
+        typedSpan.style.display = "none";
+        const chatMessages = document.getElementById('chatMessages');
+        const inputArea = document.getElementById('inputArea');
+        
+        // Clear previous input options
+        inputArea.innerHTML = '';
+
+        // Display current message
+        const currentStep = conversationSteps[step];
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message bot';
+        messageElement.innerHTML = `<div class="bubble">${currentStep.message}</div>`;
+        chatMessages.appendChild(messageElement);
+
+        // Display options if available
+        if (currentStep.options.length > 0) {
+            currentStep.options.forEach(option => {
+                const optionButton = document.createElement('button');
+                optionButton.className = 'button';
+                optionButton.textContent = option.text;
+                optionButton.disabled = buttonDisabled;
+                optionButton.onclick = () => handleUserResponse(option.text, option.nextStep);
+                inputArea.appendChild(optionButton);
+            });
+        } else {
+            // No more options, end of conversation
+            const endMessage = document.createElement('div');
+            endMessage.className = 'message bot';
+            endMessage.innerHTML = `<div class="bubble">${currentStep.message}</div>`;
+            chatMessages.appendChild(endMessage);
+        }
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function handleUserResponse(userText, nextStepIndex) {
+        if (buttonDisabled) return; // Prevent handling if button is disabled
+
+        const chatMessages = document.getElementById('chatMessages');
+        const userMessageElement = document.createElement('div');
+        userMessageElement.className = 'message user';
+        userMessageElement.innerHTML = `<div class="bubble">${userText}</div>`;
+        chatMessages.appendChild(userMessageElement);
+
+        // Disable buttons to prevent spam
+        buttonDisabled = true;
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => button.disabled = true);
+
+        // Display bot response after a delay
+        setTimeout(() => {
+            step = nextStepIndex;
+            buttonDisabled = false;
+            showStep();
+        }, 1500); // Adjust delay as needed
+    }
+typeText()
+   // window.onload = () => {
+      //  buttonDisabled = true;
+    //    typeText();
+   //     if (charIndex < totype.length) {
+       //   showStep();
+   //     }
+        //setTimeout(() => {
+            //buttonDisabled = false;
+            //
+        //}, 5000);
+   // };
+</script>
+
+</body>
+</html>
