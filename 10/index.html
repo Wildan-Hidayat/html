@@ -154,14 +154,18 @@ const nameInput = document.getElementById('name');
 const progressContainer = document.getElementById('progress-container');
 const progressBar = document.getElementById('progress-bar');
 const deleteMessagesButton = document.getElementById('delete-messages');
-// Render reCAPTCHA
+let recaptchaVerified = false;
+
+        // Render reCAPTCHA
         const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
             'size': 'normal',
             'callback': (response) => {
                 // reCAPTCHA selesai diverifikasi
+                recaptchaVerified = true;
             },
             'expired-callback': () => {
                 // reCAPTCHA kedaluwarsa
+                recaptchaVerified = false;
                 alert('reCAPTCHA expired. Please verify again.');
             }
         });
