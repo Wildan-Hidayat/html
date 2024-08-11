@@ -340,6 +340,10 @@ db.ref('messages').child(oldestKey).remove();
 // Event listener untuk form login
 loginForm.addEventListener('submit', function(event) {
 event.preventDefault();
+if (!recaptchaVerified) {
+                alert('Please complete the reCAPTCHA verification.');
+                return;
+            }
 const email = emailInput.value;
 const password = passwordInput.value;
 
