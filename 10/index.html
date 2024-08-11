@@ -154,22 +154,7 @@ const nameInput = document.getElementById('name');
 const progressContainer = document.getElementById('progress-container');
 const progressBar = document.getElementById('progress-bar');
 const deleteMessagesButton = document.getElementById('delete-messages');
-let recaptchaVerified = false;
 
-        // Render reCAPTCHA
-        const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-            'size': 'normal',
-            'callback': (response) => {
-                // reCAPTCHA selesai diverifikasi
-                recaptchaVerified = true;
-            },
-            'expired-callback': () => {
-                // reCAPTCHA kedaluwarsa
-                recaptchaVerified = false;
-                alert('reCAPTCHA expired. Please verify again.');
-            }
-        });
-        recaptchaVerifier.render();
 // Daftar kata kasar
 const badWords = [
   'k[0oui]n[t]*[o0ui]l',        // kontol, k0nt0l, konttol, dll.
@@ -342,26 +327,68 @@ db.ref('messages').child(oldestKey).remove();
 }
 
 // Event listener untuk form login
-loginForm.addEventListener('submit', function(event) {
-event.preventDefault();
-if (!recaptchaVerified) {
-                alert('Please complete the reCAPTCHA verification.');
-                return;
-            }
-const email = emailInput.value;
-const password = passwordInput.value;
+//loginForm.addEventListener('submit', function(event) {
+//event.preventDefault();
+//if (!recaptchaVerified) {
+                //alert('Please complete the reCAPTCHA verification.');
+  //              return;
+ //           }
+//const email = emailInput.value;
+//const password = passwordInput.value;
 
-auth.signInWithEmailAndPassword(email, password)
-.then(() => {
-loginContainer.style.display = 'none';
-chatContainer.style.display = 'block';
-displayMessages();
-})
-.catch(error => {
-console.error('Login failed:', error);
-alert('Login failed: ' + error.message);
-});
-});
+//auth.signInWithEmailAndPassword(email, password)
+//.then(() => {
+//loginContainer.style.display = 'none';
+//chatContainer.style.display = 'block';
+//displayMessages();
+//})
+//.catch(error => {
+//console.error('Login failed:', error);
+//alert('Login failed: ' + error.message);
+//});
+//});
+
+        // Inisialisasi reCAPTCHA
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            'size': 'normal',
+            'callback': (response) => {
+                // reCAPTCHA diverifikasi
+                console.log("reCAPTCHA verified");
+            },
+            'expired-callback': () => {
+                // reCAPTCHA kedaluwarsa
+                alert('reCAPTCHA expired. Please verify again.');
+            }
+        });
+
+        recaptchaVerifier.render();
+
+        // Handle form submission
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            
+            // Dapatkan token reCAPTCHA
+            recaptchaVerifier.verify().then(function (recaptchaToken) {
+                // Lanjutkan login dengan token reCAPTCHA
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        // Login berhasil, lanjutkan ke aplikasi
+                        loginContainer.style.display = 'none';
+                        chatContainer.style.display = 'block';
+                        displayMessages();
+                        alert('Login successful!');
+                    })
+                    .catch((error) => {
+                        console.error('Login failed:', error);
+                        alert('Login failed: ' + error.message);
+                    });
+            }).catch(function (error) {
+                console.error('reCAPTCHA failed:', error);
+                alert('Please complete the reCAPTCHA verification.');
+            });
+        });
 
 // Event listener untuk tombol sign up
 signUpButton.addEventListener('click', function(event) {
