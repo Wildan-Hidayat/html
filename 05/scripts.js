@@ -49,8 +49,3 @@ audioPlayer.addEventListener('ended', () => {
   const nextTrack = (currentTrack + 1) % playlistItems.length;
   loadTrack(nextTrack);
 });
-
-window.onload = ()=> {
-  alert("Terima Kasih Sudah Mampir Ini Adalah Daftar Musik Yang Menurut Saya Enak Didengar. Jangan Lupa Untuk Dukung Terus Pemilik Asli Dari Musik Ini <(^_^)> Jangan Di Sebar Luaskan Dengerin Sendiri Aja Untuk Tenangin Hati & Pikiran Meskipun Malah Jadi Tambah Pikiran Karena Kuota Takut Habis");
-  alert("Daftar Nama Artis: ")
-}
