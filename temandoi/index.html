@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kasih untuk teman / doi kamu 🥰</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .quiz-container {
+            background-color: transparent;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(555, 555, 555, 1);
+            border: 1px solid #fff;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #000;
+            text-transform: capitalize;
+            text-shadow: 0px 0px 5px white,0px 0px 5px white,0px 0px 5px white,0px 0px 5px white;
+        }
+
+        input[type="text"] {
+            outline: none;
+            color: #fff;
+            font-weight: bold;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: transparent;
+            box-shadow: 0 0 5px rgba(555, 555, 555, 1);
+            border: 1px solid #fff;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            box-shadow: 0 0 5px rgba(555, 555, 555, 1);
+            text-shadow: 0px 0px 5px white,0px 0px 5px white,0px 0px 5px white,0px 0px 5px white;
+            border: 1px solid #fff;
+            color: #000;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .dialog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .dialog.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dialog-box {
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 5px rgba(555, 555, 555, 1);
+            text-shadow: 0px 0px 5px white,0px 0px 5px white,0px 0px 5px white,0px 0px 5px white;
+            border: 1px solid #fff;
+            color: #000;
+            text-align: center;
+        }
+
+        .dialog-box button {
+            margin-top: 20px;
+        }
+        marquee {
+          position: fixed;
+          font-size: 50px;
+          top: 50px;
+          center: 0;
+          font-weight: bold;
+          text-align: center;
+          text-shadow: 0px 0px 5px green,0px 0px 5px lightgreen,0px 0px 5px white,0px 0px 5px white;
+          color: #000;
+          text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+<marquee behavior="scroll" direction="left" scrollamount="10">kasih untuk teman / doi kamu 🥰</marquee>
+<div class="quiz-container">
+    <!-- Halaman 1 -->
+    <div id="page1" class="page active">
+        <h1>nama aku di kontakmu? 🤔</h1>
+        <input type="text" id="jawaban1" placeholder="Masukkan jawaban disini..." onkeydown="handleEnter(event, 2, 'jawaban1')">
+        <button onclick="nextPage(2, 'jawaban1')">Lanjut</button>
+    </div>
+
+    <!-- Halaman 2 -->
+    <div id="page2" class="page">
+        <h1>siapa aku bagi kamu? 🤔</h1>
+        <input type="text" id="jawaban2" placeholder="Masukkan jawaban disini..." onkeydown="handleEnter(event, 3, 'jawaban2')">
+        <button onclick="nextPage(3, 'jawaban2')">Lanjut</button>
+    </div>
+
+    <!-- Halaman 3 -->
+    <div id="page3" class="page">
+        <h1>sifat aku yang paling kamu gak suka? 🤔</h1>
+        <input type="text" id="jawaban3" placeholder="Masukkan jawaban disini..." onkeydown="handleEnter(event, 4, 'jawaban3')">
+        <button onclick="nextPage(4, 'jawaban3')">Lanjut</button>
+    </div>
+
+    <!-- Halaman 4 -->
+    <div id="page4" class="page">
+        <h1>apa yang kamu suka dari aku? 🤔</h1>
+        <input type="text" id="jawaban4" placeholder="Masukkan jawaban disini..." onkeydown="handleEnter(event, 5, 'jawaban4')">
+        <button onclick="nextPage(5, 'jawaban4')">Lanjut</button>
+    </div>
+
+    <!-- Halaman 5 -->
+    <div id="page5" class="page">
+        <h1>makanan favorit aku? 🤔</h1>
+        <input type="text" id="jawaban5" placeholder="Masukkan jawaban disini..." onkeydown="handleEnter(event, 6, 'jawaban5')">
+        <button onclick="nextPage(6, 'jawaban5')">Lanjut</button>
+    </div>
+    
+    <!-- Halaman 6 -->
+    <div id="page6" class="page">
+        <h1>tulis 3 kata yang deskripsiin aku? 🤔</h1>
+        <input type="text" id="jawaban6" placeholder="Masukkan jawaban disini..." onkeydown="handleEnter(event)">
+        <button id="kirim" onclick="sendAndNextPage()">kirim</button>
+    </div>
+
+    <!-- Halaman 7 -->
+    <div id="page7" class="page">
+        <h1>Terima kasih!</h1>
+        <p>Jawaban kamu telah dikirim ke WhatsApp!</p>
+    </div>
+</div>
+
+<!-- Dialog Box -->
+<div id="dialog" class="dialog">
+    <div class="dialog-box">
+        <p>IHHH KAMU KO GITU<br/>KAMU GAK SAYANG AKU YA</p>
+        <button onclick="closeDialog()">Oke</button>
+    </div>
+</div>
+
+<script>
+    function nextPage(pageNumber, inputId) {
+        const jawaban = document.getElementById(inputId).value;
+
+        if (!jawaban) {
+            // Tampilkan dialog peringatan
+            document.getElementById('dialog').classList.add('active');
+            return;
+        }
+
+        // Sembunyikan semua halaman
+        var pages = document.querySelectorAll('.page');
+        pages.forEach(function(page) {
+            page.classList.remove('active');
+        });
+
+        // Tampilkan halaman yang sesuai dengan animasi
+        setTimeout(() => {
+            document.getElementById('page' + pageNumber).classList.add('active');
+        }, 500);
+    }
+
+    function sendAndNextPage() {
+        const jawaban1 = document.getElementById('jawaban1').value;
+        const jawaban2 = document.getElementById('jawaban2').value;
+        const jawaban3 = document.getElementById('jawaban3').value;
+        const jawaban4 = document.getElementById('jawaban4').value;
+        const jawaban5 = document.getElementById('jawaban5').value;
+        const jawaban6 = document.getElementById('jawaban6').value;
+
+        if (!jawaban1 || !jawaban2 || !jawaban3 || !jawaban4 || !jawaban5 || !jawaban6) {
+            // Tampilkan dialog peringatan jika ada jawaban yang kosong
+            document.getElementById('dialog').classList.add('active');
+            return;
+        }
+
+        const pesan = `-nama aku di kontakmu? 🤔 ${jawaban1}\n-siapa aku bagi kamu? 🤔 ${jawaban2}\n-sifat aku yang paling kamu gak suka? 🤔 ${jawaban3}\n-apa yang kamu suka dari aku? 🤔 ${jawaban4}\n-makanan favorit aku? 🤔 ${jawaban5}\n-tulis 3 kata yang deskripsiin aku? 🤔 ${jawaban6}`;
+        const encodedPesan = encodeURIComponent(pesan);
+
+        // Buka WhatsApp tanpa nomor spesifik, pengguna akan memilih kontak di aplikasi WhatsApp
+        const urlWhatsApp = `https://api.whatsapp.com/send?phone=&text=${encodedPesan}`;
+
+        // Buka WhatsApp dan kirim pesan
+        window.open(urlWhatsApp, '_blank');
+
+        // Pindah ke halaman terima kasih
+        nextPage(7);
+    }
+
+    function handleEnter(event, pageNumber, inputId) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            nextPage(pageNumber, inputId);
+        }
+    }
+
+    function closeDialog() {
+        document.getElementById('dialog').classList.remove('active');
+    }
+</script>
+
+</body>
+</html>
