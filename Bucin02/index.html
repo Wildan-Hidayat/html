@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bucin + Tembak</title>
+    <style>
+        body {
+            user-select: none;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fff5ee;
+            color: #ff69b4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            overflow: hidden;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        .container img {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: shake 1s infinite;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            animation: popIn 1s ease-in-out;
+        }
+
+        .heart {
+            font-size: 5rem;
+            animation: pulse 1s infinite;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            animation: bounce 1.5s infinite;
+            margin: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        button:hover {
+            background-color: #ff1493;
+        }
+
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ff69b4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            display: none;
+            z-index: 10;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .custom-alert p {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .custom-alert button {
+            background-color: white;
+            color: #ff69b4;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .custom-alert button:hover {
+            background-color: #ff1493;
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p class="heart">😍🥰</p>
+        <h1>Kamu tahu enggak?</h1>
+        <p class="heart" ontouchstart="startLongPress()" ontouchend="stopLongPress()" onmousedown="startLongPress()" onmouseup="stopLongPress()">💖</p>
+        <h1>Aku suka banget liat wajah imutmu setiap hari 😘</h1>
+        <button onclick="showAlert('Cieee... ada yang senyum nih! 😊')">Senyum dong!</button>
+        <button onclick="showAlert('Aduh, kamu bikin aku makin gemes aja! 😍')">Gemesin deh!</button>
+    </div>
+
+    <div id="customAlert" class="custom-alert">
+        <p id="alertMessage"></p>
+        <button onclick="hideAlert()">Oke deh!</button>
+    </div>
+
+    <script>
+        let longPressTimeout;
+
+        function startLongPress() {
+            longPressTimeout = setTimeout(function() {
+                showAlert("Ini rahasia, tapi... Aku sayang kamu lebih dari yang kamu tahu! 💕 <br/><br/> <b style='color:red;'>Apa Kamu Mau Jadi Pacar Ku ?</b>");
+            }, 1000); // Tahan selama 1 detik untuk memunculkan pesan rahasia
+        }
+
+        function stopLongPress() {
+            clearTimeout(longPressTimeout);
+        }
+        
+        function showAlert(message) {
+            document.getElementById("alertMessage").innerHTML = message;
+            document.getElementById("customAlert").style.display = 'block';
+        }
+
+        function hideAlert() {
+            document.getElementById("customAlert").style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
