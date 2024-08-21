@@ -1,133 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>buat sayang ku putri 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Playfair Display', serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #FFC0CB;
-            background-image: linear-gradient(to bottom, #FFC0CB, #FF69B4);
-            user-select: none;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MyLovers</title>
+    <meta name="description" content="Hanya Untuk Mu Kasih" />
+    <meta property="og:title" content="MyLovers" />
+    <meta property="og:description" content="Hanya Untuk Mu Kasih" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/F-HTML/f-html/main/thumbnail/20240821_103121.jpg" />
+    <meta property="og:url" content="https://github.com/F-HTML" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Great Vibes', cursive;
+      cursor: none;
+      user-select: none;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #FFC0CB;
+      background-image: linear-gradient(to bottom, #FFC0CB, #FF69B4);
+    }
 
-        .slider {
-            width: 100%;
-            max-width: 95vw;
-            overflow: hidden;
-            border-radius: 15px;
-            border: 1px solid #fff;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-            touch-action: pan-y;
-            position: relative;
-        }
+    .slider {
+      width: 100%;
+      max-width: 95vw;
+      overflow: hidden;
+      border-radius: 15px;
+      border: 1px solid #fff;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      touch-action: pan-y;
+      position: relative;
+    }
 
-        .slides {
-            display: flex;
-            max-height: 85vh;
-            transition: transform 0.7s ease-in-out;
-        }
+    .slides {
+      display: flex;
+      max-height: 85vh;
+      transition: transform 0.7s ease-in-out;
+    }
 
-        .slide {
-            min-width: 100%;
-            font-family: 'Dancing Script', cursive;
-            overflow-y: auto;
-            font-weight: 600;
-            box-sizing: border-box;
-            padding: 30px;
-            background-color: rgba(255, 255, 255, 0.4);
-            text-align: center;
-            font-size: 1.5em;
-            color: #333;
-            border-radius: 15px;
-            letter-spacing: 0.05em;
-            line-height: 1.6;
-        }
+    .slide {
+      min-width: 100%;
+      overflow-y: auto;
+      font-weight: 400;
+      box-sizing: border-box;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.4);
+      text-align: center;
+      font-size: 1.5em;
+      color: #333;
+      border-radius: 15px;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+    }
 
-        .indicator {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
+    .indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 2px;
+    }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-        }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
 
-        .dot.active {
-            background-color: #FF69B4;
-        }
-    </style>
+    .dot.active {
+      background-color: #FF69B4;
+    }
+
+    .modal-welcome, .modal-surprise {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeOut 1s ease-in-out;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content {
+      font-size: 1.5em;
+    }
+
+    .hearts {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .heart {
+      font-size: 2rem;
+      transition: transform 0.2s ease;
+    }
+
+    .heart:hover {
+      transform: scale(1.2);
+    }
+
+    .heart.clicked {
+      visibility: hidden;
+    }
+    .startButton {
+      font-size: 2em;
+      background: none;
+      border: none;
+    }
+    .particle {
+      position: fixed;
+      bottom: 0;
+      font-size: 1em;
+      color: #ff6f61;
+      opacity: 0.8;
+      animation: fall 20s linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+    @keyframes fadeOut {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    h2 {
+      position: fixed;
+      center: 0px;
+      opacity: 0.8;
+      color: pink;
+      font-size: 3.5em;
+      z-index: -1;
+      text-align: center;
+      -webkit-text-stroke: 0.5px red;
+    }
+  </style>
 </head>
 <body>
-    <div class="slider" id="slider">
-        <div class="slides" id="slides">
-            <div class="slide">Assalamualaikum. Hari ini, seperti biasa, aku menunggu pesan darimu...</div>
-            <div class="slide">Aku tahu kita belum pernah bertemu, namun entah mengapa aku merasa seolah telah mengenalmu...</div>
-            <div class="slide">Setiap hari berlalu dengan rindu yang semakin mendalam...</div>
-            <div class="slide">Saat malam tiba dan keheningan menyelimuti, pikiranku selalu tertuju padamu...</div>
-            <div class="slide">Aku selalu menghitung hari hingga kita bisa berbicara lagi...</div>
-        </div>
-        <div class="indicator" id="indicator"></div>
+  <h2>I Love You<br />Putri</h2>
+<!-- Modal Sambutan -->
+<div class="modal-welcome" id="welcomeModal">
+  <div class="modal-content">
+    <p>
+      Selamat datang, Cintaku! 💖
+    </p>
+    <button class="startButton" id="startButton">💖</button>
+  </div>
+</div>
+<!-- Modal Kejutan -->
+<div class="modal-surprise" id="surpriseModal">
+  <div class="modal-content">
+    <p>
+      Kejutannya adalah... Aku sangat mencintaimu! ❤️
+    </p>
+    <button id="closeSurprise">Tutup</button>
+  </div>
+</div>
+<div class="slider" id="slider">
+  <div class="slides" id="slides">
+    <div class="slide">
+      Assalamualaikum. Hari ini, seperti biasa, aku menunggu pesan darimu. Setiap kata yang kau kirimkan adalah penyejuk hatiku.
     </div>
+    <div class="slide">
+      Aku tahu kita belum pernah bertemu, tapi rasanya aku telah mengenalmu seumur hidup. Setiap percakapan kita adalah kebahagiaan tersendiri.
+    </div>
+    <div class="slide">
+      Waktu terus berjalan, dan rinduku padamu semakin dalam. Setiap hari terasa sepi tanpamu di sisiku.
+    </div>
+    <div class="slide">
+      Saat malam tiba dan keheningan menyelimuti, pikiranku selalu tertuju padamu. Kau adalah cahaya dalam gelapku.
+    </div>
+    <div class="slide">
+      Setiap kali kita berbicara, ada getaran di hatiku. Aku ingin mendengar suaramu yang lembut setiap saat.
+    </div>
+    <div class="slide">
+      Meskipun jarak memisahkan kita, hatiku selalu merasa dekat denganmu. Kamu adalah bagian terindah dalam hidupku.
+    </div>
+    <div class="slide">
+      Aku selalu berharap, suatu hari nanti, kita bisa berjalan berdampingan, menggenggam tangan, dan menikmati kebersamaan.
+    </div>
+    <div class="slide">
+      Setiap malam, aku berdoa agar Tuhan mempertemukan kita. Karena hanya denganmu aku merasa sempurna.
+    </div>
+    <div class="slide">
+      Kamu adalah alasan aku tersenyum setiap pagi. Kehadiranmu adalah berkah yang tak ternilai.
+    </div>
+    <div class="slide">
+      Aku tak sabar menunggu saat kita bisa bersama. Sampai hari itu tiba, aku akan selalu menyimpan rindu ini dalam hatiku.
+    </div>
+    <div class="slide">
+      Ketika dunia terasa berat, mengingatmu membuat semua beban terasa ringan. Kamu adalah sumber kekuatanku.
+    </div>
+    <div class="slide">
+      Setiap kali aku merasa ragu, cinta kita selalu menjadi jawaban. Kamu adalah satu-satunya yang aku inginkan.
+    </div>
+    <div class="slide">
+      Malam ini, aku kembali merindukanmu. Hanya bayanganmu yang bisa menenangkanku.
+    </div>
+    <div class="slide">
+      Setiap hari, aku semakin yakin bahwa kita ditakdirkan untuk bersama. Kamu adalah segalanya bagiku.
+    </div>
+    <div class="slide">
+      Cinta kita adalah anugerah yang paling indah. Aku bersyukur setiap hari karena memilikimu di hatiku.
+    </div>
+    <div class="slide">
+      Aku ingin menjadi alasan senyummu, sebagaimana kamu adalah alasan senyumku. Bersama kita akan menghadapi segala hal.
+    </div>
+    <div class="slide">
+      Jika aku bisa, aku akan menghabiskan setiap detik bersamamu. Namun, sampai saat itu tiba, aku akan selalu merindukanmu.
+    </div>
+    <div class="slide">
+      Tidak ada yang lebih membahagiakan daripada mengetahui bahwa aku memiliki seseorang sepertimu dalam hidupku.
+    </div>
+    <div class="slide">
+      Aku tidak tahu apa yang akan terjadi di masa depan, tapi aku tahu satu hal: aku ingin kau selalu ada di sisiku.
+    </div>
+    <div class="slide">
+      Aku selalu menghitung hari hingga kita bisa berbicara lagi. Sampai saat itu tiba, aku hanya bisa mengungkapkan rasa ini dengan penuh cinta.
+      <div class="hearts">
+        <div class="heart">
+          ❤️
+        </div>
+        <div class="heart">
+          ❤️
+        </div>
+        <div class="heart">
+          ❤️
+        </div>
+        <div class="heart">
+          ❤️
+        </div>
+        <div class="heart">
+          ❤️
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="indicator" id="indicator"></div>
+</div>
 
-    <script>
-        const slider = document.getElementById('slider');
-        const slides = document.getElementById('slides');
-        const totalSlides = document.querySelectorAll('.slide').length;
-        const indicator = document.getElementById('indicator');
-        let startX, currentX, slideIndex = 0;
+<script>
+  const slider = document.getElementById('slider');
+  const slides = document.getElementById('slides');
+  const totalSlides = document.querySelectorAll('.slide').length;
+  const indicator = document.getElementById('indicator');
+  const hearts = document.querySelectorAll('.heart');
+  const welcomeModal = document.getElementById('welcomeModal');
+  const startButton = document.getElementById('startButton');
+  const surpriseModal = document.getElementById('surpriseModal');
+  const closeSurprise = document.getElementById('closeSurprise');
+  let startX, currentX, slideIndex = 0;
 
-        // Create dots
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            indicator.appendChild(dot);
-        }
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    indicator.appendChild(dot);
+  }
 
-        const dots = document.querySelectorAll('.dot');
+  const dots = document.querySelectorAll('.dot');
 
-        const updateIndicator = () => {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === slideIndex);
-            });
-        };
+  const updateIndicator = () => {
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === slideIndex);
+    });
+  };
 
-        window.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
+  window.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
 
-        window.addEventListener('touchmove', (e) => {
-            currentX = e.touches[0].clientX;
-            const deltaX = currentX - startX;
-            slides.style.transform = `translateX(${-slideIndex * 100 + deltaX / slider.clientWidth * 100}%)`;
-        });
+  window.addEventListener('touchmove', (e) => {
+    currentX = e.touches[0].clientX;
+    const deltaX = currentX - startX;
+    slides.style.transform = `translateX(${-slideIndex * 100 + deltaX / slider.clientWidth * 100}%)`;
+  });
 
-        window.addEventListener('touchend', (e) => {
-            const deltaX = e.changedTouches[0].clientX - startX;
-            if (deltaX > 50 && slideIndex > 0) {
-                slideIndex--;
-            } else if (deltaX < -50 && slideIndex < totalSlides - 1) {
-                slideIndex++;
-            }
-            slides.style.transform = `translateX(-${slideIndex * 100}%)`;
-            updateIndicator();
-        });
-    </script>
+  window.addEventListener('touchend', (e) => {
+    const deltaX = e.changedTouches[0].clientX - startX;
+    if (deltaX > 50 && slideIndex > 0) {
+      slideIndex--;
+    } else if (deltaX < -50 && slideIndex < totalSlides - 1) {
+      slideIndex++;
+    }
+    slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    updateIndicator();
+  });
+
+  // Show the welcome modal on page load
+  window.addEventListener('load', () => {
+    welcomeModal.style.display = 'flex';
+  });
+
+  // Close the welcome modal and start the slider
+  startButton.addEventListener('click', () => {
+    welcomeModal.style.display = 'none';
+  });
+
+  // Function to check if all hearts are clicked
+  function checkAllHeartsClicked() {
+    const clickedHearts = document.querySelectorAll('.heart.clicked').length;
+    if (clickedHearts === hearts.length) {
+      surpriseModal.style.display = 'flex';
+    }
+  }
+
+  hearts.forEach(heart => {
+    heart.addEventListener('click', () => {
+      heart.classList.add('clicked');
+      checkAllHeartsClicked();
+    });
+  });
+
+  function createParticles() {
+    const numberOfParticles = 50;
+    for (let i = 0; i < numberOfParticles; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.textContent = '💖';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = Math.random() * 2 + 3 + 's';
+      document.body.appendChild(particle);
+
+      // Remove particle after animation
+      particle.addEventListener('animationend', () => {
+        particle.remove();
+      });
+    }
+  }
+  window.onload = ()=> {
+    createParticles()
+  }
+  // Close the surprise modal
+  closeSurprise.addEventListener('click', () => {
+    surpriseModal.style.display = 'none';
+  });
+</script>
 </body>
 </html>
