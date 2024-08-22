@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8" />
+         <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>undangan pernikahan v1.5</title>
+    <title>undangan pernikahan v2.0</title>
     <meta name="description" content="jangan lupa untuk hadir" />
-    <meta property="og:title" content="undangan pernikahan v1.5" />
+    <meta property="og:title" content="undangan pernikahan v2.0" />
     <meta property="og:description" content="jangan lupa untuk hadir" />
     <meta property="og:image" content="https://raw.githubusercontent.com/F-HTML/f-html/main/thumbnail/undangan.jpg" />
     <meta property="og:url" content="https://github.com/F-HTML" />
@@ -13,17 +13,17 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@300&family=Playfair+Display:wght@700&family=Lora:wght@400;500&display=swap');
-        @keyframes klip {
-            0% { opacity: 0.0; }
-            100% { opacity: 1.0; }
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap');
+        * {
+          cursor: none;
+          user-select: none;
         }
         body {
-            user-select: none;
-            font-family: 'Lora', serif;
+            font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            background: url('f2.gif') no-repeat center center fixed;
+            background-size: cover;
             color: #333;
             display: flex;
             align-items: center;
@@ -31,138 +31,132 @@
             height: 100vh;
             overflow: hidden;
         }
+
         .container {
             max-width: 500px;
             width: 100%;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             text-align: center;
             position: relative;
-            opacity: 0;
-            transform: translateY(50px);
             animation: fadeInUp 1.5s forwards;
         }
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .header {
-            font-size: 28px;
+            font-size: 36px;
             font-family: 'Great Vibes', cursive;
-            color: #d32f2f;
-            opacity: 0;
-            transform: translateY(-20px);
+            color: #c94c4c;
+            margin-bottom: 10px;
             animation: fadeInDown 1.5s 0.5s forwards;
         }
+
         @keyframes fadeInDown {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .bride-groom {
-            font-size: 24px;
+            font-size: 28px;
             margin: 15px 0;
-            font-family: 'Playfair Display', serif;
-            color: #d32f2f;
+            color: #c94c4c;
+            animation: fadeIn 1.5s 1s forwards;
         }
+
         .date-time,
         .venue,
         .additional-info {
-            font-size: 16px;
+            font-size: 18px;
             margin: 10px 0;
             color: #555;
-            font-family: 'Lora', serif;
-            opacity: 0;
-            animation: fadeIn 1s 1s forwards;
+            animation: fadeIn 1.5s 1.5s forwards;
         }
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
+
         .rsvp {
-            font-size: 14px;
+            font-size: 16px;
             margin-top: 20px;
-            color: #d32f2f;
-            font-family: 'Lora', serif;
-            opacity: 0;
-            animation: fadeIn 1s 1.5s forwards;
+            color: #c94c4c;
+            animation: fadeIn 1.5s 2s forwards;
         }
+
         .footer {
             margin-top: 15px;
-            font-size: 12px;
+            font-size: 14px;
             color: #777;
-            font-family: 'Lora', serif;
-            opacity: 0;
-            animation: fadeIn 1s 2s forwards;
+            animation: fadeIn 1.5s 2.5s forwards;
         }
-        .heart {
-            color: #d32f2f;
-            font-size: 20px;
-        }
+
         .photos {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-            opacity: 0;
-            animation: fadeIn 1s 0.5s forwards;
+            gap: 15px;
+            margin: 20px 0;
+            animation: fadeIn 1.5s 1s forwards;
         }
+
         .photos img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #d32f2f;
+            border: 2px solid #c94c4c;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transform: scale(0);
-            animation: popIn 1s 0.5s forwards;
+            animation: popIn 1.5s 1.5s forwards;
         }
+
         @keyframes popIn {
             to {
                 transform: scale(1);
             }
         }
+
         .flower {
             position: absolute;
             width: 70px;
             height: 70px;
-            background-size: 100% 100%;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: pink;
-            border-radius: 70px;
+            background-size: cover;
+            border-radius: 50%;
         }
+
         .flower.top-left {
             top: -15px;
             left: -15px;
             background-image: url('f1.gif');
             animation: fadeInRotate 2s 0.5s forwards;
         }
+
         .flower.top-right {
             top: -15px;
             right: -15px;
             background-image: url('f2.gif');
             animation: fadeInRotate 2s 0.5s forwards;
         }
+
         .flower.bottom-left {
             bottom: -15px;
             left: -15px;
             background-image: url('f3.gif');
             animation: fadeInRotate 2s 0.5s forwards;
         }
+
         .flower.bottom-right {
             bottom: -15px;
             right: -15px;
             background-image: url('f4.gif');
             animation: fadeInRotate 2s 0.5s forwards;
         }
+
         @keyframes fadeInRotate {
             from {
                 opacity: 0;
@@ -173,19 +167,22 @@
                 transform: rotate(0);
             }
         }
+
         .open-popup {
-            color: #d32f2f;
-            padding: 8px 16px;
-            font-size: 14px;
-            cursor: pointer;
+            color: #c94c4c;
+            padding: 10px 20px;
+            font-size: 16px;
             animation: klip 2s linear infinite;
         }
+
         .open-popup:after {
             content: " *";
         }
+
         .open-popup:before {
             content: "* ";
         }
+
         .popup {
             display: none;
             position: fixed;
@@ -198,20 +195,23 @@
             align-items: center;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
+
         .popup.show {
             display: flex;
             opacity: 1;
         }
+
         .popup-content {
             background: #fff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
-            width: 80%;
+            width: 90%;
             max-width: 600px;
             position: relative;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             animation: scaleUp 0.5s ease-out;
         }
+
         @keyframes scaleUp {
             from {
                 transform: scale(0.8);
@@ -222,62 +222,65 @@
                 opacity: 1;
             }
         }
+
         .close-popup {
             position: absolute;
             top: 10px;
             right: 10px;
             font-size: 24px;
-            cursor: pointer;
             color: #333;
             transition: color 0.3s;
         }
+
         .close-popup:hover {
-            color: #d32f2f;
+            color: #c94c4c;
         }
+
         .popup-content h2 {
-            font-family: 'Playfair Display', serif;
-            color: #d32f2f;
+            font-family: 'Great Vibes', cursive;
+            color: #c94c4c;
+            font-size: 36px;
         }
+
         .popup-content p {
-          font-size: 1.5em;
+            font-size: 1.5em;
+            font-family: 'Playfair Display', serif;
         }
+
         .popup-content ul {
             list-style-type: none;
             padding: 0;
         }
+
         .popup-content ul li {
             margin-bottom: 10px;
         }
+
         @media (max-width: 600px) {
             .container {
                 margin: 20px;
                 padding: 15px;
             }
             .header {
-                font-size: 24px;
+                font-size: 30px;
             }
             .bride-groom {
-                font-size: 20px;
+                font-size: 24px;
             }
             .date-time,
             .venue,
             .additional-info {
-                font-size: 14px;
+                font-size: 16px;
             }
             .rsvp {
-                font-size: 12px;
+                font-size: 14px;
             }
             .footer {
-                font-size: 10px;
+                font-size: 12px;
             }
             .photos img {
                 width: 100px;
                 height: 100px;
-                background-size: 100% 100%;
-                background-attachment: fixed;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-color: pink;
             }
             .flower {
                 width: 50px;
@@ -292,69 +295,51 @@
         <div class="flower top-right"></div>
         <div class="flower bottom-left"></div>
         <div class="flower bottom-right"></div>
-        <div class="header">Undangan</div>
+        <div class="header">Undangan Pernikahan</div>
+        <div class="bride-groom">Peria & Wanita</div>
+        <div class="date-time">Sabtu, 24 Agustus 2024, 15:00 WIB</div>
+        <div class="venue">The Grand Ballroom, Jakarta</div>
+        <div class="additional-info">Resepsi akan menyusul</div>
+        
         <div class="photos">
-            <img src="icon2.gif" alt="peria">
-            <img src="icon1.gif" alt="wanita">
+            <img src="icon2.gif" alt="Peria">
+            <img src="icon1.gif" alt="Wanita">
         </div>
-        <div class="bride-groom">
-            <p>Nama pria <span class="heart">&hearts;</span> Nama wanita</p>
-            <p>Akan Menikah</p>
-        </div>
-        <div class="date-time">
-            <p>Hari, Bulan 1, 2030</p>
-            <p>Jam 12:00 WIB</p>
-        </div>
-        <div class="venue">
-            <p>Tempat Dilaksanakan</p>
-            <p>123 Jalan Pernikahan, Kota, Negara</p>
-        </div>
-        <div class="additional-info">
-            <p><b>Kepada Yth, Bapak/Ibu/Saudara/i:</b> ?</p>
-        </div>
+        
         <div class="rsvp">
-            
+            Harap konfirmasi kehadiran sebelum 10 Agustus 2024 <br>
+            Kontak: Isi Sendiri Ya
         </div>
-        <div class="footer">
-            <p>Kami menantikan untuk merayakannya bersama Anda!</p>
-        </div>
-        <span class="open-popup">Keterangan lebih lanjut</span>
+
+        <div class="footer">Kami tidak sabar untuk merayakan hari bahagia ini bersama Anda!</div>
+        
+        <div class="open-popup" onclick="showPopup()">Klik di sini untuk info lebih lanjut</div>
     </div>
-    <div id="popup" class="popup">
+    
+    <div class="popup" id="popup">
         <div class="popup-content">
-            <span class="close-popup" id="close-popup">&times;</span>
-            <h2>informasi tambahan</h2>
-            <p>ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</p>
-            <p>وَالَّذِيْنَ يَقُوْلُوْنَ رَبَّنَا هَبْ لَنَا مِنْ اَزْوَاجِنَا وَذُرِّيّٰتِنَا قُرَّةَ اَعْيُنٍ وَّاجْعَلْنَا لِلْمُتَّقِيْنَ اِمَامًا (Al-Furqon Ayat 74)</p>
+            <span class="close-popup" onclick="closePopup()">&times;</span>
+            <h2>Detail Pernikahan</h2>
+            <p>Bergabunglah bersama kami dalam merayakan cinta kami saat kami memulai babak baru bersama.</p>
             <ul>
-                <li><b>Turut mengundang:</b> ?</li>
-                <li><b>Acara:</b> ?</li>
-                <li><b>Hormat kami:</b> ?</li>
+                <li><strong>Lokasi:</strong> The Grand Ballroom, Jakarta</li>
+                <li><strong>Tanggal:</strong> 24 Agustus 2024</li>
+                <li><strong>Waktu:</strong> 15:00 WIB</li>
+                <li><strong>Dress Code:</strong> Formal</li>
+                <li><strong>Konfirmasi Kehadiran:</strong> Harap konfirmasi kehadiran Anda sebelum 10 Agustus 2024.</li>
             </ul>
+            <p>Terima kasih telah berbagi hari istimewa ini bersama kami!</p>
         </div>
     </div>
+
     <script>
-        // Ambil elemen
-        const openPopupButton = document.querySelector('.open-popup');
-        const popup = document.getElementById('popup');
-        const closePopupButton = document.getElementById('close-popup');
+        function showPopup() {
+            document.getElementById('popup').classList.add('show');
+        }
 
-        // Buka popup
-        openPopupButton.addEventListener('click', () => {
-            popup.classList.add('show');
-        });
-
-        // Tutup popup
-        closePopupButton.addEventListener('click', () => {
-            popup.classList.remove('show');
-        });
-
-        // Tutup popup jika klik di luar area popup
-        window.addEventListener('click', (event) => {
-            if (event.target === popup) {
-                popup.classList.remove('show');
-            }
-        });
+        function closePopup() {
+            document.getElementById('popup').classList.remove('show');
+        }
     </script>
 </body>
 </html>
