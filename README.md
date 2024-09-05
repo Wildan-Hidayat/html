@@ -9,3 +9,13 @@
 8. https://wildan-hidayat.github.io/html/08/
 9. https://wildan-hidayat.github.io/html/09/
 10. https://wildan-hidayat.github.io/html/10/
+11. https://wildan-hidayat.github.io/html/11/
+12. https://wildan-hidayat.github.io/html/12/
+13. https://wildan-hidayat.github.io/html/13/
+14. https://wildan-hidayat.github.io/html/14/
+15. https://wildan-hidayat.github.io/html/15/
+16. https://wildan-hidayat.github.io/html/16/
+17. https://wildan-hidayat.github.io/html/17/
+18. https://wildan-hidayat.github.io/html/18/
+19. https://wildan-hidayat.github.io/html/19/
+20. https://wildan-hidayat.github.io/html/20/
