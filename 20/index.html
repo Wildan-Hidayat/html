@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rindu ❤️ LDR</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:wght@300&display=swap');
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: linear-gradient(to right, #ffafbd, #ffc3a0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      user-select: none;
+    }
+    .container {
+      width: 100vw;
+      height: 100vh;
+      background-image: url('20240903_084346.jpg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: fixed;
+      border-radius: 0px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: all 5s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+    }
+    .header {
+      background-color: rgba(255, 111, 97, 0.5);
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+      font-size: 8vw;
+      font-family: 'Great Vibes', cursive;
+      letter-spacing: 2px;
+      flex-shrink: 0;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+      animation: pulse 2s infinite;
+    }
+    .content {
+      flex-grow: 1;
+      padding: 5vw;
+      display: none;
+      font-size: 5vw;
+      color: #555;
+      line-height: 1.8;
+      font-family: 'Raleway', sans-serif;
+      opacity: 0;
+      transition: opacity 1s ease, transform 5s ease;
+      overflow-y: auto;
+      transform: scale(0.95);
+    }
+    .content p {
+      text-transform: capitalize;
+      font-weight: bold;
+      padding-left: 5px;
+      padding-right: 5px;
+      border-radius: 10px 0px 10px 0px;
+      background-color: rgba(0, 0, 0, 0.3);
+      color: #eee;
+      margin: 10px 0;
+    }
+    strong {
+      color: lightblue;
+    }
+    .toggle-btn {
+      background-color: rgba(255, 111, 97, 0.5);
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 7vw;
+      font-family: 'Great Vibes', cursive;
+      letter-spacing: 2px;
+      transition: background-color 5s ease, transform 5s ease;
+      border-top: 1px solid rgba(255, 75, 71, 0.5);
+      flex-shrink: 0;
+    }
+    .toggle-btn:hover {
+      background-color: rgba(255, 75, 71, 0.5);
+      transform: scale(1.05);
+    }
+    .heart-icon {
+      font-size: 7vw;
+      margin-right: 10px;
+      vertical-align: middle;
+      animation: heartbeat 1.5s infinite;
+    }
+    .fade-in {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+      }
+      50% {
+        text-shadow: 0 0 16px rgba(255, 255, 255, 1);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    /* Media Queries untuk layar besar */
+    @media (min-width: 600px) {
+      .header {
+        font-size: 30px;
+      }
+      .content {
+        font-size: 20px;
+        padding: 20px;
+      }
+      .toggle-btn {
+        font-size: 22px;
+      }
+      .heart-icon {
+        font-size: 28px;
+      }
+    }
+      .warning {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 10px;
+        width: 90%;
+        color: #fff;
+        text-align: center;
+        font-size: 8vw;
+        font-family: 'Great Vibes', cursive;
+        letter-spacing: 2px;
+        flex-shrink: 0;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        animation: pulse 2s infinite;
+      }
+  </style>
+</head>
+<body id="body">
+  <script>
+    var targetTime = new Date("2024-09-06T18:00:00");
+    function checkTime() {
+      var nows = new Date();
+      if (nows < targetTime) {
+        document.getElementById("body").innerHTML = '<div class="container" id="container"><div class="header">Rindu ❤️ LDR<br/><div id="time">Loading...</div></div><div class="toggle-btn" id="bukaPesan"><span class="heart-icon">💖</span>Buka Pesan</div><div class="content" id="content"><p>Assalamualaikum Sayang,</p><p>Ketika malam tiba dan sepi merayap masuk ke dalam hatiku, aku selalu teringat padamu. Jarak yang memisahkan kita terkadang terasa begitu menyakitkan, namun aku percaya kepada-nya akan selalu kuat menghadapi segala cobaan.</p><p>Aku merindukanmu, senyummu, dan kehadiranmu di sisiku. Ada begitu banyak hal yang ingin aku lakukan, begitu banyak momen yang ingin aku bagikan denganmu. Tapi sekarang, yang bisa aku lakukan hanya menulis pesan ini dengan harapan kamu merasakan bahagia.</p><p>Hari-hari tanpa hadirmu di sini terasa begitu panjang. Aku merindukan setiap detik yang pernah kita habiskan bersama, dan aku berharap waktu dapat berlari lebih cepat agar kita segera dipertemukan.</p><p>Namun di tengah kerinduan ini, aku selalu mencoba untuk tetap kuat, karena aku tahu, di ujung jalan ini, ada pertemuan yang telah kita tunggu-tunggu. Kita hanya perlu bersabar, meski hati ini terkadang terasa berat untuk menahan semua rindu.</p><p>Sayang, yakinlah suatu hari nanti kita akan hidup bersama dan bahagia. Aku selalu berdoa untukmu, berharap kamu selalu dalam lindungan-Nya dan semoga semua yang kita impikan dapat segera terwujud.</p><p>Di sini, aku akan terus menunggumu, dengan hati yang penuh cinta dan rindu yang tak pernah padam. Hingga saat itu tiba, aku akan menjaga hatiku hanya untukmu.</p><p>Sampai kita bertemu, jaga dirimu baik-baik. Aku menyayangimu, lebih dari apa yang kata-kata bisa ungkapkan.</p><p>Dengan penuh rindu, <strong>Wildan Hidayat</strong></p><p><strong>harapanku</strong><br/>semoga hubungan ini berjalan sampai akhir hidup tidak ada kata berpisah dan saling melengkapi segala kekurangan masing-masing ini hanya keinginan tapi semua tergantung padanya.<br/>aku tidak tau kenapa sayang menyukai orang sepertiku yang tidak memiliki kekayaan & tidak pintar, tapi aku sangat bersukur ada orang seperti sayang yang ingin nerima orang sepertiku, aku tidak berani berkata seperti ini maaf karena aku malu dan suka sedih.</p></div></div><audio id="romanticMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" loop></audio>';
+        script();
+      } else {
+        document.getElementById("body").innerHTML = '<div class="warning">Rindu ❤️ LDR</div>';
+      }
+    }
+    checkTime();
+    function script() {
+      const startDate = new Date("2024-08-18T22:30:00");
+      function updateTime() {
+        const now = new Date();
+        const diff = now - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        document.getElementById("time").innerHTML =
+        `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+      document.getElementById("bukaPesan").onclick = ()=> {
+        var content = document.getElementById("content");
+        var music = document.getElementById("romanticMusic");
+        var bukaPesan = document.getElementById('bukaPesan');
+        var container = document.getElementById('container');
+        if (content.style.display === "block") {
+          content.classList.remove("fade-in");
+          setTimeout(function() {
+            content.style.display = "none";
+            bukaPesan.innerHTML = "<span class='heart-icon'>💖</span>Buka Pesan";
+            container.style.backgroundImage = "url('20240903_084346.jpg')";
+          }, 500);
+          music.pause();
+          music.currentTime = 0;
+        } else {
+          content.style.display = "block";
+          setTimeout(function() {
+            content.classList.add("fade-in");
+            bukaPesan.innerHTML = "<span class='heart-icon'>💖</span>Tutup Pesan";
+            container.style.backgroundImage = "url('20240903_084512.jpg')";
+          }, 10);
+          music.play();
+        }
+      }
+    }
+  </script>
+</body>
+</html>
