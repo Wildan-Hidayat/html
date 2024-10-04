@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cerita Rakyat Indonesia</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0px;
+      padding: 0px;
+      background: #ccc;
+      color: #444;
+      line-height: 1.6;
+      text-transform: capitalize;
+      user-select: none;
+    }
+
+    header {
+      background: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      margin: 0px;
+      font-size: 24px;
+    }
+
+    .navBar {
+      height: 100%;
+      max-height: 100vh; /* Pastikan navBar tidak melebihi tinggi viewport */
+      width: 0px;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      background-color: #111;
+      overflow-x: hidden;
+      overflow-y: auto; /* Tambahkan ini untuk scroll vertikal */
+      transition: 0.5s;
+      padding: 0px;
+      box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .navBar h2 {
+      width: 100%;
+      text-align: center;
+      margin: 0px;
+      font-size: 24px;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .navBar ul {
+      list-style-type: none;
+      padding: 0px;
+      margin: 0px; /* Pastikan tidak ada margin */
+    }
+
+    .navBar ul li {
+      padding: 15px 25px;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .navBar ul li a {
+      color: #818181;
+      text-decoration: none;
+    }
+
+    .navBar ul li:hover a {
+      color: white;
+    }
+
+    .navButton {
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+      padding: 10px;
+    }
+
+    #contentContainer {
+      margin: 20px;
+      padding: 16px;
+      background: #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: margin-left 0.5s;
+    }
+
+    #storyContent h2 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    #storyContent p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .fade {
+      animation: fadeEffect 0.5s;
+    }
+
+    @keyframes fadeEffect {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .navBar ul li {
+        font-size: 18px;
+        padding: 10px;
+      }
+      .navButton {
+        font-size: 18px;
+      }
+      header h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button type="button" onclick="openNav()" class="navButton">☰</button>
+    <h1>cerita rakyat indonesia</h1>
+  </header>
+  <div id="navBar" class="navBar">
+    <h2>daftar cerita</h2>
+    <ul id="storyList">
+            <li><a href="#" onclick="showStory('malinKundang')">malin kundang (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('sangkuriang')">sangkuriang (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">timun mas (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">roro jonggrang (yogyakarta)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda danau toba (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">ande-ande lumut (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda batu menangis (kalimantan barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">bawang merah bawang putih (riau)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita panji (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">si pitung (jakarta)</a></li>
+            <li><a href="#" onclick="showStory('empty')">nyi roro kidul (jawa)</a></li>
+            <li><a href="#" onclick="showStory('empty')">keong mas (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">lutung kasarung (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">jaka tarub (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda telaga warna (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda rawa pening (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">si tanggang (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda pulau kemaro (sumatera selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cindelaras (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gunung tangkuban perahu (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat minang (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gajah mada (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda prambanan (yogyakarta)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gunung merapi (yogyakarta)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gunung kerinci (jambi)</a></li>
+            <li><a href="#" onclick="showStory('empty')">la galigo (sulawesi selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">siti nurbaya (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">i la galigo (sulawesi selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">telaga biru (kalimantan selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">asal mula nama banyuwangi (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">batu belah batu bertangkup (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">putri hijau (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda tujuh putri bidadari (riau)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda pulau siantan (kepulauan riau)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda danau singkarak (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">putri duyung (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda pantai ngliyep (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda pulau weh (aceh)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita loro blonyo (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">hikayat hang tuah (riau)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita anak gunung (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda batu gantung (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">putri pinang masak (kalimantan tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gunung batok (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda pulau bawean (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">hikayat si miskin (riau)</a></li>
+            <li><a href="#" onclick="showStory('empty')">asal mula kota surabaya (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita dewi sri (jawa)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda batu malin kundang (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita pandawa lima (jawa)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda putri nyale (lombok)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda naga basuki (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat irian jaya (papua)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda pulau seribu (jakarta)</a></li>
+            <li><a href="#" onclick="showStory('empty')">hikayat merong mahawangsa (kalimantan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita pak belalang (sumatera)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gunung slamet (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita ande-ande lumut (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda pulau samosir (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita nyi roro kidul (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda batu baga (bali)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita kebo iwa (bali)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita panji asmara bangun (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda danau sentarum (kalimantan barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita anak durhaka (sumatera)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gunung rinjani (lombok)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita si kabayan (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda batu kuya (kalimantan selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita si mata empat (papua)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda gua macan (jawa barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita pangeran diponegoro (yogyakarta)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda bukit siguntang (sumatera selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat aceh (aceh)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat bali (bali)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda raja balikpapan (kalimantan timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita teluk labuhan batu (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda danau maninjau (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat flores (nusa tenggara timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat maluku (maluku)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita dewi lanjar (jawa tengah)</a></li>
+            <li><a href="#" onclick="showStory('empty')">legenda danau limboto (gorontalo)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat sumba (nusa tenggara timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat batak (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat bugis (sulawesi selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat minahasa (sulawesi utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat ambon (maluku)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat toraja (sulawesi selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat lampung (lampung)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat banten (banten)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat madura (jawa timur)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat nias (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat tapanuli (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat banjar (kalimantan selatan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat dayak (kalimantan)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat mentawai (sumatera barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat nusa penida (bali)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat raja ampat (papua barat)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat asmat (papua)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat karo (sumatera utara)</a></li>
+            <li><a href="#" onclick="showStory('empty')">cerita rakyat kerinci (jambi)</a></li>
+    </ul>
+  </div>
+  <div id="contentContainer">
+    <article id="storyContent">
+      <h2>selamat datang</h2>
+      <p>pilih cerita dari daftar untuk membacanya.<br/><br/>mohon maaf jika cerita masih ada yang kosong di tunggu aja ya kawan.</p>
+    </article>
+  </div>
+  <script>
+    const stories = {
+      malinKundang: {
+        title: "Malin Kundang",
+        content: "Di sebuah desa pesisir di Sumatera Barat, tinggal seorang ibu tua yang sangat miskin bersama anak laki-lakinya yang bernama Malin Kundang. Meski hidup dalam keterbatasan, mereka berdua selalu saling mendukung dan berharap kehidupan mereka bisa lebih baik suatu hari nanti.<br/><br/>Suatu hari, Malin Kundang yang sudah dewasa memutuskan untuk merantau ke kota besar untuk mencari peruntungan. Ibunya sangat sedih, tetapi Malin meyakinkannya bahwa ia akan kembali dengan kekayaan yang bisa mengubah nasib mereka. Dengan penuh doa dan harapan, ibu Malin melepas kepergian anaknya.<br/><br/>Waktu berlalu, Malin Kundang mulai sukses di kota besar. Ia menjadi seorang pengusaha yang kaya raya dan menikahi seorang wanita cantik dari keluarga terpandang. Malin seringkali lupa akan masa lalunya dan tidak pernah lagi mengunjungi ibunya di desa.<br/><br/>Ketika suatu hari Malin Kundang beserta istrinya berlayar menuju desanya untuk berlibur, ibunya yang sudah tua renta melihat kedatangan mereka. Ia sangat gembira dan berlari untuk menyambut anaknya. Namun, Malin Kundang yang sudah kaya dan malu dengan penampilannya yang dulu, tidak mengakui ibunya dan malah memperlakukan ibu dengan kasar. Ia berkata bahwa wanita tua tersebut hanyalah seorang pengemis dan bukan ibunya yang sebenarnya.<br/><br/>Hati ibu Malin Kundang sangat hancur. Dengan penuh kesedihan dan kemarahan, ia berdoa kepada Tuhan untuk menghukum anaknya yang durhaka. Tak lama kemudian, datanglah badai besar yang menghancurkan kapal Malin Kundang. Kapal tersebut terbalik dan seluruh penumpangnya tenggelam, termasuk Malin Kundang dan istrinya. Dalam keadaan yang sangat tertekan dan putus asa, tubuh Malin Kundang berubah menjadi batu, menandakan hukuman atas pengkhianatannya terhadap ibunya.<br/><br/><b>Pesan Moral</b><br/><br/>Cerita Malin Kundang mengajarkan beberapa pesan moral penting:<br/><br/>1. Kesetiaan dan Hormat kepada Orang Tua: Menghormati dan menjaga hubungan dengan orang tua adalah hal yang sangat penting. Malin Kundang kehilangan segala sesuatu karena ketidakpatuhannya terhadap ibunya.<br/>2. Bahaya Kesombongan: Kesombongan dan kemewahan seringkali membuat seseorang lupa daratan dan meremehkan orang-orang di sekelilingnya, termasuk orang tua sendiri.<br/>3. Akibat dari Dosa dan Pengkhianatan: Setiap tindakan buruk dan pengkhianatan terhadap orang yang kita cintai akan mendapatkan balasan. Cerita ini mengingatkan bahwa tindakan kita memiliki konsekuensi, dan tidak ada dosa yang tidak terbalas.<br/><br/>Cerita ini tetap relevan sebagai pengingat untuk selalu menghargai dan merawat hubungan keluarga serta menjalani hidup dengan penuh rasa hormat dan tanggung jawab."
+      },
+      sangkuriang: {
+        title: "Sangkuriang",
+        content: "Di tanah Sunda, di sebuah desa di Jawa Barat, terdapat seorang raja bernama Prabu Tapa Agung yang memiliki seorang putri cantik bernama Dayang Sumbi. Suatu hari, ketika Dayang Sumbi sedang berburu di hutan, ia mengalami kecelakaan dan kehilangan salah satu serat tenunannya. Kemudian, seorang pria misterius muncul dan menawarkan bantuan untuk menemukan serat tenunan yang hilang. Setelah serat tersebut ditemukan, pria tersebut melamar Dayang Sumbi. Dengan berat hati, Dayang Sumbi menerima lamaran tersebut dan mereka menikah. Pria misterius itu kemudian menghilang.<br/><br/>Beberapa tahun kemudian, Dayang Sumbi melahirkan seorang anak laki-laki bernama Sangkuriang. Ketika Sangkuriang tumbuh dewasa, ia memutuskan untuk berburu di hutan. Dalam perburuan, Sangkuriang bertemu dengan seekor babi hutan besar yang sebenarnya adalah ayahnya, Prabu Tapa Agung, yang telah mengubah wujudnya. Sangkuriang berhasil membunuh babi tersebut dan membawa pulang hasil buruannya.<br/><br/>Dayang Sumbi yang sangat senang dengan hasil buruan tersebut, tidak mengetahui bahwa babi tersebut adalah suaminya. Namun, ketika Dayang Sumbi mengetahui bahwa hasil buruan itu sangat besar dan kuat, ia mulai curiga dan berusaha mencari tahu lebih lanjut.<br/><br/>Suatu malam, Dayang Sumbi melihat mimpi yang memperingatkannya bahwa anaknya, Sangkuriang, adalah anak dari suaminya yang hilang. Menyadari kenyataan ini, Dayang Sumbi sangat terkejut dan panik. Ia memutuskan untuk mengusir Sangkuriang dari rumah dan melarangnya untuk kembali ke desa.<br/><br/>Sangkuriang yang marah dan bingung, pergi jauh dari desa dan akhirnya menemukan sebuah gunung. Dia berjanji akan membangun sebuah danau dan gunung untuk menikahi ibunya yang terkasih. Dalam prosesnya, Sangkuriang bekerja keras dan mulai membuat rencana besar, tetapi Dayang Sumbi, mengetahui niat Sangkuriang, menggunakan sihir untuk menggagalkan rencananya.<br/><br/>Dayang Sumbi memerintahkan para pengikutnya untuk membuat fajar datang lebih awal dengan cara mengguncang bumi dan menciptakan kebisingan. Sangkuriang yang terkejut, gagal menyelesaikan tugasnya dalam waktu yang ditentukan. Akibatnya, gunung dan danau yang dibangun Sangkuriang belum selesai dan hanya tampak sebagai tumpukan batu besar. Sangkuriang yang marah, akhirnya mengamuk dan meninggalkan tempat tersebut. Gunung yang tampak tidak selesai itu kemudian dikenal sebagai Gunung Tangkuban Perahu, dan danau yang dibuat menjadi Danau Bandung.<br/><br/><b>Pesan Moral</b><br/><br/>Cerita Sangkuriang mengandung beberapa pesan moral yang penting:<br/><br/>1. Pentingnya Kesadaran dan Kewaspadaan: Kewaspadaan terhadap tindakan kita sendiri dan efek dari perbuatan kita sangat penting. Dayang Sumbi yang menggunakan sihir untuk menggagalkan rencana Sangkuriang menunjukkan bagaimana kebijaksanaan dan kewaspadaan dapat mencegah bencana.<br/>2. Akibat dari Tindakan Tidak Terpuji: Tindakan Sangkuriang yang mengabaikan perintah ibunya dan kebanggaannya terhadap kemampuannya menyebabkan kegagalan dalam mencapai tujuannya.<br/>3. Kehati-hatian dalam Hubungan Keluarga: Kisah ini menunjukkan bahwa hubungan keluarga harus dikelola dengan hati-hati dan penuh perhatian. Ketidakpahaman dan kemarahan dapat membawa dampak yang merugikan bagi semua pihak yang terlibat.<br/><br/>Cerita Sangkuriang mengajarkan nilai-nilai tentang kewaspadaan, tanggung jawab, dan pentingnya menjaga hubungan keluarga dengan baik."
+      },
+      empty: {
+        title: "Kosong",
+        content: "?"
+      }
+    };
+
+    function showStory(storyKey) {
+      const storyContent = document.getElementById('storyContent');
+      const story = stories[storyKey];
+      storyContent.innerHTML = `<h2>${story.title}</h2><p>${story.content}</p>`;
+      storyContent.classList.add('fade');
+      setTimeout(() => {
+        storyContent.classList.remove('fade');
+      }, 500);
+      closeNav();
+    }
+
+    function openNav() {
+      document.getElementById("navBar").style.width = "50%";
+    }
+
+    function closeNav() {
+      document.getElementById("navBar").style.width = "0";
+    }
+  </script>
+</body>
+</html>
