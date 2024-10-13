@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>pesan romantis v1.0</title>
+    <title>untuk cantikku v1.0</title>
     <meta name="description" content="bagikan link ini ke pasanganmu" />
-    <meta property="og:title" content="pesan romantis v1.0" />
+    <meta property="og:title" content="untuk cantikku v1.0" />
     <meta property="og:description" content="bagikan link ini ke pasanganmu" />
     <meta property="og:image" content="https://raw.githubusercontent.com/F-HTML/f-html/main/thumbnail/01.jpg" />
     <meta property="og:url" content="https://github.com/F-HTML" />
@@ -13,284 +13,158 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
   <style>
-    body {
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-      background: linear-gradient(to right, #ff9a9e, #fad0c4);
-      font-family: 'Arial', sans-serif;
-      position: relative;
-    }
-    .message-container {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      max-width: 80%;
-      width: 500px;
-      position: relative;
-      overflow: hidden;
-      animation: slideUp 1.5s ease-out;
-      backdrop-filter: blur(10px);
-    }
-    .message-container h1 {
-      color: #ff6f61;
-      font-size: 2.5em;
-      margin: 0;
-      animation: bounceIn 2s ease-out;
-    }
-    .message-container p {
-      color: #333;
-      font-size: 1.2em;
-      margin: 15px 0;
-      line-height: 1.5;
-      animation: fadeIn 2s ease-in;
-    }
-    .heart {
-      position: absolute;
-      top: 50%;
-      left: 35%;
-      transform: translateX(-50%);
-      font-size: 5em;
-      color: #ff6f61;
-      opacity: 0.5;
-      animation: beat 1.2s infinite;
-    }
-    .floating-heart {
-      position: absolute;
-      bottom: 10%;
-      right: 10%;
-      font-size: 3em;
-      color: #ff6f61;
-      animation: float 4.5s ease-in-out infinite;
-      opacity: 0.5;
-    }
-    .particle {
-      position: fixed;
-      top: 0;
-      font-size: 1.5em;
-      color: #ff6f61;
-      opacity: 0.5;
-      pointer-events: none;
-      animation: fall 10s linear infinite;
-    }
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes bounceIn {
-      0% {
-        transform: scale(0.5);
-        opacity: 0;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-    @keyframes beat {
-      0%, 20%, 50%, 80%, 100% {
-        transform: scale(1);
-      }
-      10% {
-        transform: scale(1.3);
-      }
-      30% {
-        transform: scale(1.3);
-      }
-    }
-    @keyframes slideUp {
-      from {
-        transform: translateY(100px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-    @keyframes float {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-30px);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
-    .background-heart-left {
-      position: fixed;
-      top: 5%;
-      left: 5%;
-      font-size: 7em;
-      color: #ff6f61;
-      opacity: 0.2;
-      animation: rotate 20s linear infinite;
-    }
-    .background-heart-left-a {
-      position: fixed;
-      bottom: 5%;
-      left: 5%;
-      font-size: 7em;
-      color: #ff6f61;
-      opacity: 0.2;
-      animation: rotate 20s linear infinite;
-    }
-    .background-heart-right {
-      position: fixed;
-      top: 5%;
-      right: 5%;
-      font-size: 7em;
-      color: #ff6f61;
-      opacity: 0.2;
-      animation: rotate 20s linear infinite;
-    }
-    .background-heart-right-a {
-      position: fixed;
-      bottom: 5%;
-      right: 5%;
-      font-size: 7em;
-      color: #ff6f61;
-      opacity: 0.2;
-      animation: rotate 20s linear infinite;
-    }
-    @keyframes rotate {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
+        body {
+            font-family: serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 28px;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 20px;
+            color: #34495e;
+            margin: 15px 0;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+        .hidden {
+            display: none;
+        }
+        .surprise {
+            color: #ff4d4d;
+            font-size: 24px;
+            margin-top: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        #by {
+          position: fixed;
+          center: 0px;
+          bottom: 5px;
+          font-size: 0.8em;
+        }
+    </style>
 </head>
 <body>
-  <audio autoplay loop controls hidden>
-  <source src="ed_sheeran_perfect_256k.mp3" type="audio/mpeg">
-  </audio>
-  <div class="background-heart-left">
-    ❤️
-  </div>
-  <div onclick="myLover()" class="background-heart-left-a">
-    ❤️
-  </div>
-  <div class="background-heart-right">
-    ❤️
-  </div>
-  <div class="background-heart-right-a">
-    ❤️
-  </div>
-  <div class="message-container">
-    <div class="heart">
-      ❤️
+<p id="by">BY: <b>WILDAN HIDAYAT</b></p>
+<!-- Pembukaan -->
+<div id="opening" class="container">
+    <h1>Hai 😍 Cantik</h1>
+    <p>Senyum dulu dong biar aku semangat 😍 buat link lagi</p>
+    <button onclick="startJourney()">----></button>
+</div>
+
+<!-- Konten Kata-Kata -->
+<div id="content" class="container hidden">
+    <h1>😍</h1>
+    <div id="page1" class="page">
+        <p>“Mau disakitin sama kamu berkali-kali, nggak apa-apa. Asal aku tetep bisa lihat senyumanmu.”</p>
     </div>
-    <h1 id="title">Untuk Cintaku</h1>
-    <p id="typed"></p>
-    <div class="floating-heart">
-      ❤️
+    <div id="page2" class="page hidden">
+        <p>“Kalau kamu jadi senja, aku nggak butuh malam lagi. Karena cukup kamu aja yang bikin hariku tenang.”</p>
     </div>
-  </div>
-  <script>
-    let love = 0;
-    function myLover() {
-      love++;
-      if (10 <= love) {
-        document.getElementById("typed").style.display = "none";
-        document.getElementById("title").textContent = "I LOVE YOU";
-        love = 0;
-      }else {
-        document.getElementById("typed").style.display = "";
-        document.getElementById("title").textContent = "Untuk Cintaku";
-      }
-    }
-    const typedSpan = document.getElementById("typed");
-    const totype = [
-      "terlukis di langit senja merah, cinta kita melayang tanpa batas, bersama dalam balutan asmara, meniti hari, menjalin kisah.",
-"rembulan hadir temani malam, kau dan aku dalam dekapan hangat, berbincang mesra di bawah bintang, mengurai mimpi, melukis harapan.",
-      "di tengah riuh dunia ini, hanya ada kita, dua jiwa satu rasa, kau bagai embun yang menyegarkan pagi, menenangkan hati, memeluk cinta.",
-      "kekasih, kau hadir memberi warna, dalam hidup yang kadang kelabu, cinta kita adalah kanvas indah, tersulam erat oleh benang asmara.",
-      "setiap tatapmu, penuh arti, membuatku ingin terus mengukir senyum, kau adalah bintang di langit malamku, memberi terang, meski gelap membalut.",
-      "tawa renyahmu, bagai nyanyian merdu, menghiasi hari dengan sukacita, kita menari dalam irama hati, menjadi satu dalam harmoni cinta.",
-      "di setiap sudut perjalanan, kita saling menggenggam erat, menghadapi segala badai bersama, menguatkan hati, saling menjaga.",
-      "kehadiranmu, anugerah tak terhingga, kau adalah cahaya dalam gelapku, di matamu, aku temukan rumah, tempat kembali, tempat berlabuh.",
-      "cinta kita adalah pelita, menuntun langkah di jalan kehidupan, kita adalah dua insan yang terpadu, menyatu dalam kasih yang abadi.",
-      "bersamamu, aku merasa lengkap, seperti melodi yang tak pernah usai, kita adalah simfoni cinta, bernyanyi dalam alunan takdir yang indah.",
-    ];
+    <div id="page3" class="page hidden">
+        <p>“Aku bukan waktu, tapi aku akan selalu ada untuk kamu, kapanpun kamu butuh.”</p>
+    </div>
+    <div id="page4" class="page hidden">
+        <p>“Cinta itu kaya kopi. Kadang pahit, tapi bikin ketagihan.”</p>
+    </div>
+    <div id="page5" class="page hidden">
+        <p>“Aku nggak nyari yang sempurna, aku cuma nyari yang bisa nerima aku apa adanya.”</p>
+    </div>
+    <div id="page6" class="page hidden">
+        <p>“Jangan bilang sayang kalau cuma buat nyenengin hati. Bilang sayang kalau memang beneran dari hati.”</p>
+        <p><b>TUNGGU SEBENTAR YA</b></p>
+    </div>
 
-    const delayTyping_char = 100;  // Percepat pengetikan
-    const delayErasing_text = 50;  // Percepat penghapusan
-    const delayTyping_text = 1500; // Sesuaikan jeda antar pesan
+    <button id="nextBtn" onclick="nextPage()">Lanjut</button>
+</div>
 
-    let totypeIndex = 0;
-    let charIndex = 0;
+<!-- Kejutan di Akhir -->
+<div id="surprise" class="container hidden">
+    <h1 class="surprise">🎉 Surprise! 🎉</h1>
+    <p>Terima kasih sudah sampai di akhir, kamu memang orang baik 😍</p>
+    <p>Aku punya sesuatu buat kamu, siap? 😊</p>
+    <button onclick="showMessage()">klik di sini</button>
+    <p id="secretMessage" class="hidden">kamu mau jadi pendamping hidupku ❤️</p>
+</div>
 
-    function typeText() {
-      if (charIndex < totype[totypeIndex].length) {
-        typedSpan.textContent += totype[totypeIndex].charAt(charIndex);
-        charIndex++;
-        setTimeout(typeText, delayTyping_char);
-      } else {
-        setTimeout(eraseText, delayTyping_text);
-      }
-    }
+<!-- Musik Latar -->
+<audio id="backgroundMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
 
-    function eraseText() {
-      if (charIndex > 0) {
-        typedSpan.textContent = totype[totypeIndex].substring(0, charIndex - 1);
-        charIndex = charIndex - 1;
-        setTimeout(eraseText, delayErasing_text);
-      } else {
-        totypeIndex++;
+<script>
+    let currentPage = 1;
+    const totalPages = 6;
+    const music = document.getElementById('backgroundMusic');
 
-        if (totypeIndex >= totype.length)
-          totypeIndex = 0;
-        setTimeout(typeText, delayTyping_text);
-      }
+    function startJourney() {
+        // Hide opening and show the first page
+        document.getElementById('opening').classList.add('hidden');
+        document.getElementById('content').classList.remove('hidden');
+        // Play background music
+        music.play();
     }
 
-    function createParticles() {
-      const numberOfParticles = 50;
-      for (let i = 0; i < numberOfParticles; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.textContent = '❤️';
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.animationDuration = Math.random() * 2 + 3 + 's';
-        document.body.appendChild(particle);
-        
-        // Remove particle after animation
-        particle.addEventListener('animationend', () => {
-          particle.remove();
-        });
-      }
+    function nextPage() {
+        // Hide the current page
+        document.getElementById(`page${currentPage}`).classList.add('hidden');
+
+        // Increment page count
+        currentPage++;
+
+        // Show the next page
+        if (currentPage <= totalPages) {
+            document.getElementById(`page${currentPage}`).classList.remove('hidden');
+        }
+
+        // When reaching the last page, show surprise section
+        if (currentPage === totalPages) {
+            document.getElementById("nextBtn").disabled = true;
+            setTimeout(() => {
+                document.getElementById('content').classList.add('hidden');
+                document.getElementById('surprise').classList.remove('hidden');
+            }, 5000);
+        }
     }
 
-    window.onload = function() {
-      if (totype[totypeIndex].length) setTimeout(typeText, delayTyping_text);
-      createParticles();
+    function showMessage() {
+        document.getElementById('secretMessage').classList.remove('hidden');
     }
-  </script>
+</script>
+
 </body>
 </html>
